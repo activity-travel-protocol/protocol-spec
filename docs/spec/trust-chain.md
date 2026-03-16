@@ -1,9 +1,9 @@
-# ATOP Trust Chain Declaration Specification
+﻿# Activity Travel Protocol Trust Chain Declaration Specification
 
 **Version:** 0.1 (Draft)  
 **Status:** Layer 1 — Identity and Trust  
 **Date:** March 2026  
-**Repository:** atop-protocol/atop-spec  
+**Repository:** Activity Travel Protocol-protocol/Activity Travel Protocol-spec  
 **Depends on:** Architecture Specification v0.1, Party Registry Specification v0.2,
 Jurisdiction Compliance Registry Specification v0.2  
 **References:** See references.md  
@@ -16,11 +16,11 @@ Jurisdiction Compliance Registry Specification v0.2
 1. [Purpose of This Document](#1-purpose-of-this-document)
 2. [Foundational Framework](#2-foundational-framework)
    - 2.1 [Trust Is Not Understanding](#21-trust-is-not-understanding)
-   - 2.2 [ATOP Trust Chains Are OpenID Federation Trust Chains](#22-atop-trust-chains-are-openid-federation-trust-chains)
+   - 2.2 [Activity Travel Protocol Trust Chains Are OpenID Federation Trust Chains](#22-Activity Travel Protocol-trust-chains-are-openid-federation-trust-chains)
    - 2.3 [FAPI 2.0 as the API Security Profile](#23-fapi-20-as-the-api-security-profile)
    - 2.4 [How the Three Standards Compose](#24-how-the-three-standards-compose)
-3. [ATOP Entity Statements](#3-atop-entity-statements)
-4. [ATOP Trust Marks](#4-atop-trust-marks)
+3. [Activity Travel Protocol Entity Statements](#3-Activity Travel Protocol-entity-statements)
+4. [Activity Travel Protocol Trust Marks](#4-Activity Travel Protocol-trust-marks)
 5. [Trust Chain Construction](#5-trust-chain-construction)
 6. [The Trust Chain Record](#6-the-trust-chain-record)
 7. [Credential Scope Validation](#7-credential-scope-validation)
@@ -36,31 +36,31 @@ Jurisdiction Compliance Registry Specification v0.2
 
 ## 1. Purpose of This Document
 
-The Trust Chain Declaration is the mechanism by which ATOP establishes, records,
+The Trust Chain Declaration is the mechanism by which Activity Travel Protocol establishes, records,
 and verifies the trust relationships between all parties in a transaction — and
 maintains that verification throughout the transaction lifecycle.
 
-Every ATOP transaction begins with a question: can these parties trust each other
-enough to commit to a binding agreement? The answer is not binary. Trust in ATOP
+Every Activity Travel Protocol transaction begins with a question: can these parties trust each other
+enough to commit to a binding agreement? The answer is not binary. Trust in Activity Travel Protocol
 is layered, evidence-based, and scoped to specific claims. A party may be trusted
 as an accommodation supplier but not as a package organizer. A party may be trusted
 in Japan but not yet verified for EU operations. An AI agent may be trusted to
 negotiate within defined bounds but not to sign binding agreements.
 
-**ATOP Trust Chains are OpenID Federation Trust Chains** [OIDFED] with ATOP-specific
+**Activity Travel Protocol Trust Chains are OpenID Federation Trust Chains** [OIDFED] with Activity Travel Protocol-specific
 Entity Statement extensions and Trust Marks. There is no separate or proprietary
-ATOP trust mechanism. A party with an OpenID Federation verifier and knowledge of
-ATOP's published Trust Mark URIs can verify any ATOP Trust Chain without
-ATOP-specific tooling.
+Activity Travel Protocol trust mechanism. A party with an OpenID Federation verifier and knowledge of
+Activity Travel Protocol's published Trust Mark URIs can verify any Activity Travel Protocol Trust Chain without
+Activity Travel Protocol-specific tooling.
 
 This specification defines:
 
-- How ATOP extends OpenID Federation with ATOP-specific Entity Statement claims and
+- How Activity Travel Protocol extends OpenID Federation with Activity Travel Protocol-specific Entity Statement claims and
   Trust Marks — and nothing more than that
 - The Trust Chain Record schema — the signed, traveling object that documents the
   trust basis for every action in a transaction, expressed as an OpenID Federation
   artifact
-- Credential scope validation: how ATOP verifies that a party's credentials cover
+- Credential scope validation: how Activity Travel Protocol verifies that a party's credentials cover
   the specific requirement being made of them
 - The Duty of Care Declaration: which party holds primary responsibility at each
   phase of the journey
@@ -110,7 +110,7 @@ assumption explicit in the INQUIRY data.
 Trust and credentials are irrelevant here — the problem is insufficient structure
 in the INQUIRY message itself.
 
-**ATOP's response to these three failure types:**
+**Activity Travel Protocol's response to these three failure types:**
 
 | Failure Type | Where Addressed | Mechanism |
 |---|---|---|
@@ -118,30 +118,30 @@ in the INQUIRY message itself.
 | Capability gap | Catalogue Specification [forthcoming] | Capability Declaration consultation during CONFIGURATION |
 | Configuration mismatch | Workflow Specification [forthcoming] | Structured INQUIRY message schema with required fields |
 
-### 2.2 ATOP Trust Chains Are OpenID Federation Trust Chains
+### 2.2 Activity Travel Protocol Trust Chains Are OpenID Federation Trust Chains
 
 OpenID Federation 1.0 [OIDFED] is adopted as the sole normative trust mechanism
-for ATOP. ATOP does not define a parallel or supplementary trust model. All trust
-establishment, verification, and propagation in ATOP operates through OpenID
+for Activity Travel Protocol. Activity Travel Protocol does not define a parallel or supplementary trust model. All trust
+establishment, verification, and propagation in Activity Travel Protocol operates through OpenID
 Federation mechanisms.
 
 This decision is deliberate and has specific consequences:
 
-**Any OpenID Federation verifier can verify an ATOP Trust Chain.** No ATOP-specific
+**Any OpenID Federation verifier can verify an Activity Travel Protocol Trust Chain.** No Activity Travel Protocol-specific
 client library is required for trust verification. A regulator, an auditor, or a
 counterparty in a dispute can verify the cryptographic trust chain using standard
-OpenID Federation tooling and ATOP's published specifications.
+OpenID Federation tooling and Activity Travel Protocol's published specifications.
 
 **Trust is composable across Protocol Operator boundaries.** A hotel registered
-with ATOP Japan and a travel agent registered with ATOP Europe can transact because
+with Activity Travel Protocol Japan and a travel agent registered with Activity Travel Protocol Europe can transact because
 OpenID Federation's trust chain resolution works across organizational and
 jurisdictional boundaries. The Protocol Operators establish mutual recognition through
 a Federation Entity Statement exchange; from that point, their respective parties can
 verify each other's trust chains without further bilateral arrangements.
 
-**ATOP extends OpenID Federation, it does not replace it.** ATOP adds:
-- ATOP-specific claims in Entity Configurations (Section 3)
-- ATOP-specific Trust Marks for roles and conformance (Section 4)
+**Activity Travel Protocol extends OpenID Federation, it does not replace it.** Activity Travel Protocol adds:
+- Activity Travel Protocol-specific claims in Entity Configurations (Section 3)
+- Activity Travel Protocol-specific Trust Marks for roles and conformance (Section 4)
 - The Trust Chain Record schema that organizes federation artifacts per transaction
   (Section 6)
 
@@ -149,9 +149,9 @@ Everything else — Entity Identifiers, Entity Configurations, Subordinate State
 Trust Chain resolution, Trust Mark issuance and verification — follows [OIDFED]
 without modification.
 
-**How OpenID Federation solves ATOP's trust problem:**
+**How OpenID Federation solves Activity Travel Protocol's trust problem:**
 
-Each ATOP Party publishes a signed Entity Configuration at their well-known endpoint.
+Each Activity Travel Protocol Party publishes a signed Entity Configuration at their well-known endpoint.
 The Protocol Operator publishes Subordinate Statements vouching for each registered
 party. A verifier constructs a trust chain by:
 
@@ -163,7 +163,7 @@ party. A verifier constructs a trust chain by:
 
 For transactions where parties are registered with different Protocol Operators,
 those Protocol Operators MUST have established mutual recognition through a Federation
-Entity Statement exchange before their parties can transact. The ATOP governance
+Entity Statement exchange before their parties can transact. The Activity Travel Protocol governance
 process for Protocol Operator mutual recognition is defined in the Governance
 Specification [forthcoming].
 
@@ -173,7 +173,7 @@ statement:
 - Is scoped to this transaction only (contains the `transaction_id`)
 - Attests to the credential scope validation result for this party in this transaction
 - Contains the compliance check result for this party's role
-- Carries ATOP Trust Marks relevant to this party's role in this transaction
+- Carries Activity Travel Protocol Trust Marks relevant to this party's role in this transaction
 - Expires when the transaction reaches COMPLETION or CANCELLATION
 
 This replaces what would otherwise be a proprietary "session token" — the
@@ -184,7 +184,7 @@ transaction-scoped chain.
 
 ### 2.3 FAPI 2.0 as the API Security Profile
 
-All ATOP API calls MUST conform to the FAPI 2.0 Security Profile [FAPI2SEC]. FAPI 2.0
+All Activity Travel Protocol API calls MUST conform to the FAPI 2.0 Security Profile [FAPI2SEC]. FAPI 2.0
 sits on top of OpenID Connect [OIDC] and OAuth 2.0, which in turn compose with
 OpenID Federation. The three standards form a coherent stack:
 
@@ -201,7 +201,7 @@ FAPI 2.0 Security Profile [FAPI2SEC] + Message Signing [FAPI2MSG]
 ```
 
 FAPI 2.0 was selected because it is proven in high-stakes ecosystems — Open Banking
-in the UK, Brazil, and Australia — that share ATOP's requirements: binding financial
+in the UK, Brazil, and Australia — that share Activity Travel Protocol's requirements: binding financial
 commitments, multi-party authorization, and non-repudiation. FAPI 2.0's requirements
 for DPoP [RFC9449], PAR (Pushed Authorization Requests), and message signing eliminate
 the most common implementation vulnerabilities in multi-party API systems.
@@ -209,15 +209,15 @@ the most common implementation vulnerabilities in multi-party API systems.
 ### 2.4 How the Three Standards Compose
 
 The following shows how [OIDFED], [FAPI2SEC], and [FAPI2MSG] compose for a
-representative ATOP interaction — a CONFIRMATION signature:
+representative Activity Travel Protocol interaction — a CONFIRMATION signature:
 
 ```
 1. Party A resolves Party B's Entity Configuration via [OIDFED]
    → Verifies B's federation trust chain to the Trust Anchor
-   → Verifies B's ATOP Trust Marks for their role in this transaction
+   → Verifies B's Activity Travel Protocol Trust Marks for their role in this transaction
    → Verifies B's transaction-scoped Subordinate Statement
 
-2. Party A's system authenticates to Party B's ATOP API endpoint via [FAPI2SEC]
+2. Party A's system authenticates to Party B's Activity Travel Protocol API endpoint via [FAPI2SEC]
    → Uses Pushed Authorization Request (PAR) with federation-issued access token
    → DPoP [RFC9449] binds the token to Party A's key pair
 
@@ -233,30 +233,30 @@ representative ATOP interaction — a CONFIRMATION signature:
    → Records the verified signature in the Trust Chain Record
 ```
 
-This full stack means that CONFIRMATION — the binding moment in every ATOP
+This full stack means that CONFIRMATION — the binding moment in every Activity Travel Protocol
 transaction — is cryptographically verifiable by any party, at any time, using
 published open standards.
 
 ---
 
-## 3. ATOP Entity Statements
+## 3. Activity Travel Protocol Entity Statements
 
-ATOP extends OpenID Federation Entity Statements with ATOP-specific claims registered
-in the ATOP namespace. These extensions MUST be included in Entity Configurations
-published by ATOP-registered parties.
+Activity Travel Protocol extends OpenID Federation Entity Statements with Activity Travel Protocol-specific claims registered
+in the Activity Travel Protocol namespace. These extensions MUST be included in Entity Configurations
+published by Activity Travel Protocol-registered parties.
 
-### 3.1 ATOP Entity Configuration Extension
+### 3.1 Activity Travel Protocol Entity Configuration Extension
 
 ```json
 {
-  "atop": {
+  "Activity Travel Protocol": {
     "version": "0.1",
-    "party_id": "atop:party:jp:myauberge-001",
+    "party_id": "Activity Travel Protocol:party:jp:myauberge-001",
     "roles": ["ACCOMMODATION_SUPPLIER"],
     "endpoints": {
-      "capability_declaration": "https://atop.myauberge.jp/atop/capability",
-      "inquiry": "https://atop.myauberge.jp/atop/inquiry",
-      "transaction": "https://atop.myauberge.jp/atop/transaction"
+      "capability_declaration": "https://Activity Travel Protocol.myauberge.jp/Activity Travel Protocol/capability",
+      "inquiry": "https://Activity Travel Protocol.myauberge.jp/Activity Travel Protocol/inquiry",
+      "transaction": "https://Activity Travel Protocol.myauberge.jp/Activity Travel Protocol/transaction"
     },
     "jurisdiction_compliance": {
       "JP": {
@@ -269,9 +269,9 @@ published by ATOP-registered parties.
 }
 ```
 
-### 3.2 ATOP Subordinate Statement Extension
+### 3.2 Activity Travel Protocol Subordinate Statement Extension
 
-Protocol Operators MUST include ATOP-specific claims in Subordinate Statements
+Protocol Operators MUST include Activity Travel Protocol-specific claims in Subordinate Statements
 they issue for registered parties:
 
 ```json
@@ -299,15 +299,15 @@ they issue for registered parties:
 
 For an active transaction, the Protocol Operator issues a transaction-scoped
 Subordinate Statement for each participating party. This is a standard OpenID
-Federation Subordinate Statement with additional ATOP transaction claims:
+Federation Subordinate Statement with additional Activity Travel Protocol transaction claims:
 
 ```json
 {
-  "iss": "https://registry.atop-protocol.org",
-  "sub": "https://atop.myauberge.jp/.well-known/openid-federation",
+  "iss": "https://registry.Activity Travel Protocol-protocol.org",
+  "sub": "https://Activity Travel Protocol.myauberge.jp/.well-known/openid-federation",
   "iat": 1741132800,
   "exp": 1741219200,
-  "source_endpoint": "https://registry.atop-protocol.org/fetch",
+  "source_endpoint": "https://registry.Activity Travel Protocol-protocol.org/fetch",
   "atop_transaction": {
     "transaction_id": "tx:2026-03-04:ski-booking-nagano-001",
     "trust_chain_id": "tc:2026-03-04:ski-booking-nagano-001",
@@ -331,39 +331,39 @@ The `exp` of the transaction-scoped Subordinate Statement is set to the earlier 
 
 ---
 
-## 4. ATOP Trust Marks
+## 4. Activity Travel Protocol Trust Marks
 
 Trust Marks in OpenID Federation [OIDFED] are signed JWT assertions that a party
-has met specific criteria. ATOP defines canonical Trust Marks for each role and
+has met specific criteria. Activity Travel Protocol defines canonical Trust Marks for each role and
 conformance level.
 
 **Trust Mark issuers:**
-- ATOP Certification Body — issues ATOP-wide conformance Trust Marks
+- Activity Travel Protocol Certification Body — issues Activity Travel Protocol-wide conformance Trust Marks
 - Protocol Operators — issue role and jurisdiction Trust Marks for their registered parties
 
-### 4.1 Canonical ATOP Trust Mark URIs
+### 4.1 Canonical Activity Travel Protocol Trust Mark URIs
 
 | Trust Mark | URI | Issued By | Criteria |
 |---|---|---|---|
-| ATOP Conformance | `https://trust.atop-protocol.org/marks/atop-conformance/v1` | ATOP Certification Body | Passed ATOP conformance test suite |
-| Protocol Operator | `https://trust.atop-protocol.org/marks/protocol-operator/v1` | ATOP Certification Body | Full Protocol Operator certification |
-| Accommodation Supplier | `https://trust.atop-protocol.org/marks/accommodation-supplier/v1` | Protocol Operator | Verified accommodation license + liability insurance |
-| Activity Supplier | `https://trust.atop-protocol.org/marks/activity-supplier/v1` | Protocol Operator | Verified activity credentials per jurisdiction |
-| Tour Operator | `https://trust.atop-protocol.org/marks/tour-operator/v1` | Protocol Operator | Verified travel agency license + insolvency protection |
-| Travel Agent | `https://trust.atop-protocol.org/marks/travel-agent/v1` | Protocol Operator | Verified travel agency license |
-| OTA | `https://trust.atop-protocol.org/marks/ota/v1` | Protocol Operator | Verified travel agency license + data protection compliance |
-| AI Agent Level 2 | `https://trust.atop-protocol.org/marks/ai-agent-level-2/v1` | Protocol Operator | Valid Agent Authorization Declaration at Level 2 or below |
+| Activity Travel Protocol Conformance | `https://trust.Activity Travel Protocol-protocol.org/marks/Activity Travel Protocol-conformance/v1` | Activity Travel Protocol Certification Body | Passed Activity Travel Protocol conformance test suite |
+| Protocol Operator | `https://trust.Activity Travel Protocol-protocol.org/marks/protocol-operator/v1` | Activity Travel Protocol Certification Body | Full Protocol Operator certification |
+| Accommodation Supplier | `https://trust.Activity Travel Protocol-protocol.org/marks/accommodation-supplier/v1` | Protocol Operator | Verified accommodation license + liability insurance |
+| Activity Supplier | `https://trust.Activity Travel Protocol-protocol.org/marks/activity-supplier/v1` | Protocol Operator | Verified activity credentials per jurisdiction |
+| Tour Operator | `https://trust.Activity Travel Protocol-protocol.org/marks/tour-operator/v1` | Protocol Operator | Verified travel agency license + insolvency protection |
+| Travel Agent | `https://trust.Activity Travel Protocol-protocol.org/marks/travel-agent/v1` | Protocol Operator | Verified travel agency license |
+| OTA | `https://trust.Activity Travel Protocol-protocol.org/marks/ota/v1` | Protocol Operator | Verified travel agency license + data protection compliance |
+| AI Agent Level 2 | `https://trust.Activity Travel Protocol-protocol.org/marks/ai-agent-level-2/v1` | Protocol Operator | Valid Agent Authorization Declaration at Level 2 or below |
 
 ### 4.2 Trust Mark Schema
 
-Each ATOP Trust Mark is a signed JWT conforming to the OpenID Federation Trust Mark
+Each Activity Travel Protocol Trust Mark is a signed JWT conforming to the OpenID Federation Trust Mark
 format [OIDFTM]:
 
 ```json
 {
-  "iss": "https://registry.atop-protocol.org",
-  "sub": "https://atop.myauberge.jp/.well-known/openid-federation",
-  "id": "https://trust.atop-protocol.org/marks/accommodation-supplier/v1",
+  "iss": "https://registry.Activity Travel Protocol-protocol.org",
+  "sub": "https://Activity Travel Protocol.myauberge.jp/.well-known/openid-federation",
+  "id": "https://trust.Activity Travel Protocol-protocol.org/marks/accommodation-supplier/v1",
   "iat": 1741132800,
   "exp": 1772668800,
   "atop_mark_claims": {
@@ -378,7 +378,7 @@ format [OIDFTM]:
 
 ### 4.3 Trust Mark Verification
 
-Trust Mark verification follows [OIDFED] Section 8. Additionally for ATOP, a
+Trust Mark verification follows [OIDFED] Section 8. Additionally for Activity Travel Protocol, a
 verifier MUST confirm:
 
 1. The `sub` matches the Entity Identifier of the presenting party
@@ -407,7 +407,7 @@ For each party in the transaction:
   ├── Resolve Entity Identifier → fetch Entity Configuration [OIDFED §6]
   ├── Fetch Subordinate Statement from party's Protocol Operator [OIDFED §7]
   ├── Build and verify federation trust chain to Trust Anchor [OIDFED §9]
-  ├── Verify all ATOP Trust Marks presented by the party [OIDFED §8]
+  ├── Verify all Activity Travel Protocol Trust Marks presented by the party [OIDFED §8]
   ├── Run Credential Scope Validation (Section 7)
   ├── Issue transaction-scoped Subordinate Statement (Section 3.3)
   └── Record all results in Trust Chain Record (Section 6)
@@ -463,14 +463,14 @@ CANCELLATION.
 The Trust Chain Record does not replace or duplicate federation artifacts — it
 references them. The Party's Entity Configuration, Subordinate Statement, and Trust
 Marks remain at their canonical federation endpoints. The Trust Chain Record holds
-references plus the ATOP-specific transaction content.
+references plus the Activity Travel Protocol-specific transaction content.
 
 ### 6.1 Trust Chain Record Schema
 
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.atop-protocol.org/trust-chain/record/v0.1",
+  "$id": "https://schemas.Activity Travel Protocol-protocol.org/trust-chain/record/v0.1",
   "type": "object",
   "required": ["trust_chain_id", "transaction_id", "protocol_version",
                "created_at", "created_by", "parties",
@@ -670,26 +670,26 @@ references plus the ATOP-specific transaction content.
   "transaction_id": "tx:2026-03-04:ski-booking-nagano-001",
   "protocol_version": "0.1",
   "created_at": "2026-03-04T09:30:00Z",
-  "created_by": "atop:party:jp:myauberge-001",
+  "created_by": "Activity Travel Protocol:party:jp:myauberge-001",
 
   "parties": [
     {
-      "party_id": "atop:party:jp:myauberge-001",
-      "entity_identifier": "https://atop.myauberge.jp/.well-known/openid-federation",
+      "party_id": "Activity Travel Protocol:party:jp:myauberge-001",
+      "entity_identifier": "https://Activity Travel Protocol.myauberge.jp/.well-known/openid-federation",
       "role_in_transaction": "ACCOMMODATION_SUPPLIER",
       "actor_id": "actor:myauberge-001:tomsato",
       "federation_verification": {
         "trust_chain_resolved": true,
         "trust_chain_resolved_at": "2026-03-04T09:30:05Z",
-        "trust_anchor": "https://registry.atop-protocol.org",
+        "trust_anchor": "https://registry.Activity Travel Protocol-protocol.org",
         "trust_marks_verified": [
-          "https://trust.atop-protocol.org/marks/accommodation-supplier/v1",
-          "https://trust.atop-protocol.org/marks/atop-conformance/v1"
+          "https://trust.Activity Travel Protocol-protocol.org/marks/accommodation-supplier/v1",
+          "https://trust.Activity Travel Protocol-protocol.org/marks/Activity Travel Protocol-conformance/v1"
         ],
-        "entity_configuration_ref": "https://atop.myauberge.jp/.well-known/openid-federation#sha256:a3f5c...",
-        "subordinate_statement_ref": "https://registry.atop-protocol.org/fetch?sub=https://atop.myauberge.jp/.well-known/openid-federation#sha256:b7d2e..."
+        "entity_configuration_ref": "https://Activity Travel Protocol.myauberge.jp/.well-known/openid-federation#sha256:a3f5c...",
+        "subordinate_statement_ref": "https://registry.Activity Travel Protocol-protocol.org/fetch?sub=https://Activity Travel Protocol.myauberge.jp/.well-known/openid-federation#sha256:b7d2e..."
       },
-      "transaction_subordinate_statement_ref": "https://registry.atop-protocol.org/transaction/tc:2026-03-04:ski-booking-nagano-001/sub/myauberge-001",
+      "transaction_subordinate_statement_ref": "https://registry.Activity Travel Protocol-protocol.org/transaction/tc:2026-03-04:ski-booking-nagano-001/sub/myauberge-001",
       "credential_scope_validation": {
         "validation_status": "sandbox_active",
         "requirements_checked": ["JP-LIC-001", "JP-LIC-002", "JP-CP-003"],
@@ -702,21 +702,21 @@ references plus the ATOP-specific transaction content.
       "duty_of_care_phases": ["PRE_ACTIVITY_COLLECTION", "READY"]
     },
     {
-      "party_id": "atop:party:jp:ski-resort-nagano-001",
-      "entity_identifier": "https://atop.skiresort-nagano.jp/.well-known/openid-federation",
+      "party_id": "Activity Travel Protocol:party:jp:ski-resort-nagano-001",
+      "entity_identifier": "https://Activity Travel Protocol.skiresort-nagano.jp/.well-known/openid-federation",
       "role_in_transaction": "ACTIVITY_SUPPLIER",
       "actor_id": "actor:ski-resort-nagano-001:bookingsystem",
       "federation_verification": {
         "trust_chain_resolved": true,
         "trust_chain_resolved_at": "2026-03-04T09:30:08Z",
-        "trust_anchor": "https://registry.atop-protocol.org",
+        "trust_anchor": "https://registry.Activity Travel Protocol-protocol.org",
         "trust_marks_verified": [
-          "https://trust.atop-protocol.org/marks/activity-supplier/v1"
+          "https://trust.Activity Travel Protocol-protocol.org/marks/activity-supplier/v1"
         ],
-        "entity_configuration_ref": "https://atop.skiresort-nagano.jp/.well-known/openid-federation#sha256:c9a1b...",
-        "subordinate_statement_ref": "https://registry.atop-protocol.org/fetch?sub=https://atop.skiresort-nagano.jp/.well-known/openid-federation#sha256:d4f8a..."
+        "entity_configuration_ref": "https://Activity Travel Protocol.skiresort-nagano.jp/.well-known/openid-federation#sha256:c9a1b...",
+        "subordinate_statement_ref": "https://registry.Activity Travel Protocol-protocol.org/fetch?sub=https://Activity Travel Protocol.skiresort-nagano.jp/.well-known/openid-federation#sha256:d4f8a..."
       },
-      "transaction_subordinate_statement_ref": "https://registry.atop-protocol.org/transaction/tc:2026-03-04:ski-booking-nagano-001/sub/ski-resort-nagano-001",
+      "transaction_subordinate_statement_ref": "https://registry.Activity Travel Protocol-protocol.org/transaction/tc:2026-03-04:ski-booking-nagano-001/sub/ski-resort-nagano-001",
       "credential_scope_validation": {
         "validation_status": "passed",
         "requirements_checked": ["JP-DOM-SLOPE-001"],
@@ -746,22 +746,22 @@ references plus the ATOP-specific transaction content.
     "phases": [
       {
         "phase": "PRE_ACTIVITY_COLLECTION",
-        "primary_party": "atop:party:jp:myauberge-001",
-        "handover_to": "atop:party:jp:ski-resort-nagano-001",
+        "primary_party": "Activity Travel Protocol:party:jp:myauberge-001",
+        "handover_to": "Activity Travel Protocol:party:jp:ski-resort-nagano-001",
         "handover_trigger": "Customer departs accommodation for ski resort"
       },
       {
         "phase": "READY",
-        "primary_party": "atop:party:jp:myauberge-001"
+        "primary_party": "Activity Travel Protocol:party:jp:myauberge-001"
       },
       {
         "phase": "FULFILLMENT",
-        "primary_party": "atop:party:jp:ski-resort-nagano-001",
-        "handover_from": "atop:party:jp:myauberge-001"
+        "primary_party": "Activity Travel Protocol:party:jp:ski-resort-nagano-001",
+        "handover_from": "Activity Travel Protocol:party:jp:myauberge-001"
       },
       {
         "phase": "COMPLETION",
-        "primary_party": "atop:party:jp:ski-resort-nagano-001"
+        "primary_party": "Activity Travel Protocol:party:jp:ski-resort-nagano-001"
       }
     ],
     "gaps": []
@@ -907,9 +907,9 @@ A binding signature MUST conform to [FAPI2MSG] and MUST include:
     "transition": "CONFIRMATION",
     "timestamp": "2026-03-05T14:22:00Z",
     "content_hash": "sha256:a3f5c...",
-    "signer_party_id": "atop:party:jp:myauberge-001",
+    "signer_party_id": "Activity Travel Protocol:party:jp:myauberge-001",
     "signer_actor_id": "actor:myauberge-001:tomsato",
-    "transaction_subordinate_statement_ref": "https://registry.atop-protocol.org/transaction/tc:2026-03-04:ski-booking-nagano-001/sub/myauberge-001",
+    "transaction_subordinate_statement_ref": "https://registry.Activity Travel Protocol-protocol.org/transaction/tc:2026-03-04:ski-booking-nagano-001/sub/myauberge-001",
     "dpop_proof": "{DPoP JWT per RFC9449}"
   },
   "signature": "{ES256 signature}",
@@ -970,8 +970,8 @@ or dispute context:
 ## 11. Trust Chain Verification
 
 Any party to a transaction, or any authorized third party such as a regulator or
-dispute resolution body, may verify a Trust Chain Record. No ATOP-specific tooling
-is required — standard OpenID Federation verifiers plus knowledge of ATOP's
+dispute resolution body, may verify a Trust Chain Record. No Activity Travel Protocol-specific tooling
+is required — standard OpenID Federation verifiers plus knowledge of Activity Travel Protocol's
 published Trust Mark URIs are sufficient.
 
 ### 11.1 Verification Steps
@@ -1023,8 +1023,8 @@ and URL for each reference.
 
 | Tag | Title | Relevance to This Specification |
 |---|---|---|
-| [OIDFED] | OpenID Federation 1.0 | The trust mechanism — ATOP Trust Chains ARE OpenID Federation Trust Chains |
-| [FAPI2SEC] | FAPI 2.0 Security Profile | API security for all ATOP API calls |
+| [OIDFED] | OpenID Federation 1.0 | The trust mechanism — Activity Travel Protocol Trust Chains ARE OpenID Federation Trust Chains |
+| [FAPI2SEC] | FAPI 2.0 Security Profile | API security for all Activity Travel Protocol API calls |
 | [FAPI2MSG] | FAPI 2.0 Message Signing | Binding signature format |
 | [RFC2119] | Key Words for RFCs | Normative language |
 | [RFC8174] | Ambiguity of Uppercase | Normative language clarification |
@@ -1046,7 +1046,7 @@ and URL for each reference.
 | [OIDFTM] | OpenID Federation Trust Marks | Background on Trust Mark mechanism used in Section 4 |
 | [EIDAS2] | eIDAS 2.0 | EU digital identity; Assurance Level alignment |
 | [OIDF-EUDI] | OpenID Federation EUDI Interoperability | Validates OpenID Federation maturity |
-| [FAPI-ECOSYSTEMS] | FAPI 2.0 Real-World Ecosystems | Validates FAPI 2.0 suitability for ATOP |
+| [FAPI-ECOSYSTEMS] | FAPI 2.0 Real-World Ecosystems | Validates FAPI 2.0 suitability for Activity Travel Protocol |
 | [EU-GDPR] | GDPR | Trust Chain archival data handling |
 | [EU-AIACT] | EU AI Act | AI agent regulatory context for Section 8.4 |
 | [JP-APPI] | Japan APPI | Archival retention requirements |
@@ -1055,5 +1055,6 @@ and URL for each reference.
 
 *Document status: Draft v0.1 — March 2026*  
 *Next: Party Policy Declarations Specification v0.1*  
-*Maintainer: ATOP Protocol — github.com/atop-protocol*  
+*Maintainer: Activity Travel Protocol Protocol — github.com/Activity Travel Protocol-protocol*  
 *License: Apache 2.0*
+

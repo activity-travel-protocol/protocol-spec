@@ -1,9 +1,9 @@
-# ATOP Party Policy Declarations Specification
+﻿# Activity Travel Protocol Party Policy Declarations Specification
 
 **Version:** 0.1 (Draft)  
 **Status:** Layer 1 — Identity and Trust  
 **Date:** March 2026  
-**Repository:** atop-protocol/atop-spec  
+**Repository:** Activity Travel Protocol-protocol/Activity Travel Protocol-spec  
 **Depends on:** Architecture Specification v0.1, Party Registry Specification v0.2,
 Jurisdiction Compliance Registry Specification v0.2,
 Trust Chain Declaration Specification v0.1  
@@ -20,7 +20,7 @@ Trust Chain Declaration Specification v0.1
    - 2.2 [Policy Basis: The Primary Organizing Principle](#22-policy-basis-the-primary-organizing-principle)
    - 2.3 [Regulatory vs. Supplier Policies — Processing Consequences](#23-regulatory-vs-supplier-policies--processing-consequences)
    - 2.4 [Layered Policies](#24-layered-policies)
-   - 2.5 [What ATOP Does and Does Not Do](#25-what-atop-does-and-does-not-do)
+   - 2.5 [What Activity Travel Protocol Does and Does Not Do](#25-what-Activity Travel Protocol-does-and-does-not-do)
 3. [Policy Type Taxonomy](#3-policy-type-taxonomy)
 4. [Policy Declaration Schema](#4-policy-declaration-schema)
 5. [Policy Acknowledgment](#5-policy-acknowledgment)
@@ -44,15 +44,15 @@ Party Policy Declarations answer the question: *what conditions must be met —
 and what must be explicitly acknowledged — before this transaction can proceed
 to CONFIRMATION?*
 
-Policies in ATOP cover a wide range: a resort's adult-only rule, a dive operator's
+Policies in Activity Travel Protocol cover a wide range: a resort's adult-only rule, a dive operator's
 certification requirement, a jurisdiction's visa obligation, a safety waiver for
 a high-altitude hike, a data processing consent for GDPR compliance. These are not
-the same kind of thing. The primary distinction that governs how ATOP processes
+the same kind of thing. The primary distinction that governs how Activity Travel Protocol processes
 every policy is not its subject matter but its **basis** — is this policy a
 regulatory requirement, or is it a supplier preference?
 
 This distinction is architectural. It determines how the policy is validated,
-where its acknowledgment text comes from, what ATOP enforces automatically versus
+where its acknowledgment text comes from, what Activity Travel Protocol enforces automatically versus
 what the Party must configure, and what the legal consequences of non-compliance are.
 
 ---
@@ -103,19 +103,19 @@ surfacing an existing legal requirement in a transaction-relevant context. A
 reference a specific requirement ID in the Jurisdiction Compliance Registry or a
 specific sandbox flag ID.
 
-ATOP validates regulatory policies against the Jurisdiction Compliance Registry:
+Activity Travel Protocol validates regulatory policies against the Jurisdiction Compliance Registry:
 - Does the cited requirement exist?
 - Does it apply to this transaction configuration?
 - Is a related sandbox flag active?
 - Is the acknowledgment text mandated by the jurisdiction entry?
 
 **Supplier policies** (`policy_basis: "supplier"`) exist because the Party chooses
-to impose them as a condition of doing business. ATOP knows about supplier policies
-only because the Party declared them. ATOP validates the structure of the declaration
+to impose them as a condition of doing business. Activity Travel Protocol knows about supplier policies
+only because the Party declared them. Activity Travel Protocol validates the structure of the declaration
 but cannot validate the content against any external source. The Party has discretion
 to waive or modify supplier policies; they cannot waive regulatory policies.
 
-**Protocol policies** (`policy_basis: "protocol"`) are policies ATOP itself requires
+**Protocol policies** (`policy_basis: "protocol"`) are policies Activity Travel Protocol itself requires
 all parties to accept as a condition of participation. They are defined in Section 9
 and declared in every Party Record automatically upon registration. They are not
 configurable by individual parties.
@@ -127,7 +127,7 @@ The following table shows how `policy_basis` determines processing at every stag
 | Aspect | Regulatory | Supplier | Protocol |
 |---|---|---|---|
 | Source of truth | Jurisdiction Compliance Registry | Party's own declaration | This specification |
-| ATOP validates content? | Yes — against jurisdiction entry | No — structure only | N/A — defined here |
+| Activity Travel Protocol validates content? | Yes — against jurisdiction entry | No — structure only | N/A — defined here |
 | Acknowledgment text source | Jurisdiction entry (may be mandated) | Party's own text | This specification |
 | Party may waive? | No | Yes | No |
 | Party may strengthen? | Yes — see Section 2.4 | Yes | No |
@@ -137,7 +137,7 @@ The following table shows how `policy_basis` determines processing at every stag
 
 The most important row is **"Automatically included?"** A regulatory policy that is
 required by the jurisdiction entry for this transaction configuration will be surfaced
-by ATOP at INQUIRY regardless of whether the Party has explicitly declared it. The
+by Activity Travel Protocol at INQUIRY regardless of whether the Party has explicitly declared it. The
 jurisdiction entry is the authoritative source. The Party's explicit declaration
 adds context — a specific acknowledgment text, an operational note — but cannot
 remove the underlying requirement.
@@ -173,9 +173,9 @@ When a layered policy is presented to a customer, both the regulatory floor and
 the supplier restriction MUST be disclosed — the customer must understand which
 part of the requirement is law and which part is the supplier's choice.
 
-### 2.5 What ATOP Does and Does Not Do
+### 2.5 What Activity Travel Protocol Does and Does Not Do
 
-ATOP **does**:
+Activity Travel Protocol **does**:
 - Provide the schema for declaring policies of all types
 - Validate that regulatory policy references exist in the jurisdiction entry
 - Surface applicable regulatory policies automatically based on the transaction
@@ -186,7 +186,7 @@ ATOP **does**:
 - Snapshot the policy version at CONFIRMATION so the confirmed booking is governed
   by the policy in effect at that moment
 
-ATOP **does not**:
+Activity Travel Protocol **does not**:
 - Prescribe the content of supplier policies
 - Determine whether a safety waiver is legally enforceable
 - Validate that a customer actually holds a required credential (it records the
@@ -211,7 +211,7 @@ Conditions one registered Party places on transacting with another Party.
 - Activity Supplier requires that any Tour Operator booking group activities holds
   group liability insurance above a defined threshold
 - Resort requires that the booking OTA has a data processing agreement in place
-- Supplier requires that the booking Party holds a specific ATOP Trust Mark
+- Supplier requires that the booking Party holds a specific Activity Travel Protocol Trust Mark
 
 *Applies to:* Other Parties in the transaction  
 *Evaluation point:* INQUIRY — gate condition before CONFIGURATION begins  
@@ -245,7 +245,7 @@ supplier one only if declared.
 The customer must hold a specific credential. Splits into two sub-types:
 
 **Type 3a — Required at booking time:** Customer must confirm they hold the
-credential for CONFIRMATION to proceed. ATOP records the declaration. The Party
+credential for CONFIRMATION to proceed. Activity Travel Protocol records the declaration. The Party
 verifies the actual credential at fulfillment.
 
 *Examples:*
@@ -256,7 +256,7 @@ verifies the actual credential at fulfillment.
 - Professional accreditation for industry events
 
 **Type 3b — Required at fulfillment:** Customer must present the credential
-physically at the activity. Declared during PRE_ACTIVITY_COLLECTION. ATOP
+physically at the activity. Declared during PRE_ACTIVITY_COLLECTION. Activity Travel Protocol
 records what will be required so the customer is informed before departure.
 
 *Examples:*
@@ -271,11 +271,11 @@ records what will be required so the customer is informed before departure.
 and age verification requirements are regulatory; supplier-imposed credential
 requirements are supplier policies
 
-**Visa requirements specifically:** ATOP declares that a visa requirement exists
+**Visa requirements specifically:** Activity Travel Protocol declares that a visa requirement exists
 and references the relevant jurisdiction entry or official government source.
 Verification that the customer actually holds the correct visa is the customer's
-responsibility. ATOP records that the customer was informed of the requirement
-and acknowledged it. ATOP does not perform visa eligibility checking.
+responsibility. Activity Travel Protocol records that the customer was informed of the requirement
+and acknowledged it. Activity Travel Protocol does not perform visa eligibility checking.
 
 ### Type 4 — Jurisdictional Compliance Policies
 
@@ -337,7 +337,7 @@ Conditions governing how customer personal data is handled.
 Consent for photography is typically supplier preference.
 
 **AI processing disclosure** is a special case. Where an AI agent participated
-in the booking, disclosure to the customer is required under ATOP Protocol Policy
+in the booking, disclosure to the customer is required under Activity Travel Protocol Protocol Policy
 (Type 8) regardless of whether any jurisdiction has yet mandated it. The EU AI Act
 [EU-AIACT] Article 50 adds a regulatory layer for EU transactions.
 
@@ -357,10 +357,10 @@ participation.
 
 *Applies to:* Customer  
 *Evaluation point:* CONFIRMATION  
-*Policy basis:* Almost always `supplier` — ATOP takes no position on legal
+*Policy basis:* Almost always `supplier` — Activity Travel Protocol takes no position on legal
 enforceability. The structure records that the acknowledgment was presented and
 accepted. Whether that acknowledgment constitutes a legally enforceable waiver
-in any jurisdiction is outside ATOP's scope.
+in any jurisdiction is outside Activity Travel Protocol's scope.
 
 *Exception:* Insurance requirements may be regulatory in some jurisdictions
 (some countries require travel insurance for entry). Where regulatory, reference
@@ -368,14 +368,14 @@ the jurisdiction entry.
 
 ### Type 8 — Protocol-Level Policies
 
-Policies ATOP itself requires all parties to accept as a condition of participation.
+Policies Activity Travel Protocol itself requires all parties to accept as a condition of participation.
 Defined in Section 9. Always `policy_basis: "protocol"`. Not configurable.
 
 *Examples:*
 - AI agent involvement disclosure to customers
 - Trust Chain archival consent
 - Duty of Care Declaration acceptance
-- ATOP conformance acknowledgment
+- Activity Travel Protocol conformance acknowledgment
 
 ---
 
@@ -386,7 +386,7 @@ Defined in Section 9. Always `policy_basis: "protocol"`. Not configurable.
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.atop-protocol.org/policy/declaration/v0.1",
+  "$id": "https://schemas.Activity Travel Protocol-protocol.org/policy/declaration/v0.1",
   "type": "object",
   "required": ["policy_id", "policy_basis", "policy_type", "applies_to",
                "evaluation_point", "acknowledgment_required"],
@@ -607,7 +607,7 @@ Defined in Section 9. Always `policy_basis: "protocol"`. Not configurable.
   "acknowledgment_config": {
     "acknowledgment_type": "checkbox",
     "text_source": "party_defined",
-    "text": "I confirm I have verified the visa requirements for my nationality for entry to Japan and will ensure I hold the correct documentation before travel. ATOP and the booking party are not responsible for denied entry due to visa non-compliance.",
+    "text": "I confirm I have verified the visa requirements for my nationality for entry to Japan and will ensure I hold the correct documentation before travel. Activity Travel Protocol and the booking party are not responsible for denied entry due to visa non-compliance.",
     "requires_human_actor": false,
     "minimum_acknowledgment_timing": "at_confirmation"
   },
@@ -639,7 +639,7 @@ Defined in Section 9. Always `policy_basis: "protocol"`. Not configurable.
   "acknowledgment_config": {
     "acknowledgment_type": "signed_declaration",
     "text_source": "party_defined",
-    "text": "I acknowledge that skiing involves inherent risks including collision, falls, and injury from terrain and weather conditions. I voluntarily accept these risks and confirm I am physically fit to participate. I understand that Nagano Ski Resort's liability is limited to losses caused by its direct negligence. ATOP records this acknowledgment but takes no position on its legal effect.",
+    "text": "I acknowledge that skiing involves inherent risks including collision, falls, and injury from terrain and weather conditions. I voluntarily accept these risks and confirm I am physically fit to participate. I understand that Nagano Ski Resort's liability is limited to losses caused by its direct negligence. Activity Travel Protocol records this acknowledgment but takes no position on its legal effect.",
     "requires_human_actor": true,
     "minimum_acknowledgment_timing": "at_confirmation"
   },
@@ -912,9 +912,9 @@ defined in the Trust Chain Record.
 *Requires human acknowledgment:* No — binding signature at CONFIRMATION covers this  
 *Note:* This is a Party-level obligation, not a customer acknowledgment.
 
-### PP-004 — ATOP Conformance Acknowledgment
+### PP-004 — Activity Travel Protocol Conformance Acknowledgment
 
-All Parties confirm they operate in conformance with the ATOP Protocol Specification
+All Parties confirm they operate in conformance with the Activity Travel Protocol Protocol Specification
 version in effect at transaction time.
 
 *Applies to:* All Parties  
@@ -951,7 +951,8 @@ See `references.md` for full citation details.
 ---
 
 *Document status: Draft v0.1 — March 2026*  
-*This document completes Layer 1 — Identity and Trust of the ATOP Protocol.*  
+*This document completes Layer 1 — Identity and Trust of the Activity Travel Protocol Protocol.*  
 *Next: Layer 2 — Catalogue Specification v0.1*  
-*Maintainer: ATOP Protocol — github.com/atop-protocol*  
+*Maintainer: Activity Travel Protocol Protocol — github.com/Activity Travel Protocol-protocol*  
 *License: Apache 2.0*
+

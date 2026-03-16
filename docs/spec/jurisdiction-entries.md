@@ -1,9 +1,9 @@
-# ATOP Jurisdiction Entries
+﻿# Activity Travel Protocol Jurisdiction Entries
 
 **Version:** 0.1 (Draft)  
 **Status:** Layer 1 — Identity and Trust  
 **Date:** March 2026  
-**Repository:** atop-protocol/atop-spec  
+**Repository:** Activity Travel Protocol-protocol/Activity Travel Protocol-spec  
 **Depends on:** Jurisdiction Compliance Registry Specification v0.2  
 **Related documents:** Global Jurisdiction Comparison v0.1  
 **License:** Apache 2.0  
@@ -12,7 +12,7 @@
 
 ## About This Document
 
-This document contains the jurisdiction entries for the ATOP Jurisdiction Compliance
+This document contains the jurisdiction entries for the Activity Travel Protocol Jurisdiction Compliance
 Registry. It is versioned independently from the Specification — regulatory changes
 update this document without requiring schema changes.
 
@@ -62,7 +62,7 @@ jurisdiction_name:    Japan
 entry_version:        0.1
 entry_status:         partial
 last_updated:         2026-03-04
-co_maintained_by:     (target: atop:party:jp:jta-licensing-authority)
+co_maintained_by:     (target: Activity Travel Protocol:party:jp:jta-licensing-authority)
 primary_regulatory_body:
   name:               Japan Tourism Agency
   name_local:         観光庁
@@ -165,7 +165,7 @@ Each licensed travel agency location must designate a qualified Travel Agency Ma
 
 *Required credential:* TRAVEL_AGENCY_MANAGER_CERT (national exam pass certificate)
 
-*ATOP note:* This credential applies to individuals (Actors), not the Party entity.
+*Activity Travel Protocol note:* This credential applies to individuals (Actors), not the Party entity.
 It is declared as an Actor credential, not a Party credential.
 
 *Legal basis:* Travel Agency Act Articles 11-2 through 11-3
@@ -225,7 +225,7 @@ issued to the customer.
 
 *Applies to roles:* TOUR_OPERATOR, TRAVEL_AGENT, ONLINE_TRAVEL_AGENCY
 
-*ATOP mapping:* Fulfilled by the CONFIRMATION document generated at CONFIRMATION state.
+*Activity Travel Protocol mapping:* Fulfilled by the CONFIRMATION document generated at CONFIRMATION state.
 Document must include all fields required under JP-DISC-002.
 
 *Legal basis:* Travel Agency Act Article 12-4
@@ -259,8 +259,8 @@ pre-planned (not assembled in response to a specific customer request); any dura
 **JP-PKG-002 — Custom-Arranged Package (受注型企画旅行)**
 
 A package assembled in response to a specific customer request. This is the primary
-product type ATOP is designed to enable — a customer initiates an INQUIRY, a
-configuration is assembled through ATOP's INQUIRY → CONFIGURATION → PROPOSAL flow,
+product type Activity Travel Protocol is designed to enable — a customer initiates an INQUIRY, a
+configuration is assembled through Activity Travel Protocol's INQUIRY → CONFIGURATION → PROPOSAL flow,
 and the result is a 受注型企画旅行.
 
 *Threshold:* Same components as JP-PKG-001 but assembled in direct response to
@@ -268,7 +268,7 @@ customer INQUIRY rather than pre-planned
 
 *Obligations triggered:* Same as JP-PKG-001
 
-*ATOP mapping:* ATOP's full booking workflow from INQUIRY through CONFIRMATION is the
+*Activity Travel Protocol mapping:* Activity Travel Protocol's full booking workflow from INQUIRY through CONFIRMATION is the
 technical implementation of the 受注型企画旅行 booking process.
 
 ---
@@ -277,7 +277,7 @@ technical implementation of the 受注型企画旅行 booking process.
 
 Where each component is contracted separately by its direct provider with no single
 party selling an inclusive package, this is classified as 手配旅行. Package obligations
-do not apply. This is the legal basis for ATOP's split-seller configuration.
+do not apply. This is the legal basis for Activity Travel Protocol's split-seller configuration.
 
 *Threshold NOT triggered when:*
 - Each service component contracted separately with its direct provider
@@ -300,7 +300,7 @@ Written information covering all key terms must be provided before the contract 
 concluded.
 
 *Delivery timing:* at_proposal (before CONFIRMATION)  
-*ATOP workflow state:* PROPOSAL  
+*Activity Travel Protocol workflow state:* PROPOSAL  
 *Applies to roles:* TOUR_OPERATOR, TRAVEL_AGENT, ONLINE_TRAVEL_AGENCY
 
 *Content required:*
@@ -321,7 +321,7 @@ concluded.
 Upon conclusion of the travel contract, the agent must issue a written confirmation.
 
 *Delivery timing:* at_confirmation  
-*ATOP workflow state:* CONFIRMATION  
+*Activity Travel Protocol workflow state:* CONFIRMATION  
 *Applies to roles:* TOUR_OPERATOR, TRAVEL_AGENT, ONLINE_TRAVEL_AGENCY
 
 *Content required:* All JP-DISC-001 fields plus:
@@ -341,7 +341,7 @@ that they are entering separate contracts with each provider and do not have the
 protections of a package travel contract.
 
 *Delivery timing:* before_booking  
-*ATOP workflow state:* INQUIRY acknowledgment; repeated in CONFIRMATION  
+*Activity Travel Protocol workflow state:* INQUIRY acknowledgment; repeated in CONFIRMATION  
 *Trigger:* sandbox_flags_active includes JP-TRAVEL-LAW-SPLIT-SELLER
 
 *Required disclosure text (Japanese):*
@@ -485,7 +485,7 @@ March 2026.
 of consumers. Whether an AI agent initiating a booking constitutes conducting travel
 agency business is unaddressed in any JTA guidance.
 
-*Compliant path available:* Yes — ATOP Agentic Authorization Framework:
+*Compliant path available:* Yes — Activity Travel Protocol Agentic Authorization Framework:
 1. AI agent operates under signed Authorization Declaration from consumer
 2. Agent operates at Level 2 maximum (negotiates but does not confirm)
 3. Human consumer provides binding signature at CONFIRMATION
@@ -500,7 +500,7 @@ agency business is unaddressed in any JTA guidance.
 
 ### JP Government Advisory Sources
 
-| Source ID | Authority | Feed URL | Format | ATOP Mapping |
+| Source ID | Authority | Feed URL | Format | Activity Travel Protocol Mapping |
 |---|---|---|---|---|
 | `advisory:jp:mofa` | MOFA (外務省) | https://www.anzen.mofa.go.jp/rss/anzen_situa.xml | RSS | Danger/Evacuation→CRITICAL, Caution→WARNING, Watch→CAUTION, Info→MONITOR |
 | `advisory:jp:jta-disruption` | Japan Tourism Agency | https://www.mlit.go.jp/kankocho/ | manual | As published |
@@ -516,7 +516,7 @@ jurisdiction_name:    European Union (Member States)
 entry_version:        0.1
 entry_status:         partial
 last_updated:         2026-03-04
-co_maintained_by:     (target: atop:party:eu:ec-dg-grow)
+co_maintained_by:     (target: Activity Travel Protocol:party:eu:ec-dg-grow)
 primary_regulatory_body:
   name:               European Commission — Directorate-General for Internal Market,
                       Industry, Entrepreneurship and SMEs (DG GROW)
@@ -737,7 +737,7 @@ Standardized pre-contractual information covering all key package terms, as spec
 in PTD Annex I Part A, must be provided before the traveler is bound by the contract.
 
 *Delivery timing:* before_booking  
-*ATOP workflow state:* PROPOSAL
+*Activity Travel Protocol workflow state:* PROPOSAL
 
 *Content required (PTD Annex I Part A):*
 - Main characteristics of travel services (destinations, transport, accommodation,
@@ -761,7 +761,7 @@ A confirmation document or booking confirmation on durable medium must be provid
 at or promptly after conclusion of the package travel contract.
 
 *Delivery timing:* at_confirmation  
-*ATOP workflow state:* CONFIRMATION
+*Activity Travel Protocol workflow state:* CONFIRMATION
 
 *Content required:* All Annex I Part A information plus:
 - Receipt of advance payment
@@ -780,7 +780,7 @@ informing the traveler that they are not purchasing a package and do not have fu
 package protections.
 
 *Delivery timing:* before_booking  
-*ATOP workflow state:* INQUIRY acknowledgment
+*Activity Travel Protocol workflow state:* INQUIRY acknowledgment
 
 *Required content:* PTD Annex II standard notice form, in the language of the
 transaction
@@ -795,7 +795,7 @@ The EU AI Act Article 50 requires disclosure when AI systems interact with natur
 persons. Application to travel AI agents is under regulatory clarification.
 
 *Status:* Pending — EU-AI-ACT-TRAVEL sandbox flag active  
-*ATOP workflow state:* INQUIRY (where AI agent initiates)
+*Activity Travel Protocol workflow state:* INQUIRY (where AI agent initiates)
 
 ---
 
@@ -894,7 +894,7 @@ initiate travel bookings involving financial commitments qualify as high-risk un
 Annex III is under review. If classified as high-risk, additional conformity assessment,
 transparency, and human oversight requirements apply.
 
-*Compliant path available:* Yes — ATOP's Agentic Authorization Framework implements
+*Compliant path available:* Yes — Activity Travel Protocol's Agentic Authorization Framework implements
 human oversight requirements consistent with EU AI Act Article 14 regardless of final
 classification.
 
@@ -904,7 +904,7 @@ classification.
 
 ### EU Government Advisory Sources
 
-| Source ID | Authority | Feed URL | Format | ATOP Mapping |
+| Source ID | Authority | Feed URL | Format | Activity Travel Protocol Mapping |
 |---|---|---|---|---|
 | `advisory:eu:easa-czib` | EASA | https://www.easa.europa.eu/en/domains/air-operations/czibs | HTML/manual | CZIB issued→WARNING or CRITICAL depending on severity |
 | `advisory:eu:ec-travel` | European Commission | https://ec.europa.eu/consularprotection/content/travel-advice_en | manual | As published |
@@ -920,7 +920,7 @@ jurisdiction_name:    United Kingdom
 entry_version:        0.1
 entry_status:         partial
 last_updated:         2026-03-04
-co_maintained_by:     (target: atop:party:gb:cma)
+co_maintained_by:     (target: Activity Travel Protocol:party:gb:cma)
 primary_regulatory_body:
   name:               Competition and Markets Authority (CMA)
   website:            https://www.gov.uk/government/organisations/competition-and-markets-authority
@@ -1030,7 +1030,7 @@ Consumer receives ATOL certificate confirming protection.
 
 *Applies to roles:* TOUR_OPERATOR, TRAVEL_AGENT, ONLINE_TRAVEL_AGENCY (flight-inclusive)
 
-*ATOP note:* The ATOL certificate number must be included in the CONFIRMATION document
+*Activity Travel Protocol note:* The ATOL certificate number must be included in the CONFIRMATION document
 and in all marketing materials. This is a GB-specific field in the disclosure schema.
 
 *Legal basis:* ATOL Regulations 2012 Regulation 14
@@ -1134,7 +1134,7 @@ if they operate in both markets.
 sector-specific travel rules. No binding obligation addresses AI agents in travel.
 Whether AI-assisted booking requires disclosure is unresolved.
 
-*Compliant path:* ATOP Agentic Authorization Framework with Level 2 maximum; human
+*Compliant path:* Activity Travel Protocol Agentic Authorization Framework with Level 2 maximum; human
 confirmation at CONFIRMATION state
 
 *Reform reference:* DSIT AI regulation consultation ongoing; no sector-specific
@@ -1144,7 +1144,7 @@ travel rules anticipated in near term
 
 ### GB Government Advisory Sources
 
-| Source ID | Authority | Feed URL | Format | ATOP Mapping |
+| Source ID | Authority | Feed URL | Format | Activity Travel Protocol Mapping |
 |---|---|---|---|---|
 | `advisory:gb:fcdo` | UK FCDO | https://www.gov.uk/foreign-travel-advice | RSS/HTML | Advise against all travel→CRITICAL; Advise against all but essential→WARNING; Some risk→CAUTION |
 | `advisory:gb:met-office` | Met Office | https://www.metoffice.gov.uk/weather/warnings-and-advice/uk-warnings | RSS | Red warning→CRITICAL, Amber→WARNING, Yellow→CAUTION |
@@ -1303,7 +1303,7 @@ While there is no statute, FTC enforcement has established that:
   bundle cannot actually be purchased at the advertised price
 - Cancellation and refund terms for packages must be clearly disclosed before purchase
 
-*ATOP note:* The absence of a statutory package definition in the US means ATOP's
+*Activity Travel Protocol note:* The absence of a statutory package definition in the US means Activity Travel Protocol's
 split-seller vs. package distinction is primarily relevant for EU/UK/JP compliance
 when US customers are traveling to those jurisdictions. For US-domestic travel, the
 contractual and FTC framework governs.
@@ -1320,7 +1320,7 @@ Total price including all mandatory fees must be clearly displayed before checko
 Hidden or drip pricing — revealing fees incrementally — is an FTC enforcement priority.
 
 *Delivery timing:* before_booking  
-*ATOP workflow state:* PROPOSAL
+*Activity Travel Protocol workflow state:* PROPOSAL
 
 ---
 
@@ -1330,7 +1330,7 @@ Cancellation terms must be clearly disclosed before purchase. California require
 specific cancellation policy disclosure for travel sellers.
 
 *Delivery timing:* before_booking  
-*ATOP workflow state:* PROPOSAL and CONFIRMATION
+*Activity Travel Protocol workflow state:* PROPOSAL and CONFIRMATION
 
 ---
 
@@ -1416,7 +1416,7 @@ material California customer volume.
 consumers. Whether the AI agent, the platform deploying it, or the consumer is the
 "seller" for SOT purposes is unresolved.
 
-*Compliant path:* ATOP Agentic Authorization Framework: human consumer provides binding
+*Compliant path:* Activity Travel Protocol Agentic Authorization Framework: human consumer provides binding
 confirmation, agent acts under declared authorization, Platform holds any required SOT
 registration as the technology provider
 
@@ -1424,7 +1424,7 @@ registration as the technology provider
 
 ### US Government Advisory Sources
 
-| Source ID | Authority | Feed URL | Format | ATOP Mapping |
+| Source ID | Authority | Feed URL | Format | Activity Travel Protocol Mapping |
 |---|---|---|---|---|
 | `advisory:us:state-dept` | US State Department | https://travel.state.gov/content/travel/en/traveladvisories/RSS.xml | RSS | Level 4→CRITICAL, Level 3→WARNING, Level 2→CAUTION, Level 1→MONITOR |
 | `advisory:us:cdc-travel` | CDC | https://wwwnc.cdc.gov/travel/rss/destinationlist.xml | RSS | Warning Level 3→WARNING, Alert Level 2→CAUTION, Watch Level 1→MONITOR |
@@ -1435,9 +1435,9 @@ registration as the technology provider
 ## Advisory Sources Registry
 
 Full registry of all government advisory sources referenced in this document and
-available for ATOP Disruption Event integration.
+available for Activity Travel Protocol Disruption Event integration.
 
-| Source ID | Jurisdiction | Authority | Feed Type | ATOP Severity Mapping |
+| Source ID | Jurisdiction | Authority | Feed Type | Activity Travel Protocol Severity Mapping |
 |---|---|---|---|---|
 | `advisory:jp:mofa` | JP | Ministry of Foreign Affairs | RSS | Danger/Evacuation→CRITICAL, Caution→WARNING, Watch→CAUTION, Info→MONITOR |
 | `advisory:jp:jma` | JP | Japan Meteorological Agency | JSON | Special Warning→CRITICAL, Warning→WARNING, Advisory→CAUTION |
@@ -1461,7 +1461,7 @@ The following jurisdiction entries are planned for v0.2 of this document:
 | Jurisdiction | Priority | Notes |
 |---|---|---|
 | Australia (AU) | High | ATAS (Australian Travel Accreditation Scheme); significant inbound from Japan |
-| Singapore (SG) | High | Singapore Tourism Board; key ASEAN hub; ATOP deployment target |
+| Singapore (SG) | High | Singapore Tourism Board; key ASEAN hub; Activity Travel Protocol deployment target |
 | South Korea (KR) | High | Korea Tourism Organization; large Japan-Korea travel corridor |
 | France (FR) | Medium | Member state entry; Atout France registration; significant ski market |
 | Germany (DE) | Medium | Member state entry; Reiserecht; major outbound market |
@@ -1477,5 +1477,6 @@ extend the EU baseline entry rather than duplicating it.
 *Document status: Draft v0.1 — March 2026*  
 *Next revision: v0.2 — full status for all four primary jurisdictions following*  
 *regulatory body review engagement*  
-*Maintainer: ATOP Protocol — github.com/atop-protocol*  
+*Maintainer: Activity Travel Protocol Protocol — github.com/Activity Travel Protocol-protocol*  
 *License: Apache 2.0*
+

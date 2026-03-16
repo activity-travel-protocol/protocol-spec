@@ -1,10 +1,10 @@
-# Global Travel Regulation and the Challenge of Jurisdiction: A Discussion Paper
+﻿# Global Travel Regulation and the Challenge of Jurisdiction: A Discussion Paper
 
 **Document type:** Discussion Paper / White Paper  
 **Version:** 0.1 (Draft)  
 **Date:** March 2026  
-**Prepared by:** ATOP Protocol — Activity and Travel Orchestration Protocol  
-**Repository:** atop-protocol/atop-spec  
+**Prepared by:** Activity Travel Protocol Protocol — Activity Travel Protocol  
+**Repository:** Activity Travel Protocol-protocol/Activity Travel Protocol-spec  
 **Related documents:** Jurisdiction Compliance Registry Specification v0.2,
 Jurisdiction Entries v0.1  
 
@@ -17,7 +17,7 @@ industry participants. Both need to understand the same problem from different a
 
 To regulators: this paper describes where existing consumer protection frameworks are
 failing travelers — and why those failures are about to get significantly worse as AI
-agents reshape the booking experience. It proposes ATOP as infrastructure that extends
+agents reshape the booking experience. It proposes Activity Travel Protocol as infrastructure that extends
 the reach of your existing regulatory intent into new business models and new
 technologies.
 
@@ -26,7 +26,7 @@ OTAs, tour operators, and accommodation providers navigate daily — often witho
 tools to navigate it correctly — and why AI-assisted booking makes that complexity
 simultaneously more important and harder to manage manually.
 
-The analysis is evidence-based. The intent is constructive. ATOP's goal is not to
+The analysis is evidence-based. The intent is constructive. Activity Travel Protocol's goal is not to
 work around travel regulation but to make it work in a world the regulations were not
 designed for.
 
@@ -40,7 +40,7 @@ designed for.
 4. [Cross-Jurisdiction Comparison: How the Four Primary Frameworks Compare](#4-cross-jurisdiction-comparison)
 5. [Where Global Operators Find It Hardest: Technology and Operational Challenges](#5-where-global-operators-find-it-hardest)
 6. [The Cross-Border Problem: When Three Jurisdictions Apply Simultaneously](#6-the-cross-border-problem)
-7. [What ATOP Provides: Closing the Gap Without Replacing Regulation](#7-what-atop-provides)
+7. [What Activity Travel Protocol Provides: Closing the Gap Without Replacing Regulation](#7-what-Activity Travel Protocol-provides)
 8. [A Path Forward: Recommendations for Regulatory Engagement](#8-a-path-forward)
 
 ---
@@ -94,8 +94,8 @@ flights. Hotels held reservations that could no longer be reached. Activity book
 were stranded in place. No single party had a clear, enforceable duty of care
 obligation across the whole journey. Response was ad hoc, manual, and slow.
 
-ATOP was designed with this exact scenario in mind. The Duty of Care Declaration — a
-required component of every ATOP Trust Chain — explicitly names which party holds
+Activity Travel Protocol was designed with this exact scenario in mind. The Duty of Care Declaration — a
+required component of every Activity Travel Protocol Trust Chain — explicitly names which party holds
 primary duty of care at each phase of the journey, before the journey begins.
 
 ### 1.3 The Disclosure Failure
@@ -218,8 +218,8 @@ recommendation? In the absence of a clear declaration framework for AI agent
 authorization — with explicit scope, limits, and accountability assignment — courts
 and regulators will face years of uncertainty.
 
-ATOP's Agentic Authorization Framework addresses this directly. Every AI agent acting
-in an ATOP transaction acts under a signed Authorization Declaration from a registered
+Activity Travel Protocol's Agentic Authorization Framework addresses this directly. Every AI agent acting
+in an Activity Travel Protocol transaction acts under a signed Authorization Declaration from a registered
 Party. The Party is accountable. The agent's scope is declared. The human confirmation
 checkpoints are specified. This is not a theoretical future state — it is the framework
 operating now.
@@ -229,17 +229,17 @@ operating now.
 As of March 2026, no jurisdiction has definitively addressed AI agents in travel
 agency regulation. The following table summarizes the current state:
 
-| Jurisdiction | AI Regulation Framework | Travel-Specific AI Rules | ATOP Relevance |
+| Jurisdiction | AI Regulation Framework | Travel-Specific AI Rules | Activity Travel Protocol Relevance |
 |---|---|---|---|
 | JP | AI governance discussion ongoing; JTA AI working group active | None issued | JP-AI-AGENT-001 sandbox flag active |
-| EU | EU AI Act in force; Article 6 high-risk classification under review | None yet issued | EU AI Act compliance mapped in ATOP agent authorization schema |
+| EU | EU AI Act in force; Article 6 high-risk classification under review | None yet issued | EU AI Act compliance mapped in Activity Travel Protocol agent authorization schema |
 | UK | Principles-based AI governance (DSIT framework 2023); no sector rules | None issued | UK sandbox flag pending |
 | US | FTC guidance only; no binding federal AI law; state laws emerging | None issued | US sandbox flag pending |
 
 This table represents an extraordinary opportunity. The first framework to define
 clearly how AI agents should behave in travel transactions — with legal accountability,
 declared scope, and consumer protection built in — will shape how every jurisdiction
-develops its rules. ATOP's Agentic Authorization Framework exists today. It can be
+develops its rules. Activity Travel Protocol's Agentic Authorization Framework exists today. It can be
 that framework.
 
 ---
@@ -248,7 +248,7 @@ that framework.
 
 This section compares the travel regulatory frameworks of Japan, the European Union,
 the United Kingdom, and the United States across the dimensions most relevant to
-ATOP's compliance model. All four jurisdictions are given equal treatment.
+Activity Travel Protocol's compliance model. All four jurisdictions are given equal treatment.
 
 ### 4.1 Licensing Framework Comparison
 
@@ -274,7 +274,7 @@ ATOP's compliance model. All four jurisdictions are given equal treatment.
 
 ### 4.3 Packaging Definition Comparison
 
-This is the most practically important comparison for ATOP, because the definition of
+This is the most practically important comparison for Activity Travel Protocol, because the definition of
 "package" determines when the comprehensive consumer protection obligations apply.
 
 | Dimension | Japan (JP) | European Union (EU) | United Kingdom (GB) | United States (US) |
@@ -345,7 +345,7 @@ compliance teams update internal documents. Booking system teams interpret those
 documents and implement code changes. The lag between regulatory change and system
 implementation is measured in months.
 
-ATOP's Jurisdiction Compliance Registry makes compliance data machine-readable for
+Activity Travel Protocol's Jurisdiction Compliance Registry makes compliance data machine-readable for
 the first time. A booking system can query the Registry at transaction time, get a
 current compliance check result, and adapt the booking flow in real time.
 
@@ -355,7 +355,7 @@ branches across three jurisdictions simultaneously. Building and maintaining thi
 logic in bespoke code for every platform is expensive, error-prone, and fragile.
 Every time any of the three jurisdictions changes a rule, the code must be updated.
 
-ATOP externalizes this logic into the Registry. The booking system asks "is this
+Activity Travel Protocol externalizes this logic into the Registry. The booking system asks "is this
 compliant?" and receives an answer. The complex multi-jurisdiction evaluation happens
 once, in the Registry, and is available to all implementations.
 
@@ -365,7 +365,7 @@ disclosures across all jurisdictions, for all product types, in the customer's l
 at the right moment in the workflow, is a non-trivial technical problem that every OTA
 solves separately and expensively.
 
-ATOP maps disclosure requirements to workflow states. The disclosure content is defined
+Activity Travel Protocol maps disclosure requirements to workflow states. The disclosure content is defined
 in the Registry. Implementations know which disclosures to generate, when, and in what
 form.
 
@@ -374,7 +374,7 @@ booking, they need programmatic guardrails that prevent agents from taking actio
 would be non-compliant or that exceed their authorization. Without a formal authorization
 framework, these guardrails are implemented ad hoc in each platform.
 
-ATOP's Agentic Authorization Framework provides a formal, verifiable authorization
+Activity Travel Protocol's Agentic Authorization Framework provides a formal, verifiable authorization
 structure. The agent's permitted scope is declared, signed, and verifiable by
 counterparties. Guardrails are enforced at the protocol level, not in bespoke code.
 
@@ -393,7 +393,7 @@ different credential systems, three different verification processes, and three 
 validity periods. Most OTAs rely on supplier self-declaration — the lowest assurance
 level.
 
-ATOP's Party Registry, with its structured credential reference system and four
+Activity Travel Protocol's Party Registry, with its structured credential reference system and four
 assurance levels, provides a common framework for supplier credential verification
 across all jurisdictions.
 
@@ -404,7 +404,7 @@ currently done manually: phone calls, email chains, WhatsApp messages. There is 
 protocol-level mechanism for propagating a disruption declaration to all affected
 parties.
 
-ATOP's Disruption Events mechanism, with registered government advisory sources and
+Activity Travel Protocol's Disruption Events mechanism, with registered government advisory sources and
 machine-readable disruption declarations, provides exactly this.
 
 ---
@@ -454,10 +454,10 @@ recourse in any jurisdiction.
 - The customer authorized the AI agent under a framework that exists in no jurisdiction's
   law
 
-### 6.2 ATOP's Cross-Border Resolution Model
+### 6.2 Activity Travel Protocol's Cross-Border Resolution Model
 
-ATOP does not resolve jurisdiction conflicts — that is a matter for law and treaties.
-What ATOP does is make the conflicts visible, declare which jurisdiction's rules are
+Activity Travel Protocol does not resolve jurisdiction conflicts — that is a matter for law and treaties.
+What Activity Travel Protocol does is make the conflicts visible, declare which jurisdiction's rules are
 being applied to each component of the transaction, and record that declaration in the
 Trust Chain.
 
@@ -477,19 +477,19 @@ examine to understand how compliance was evaluated for a specific transaction.
 
 ---
 
-## 7. What ATOP Provides: Closing the Gap Without Replacing Regulation
+## 7. What Activity Travel Protocol Provides: Closing the Gap Without Replacing Regulation
 
-ATOP is not a regulatory body and does not seek to be one. It is infrastructure —
+Activity Travel Protocol is not a regulatory body and does not seek to be one. It is infrastructure —
 protocol-level machinery that makes existing regulatory requirements machine-readable,
 makes compliance visible at transaction time, and makes the accountability chain
 explicit for all parties including AI agents.
 
-### 7.1 The Three Things ATOP Provides
+### 7.1 The Three Things Activity Travel Protocol Provides
 
 **Machine-readable compliance data.** The Jurisdiction Compliance Registry translates
 regulatory requirements into structured data that booking systems and AI agents can
 query in real time. When a regulatory requirement changes, the Registry is updated and
-all ATOP-conformant systems automatically incorporate the change.
+all Activity Travel Protocol-conformant systems automatically incorporate the change.
 
 **A common accountability framework.** The Party Registry, Trust Chain, and Duty of
 Care Declaration provide a single framework for declaring who is responsible for what
@@ -499,26 +499,26 @@ across the human-AI boundary.
 **An evidence base for regulatory reform.** Every Regulatory Sandbox Flag invocation
 contributes to an aggregate dataset. This dataset shows precisely where existing
 regulations create friction for legitimate business without improving consumer
-protection. ATOP provides this data as a public good, available to any regulator
+protection. Activity Travel Protocol provides this data as a public good, available to any regulator
 seeking evidence for reform.
 
-### 7.2 What ATOP Asks of Regulators
+### 7.2 What Activity Travel Protocol Asks of Regulators
 
-ATOP asks three things of regulatory bodies:
+Activity Travel Protocol asks three things of regulatory bodies:
 
 **Participate in jurisdiction entry co-maintenance.** A co-maintained entry — reviewed
-and endorsed by the primary regulatory body — transforms ATOP's compliance declarations
+and endorsed by the primary regulatory body — transforms Activity Travel Protocol's compliance declarations
 from best-interpretation to authoritative. This does not require regulatory bodies to
-endorse ATOP as a platform; it requires only that they review and confirm the accuracy
+endorse Activity Travel Protocol as a platform; it requires only that they review and confirm the accuracy
 of their own regulatory requirements as described in the entry.
 
 **Engage with the Sandbox Flag evidence.** The aggregate data generated by Sandbox Flag
-invocations is evidence of regulatory friction. ATOP makes this data available to
+invocations is evidence of regulatory friction. Activity Travel Protocol makes this data available to
 regulatory bodies. We ask that it be used — as input to reform discussions, working
 group deliberations, and legislative review processes.
 
-**Consider ATOP's AI agent framework in AI policy development.** No jurisdiction yet
-has travel-specific AI agent rules. ATOP's Agentic Authorization Framework is the
+**Consider Activity Travel Protocol's AI agent framework in AI policy development.** No jurisdiction yet
+has travel-specific AI agent rules. Activity Travel Protocol's Agentic Authorization Framework is the
 only existing operational framework for AI agent accountability in travel transactions.
 We invite regulatory bodies to examine it as a reference model for policy development.
 
@@ -530,15 +530,15 @@ We invite regulatory bodies to examine it as a reference model for policy develo
 
 The most urgent priority for Japan is clarity on two points: the hotel activity
 packaging configuration (the split-seller gray zone), and AI agent booking initiation.
-Both are addressed by current ATOP sandbox flags. JTA's DX working group is the
+Both are addressed by current Activity Travel Protocol sandbox flags. JTA's DX working group is the
 natural forum for this engagement.
 
 **Recommended actions:**
-1. Co-maintain the JP jurisdiction entry — review and endorse ATOP's description of
+1. Co-maintain the JP jurisdiction entry — review and endorse Activity Travel Protocol's description of
    Japanese travel law requirements
 2. Issue guidance on hotel activity packaging in a digital split-seller configuration
    (resolving `JP-TRAVEL-LAW-SPLIT-SELLER`)
-3. Include ATOP's AI agent authorization framework in the JTA AI working group's
+3. Include Activity Travel Protocol's AI agent authorization framework in the JTA AI working group's
    reference materials
 
 ### For the European Union (EC / DG GROW)
@@ -548,11 +548,11 @@ world. The challenge is extending it to digital platforms, AI agents, and cross-
 configurations the 2015 PTD did not anticipate.
 
 **Recommended actions:**
-1. Examine ATOP's Linked Travel Arrangement handling as a model for machine-readable
+1. Examine Activity Travel Protocol's Linked Travel Arrangement handling as a model for machine-readable
    LTA detection
-2. Consider ATOP's agent authorization schema in the EU AI Act secondary regulation
+2. Consider Activity Travel Protocol's agent authorization schema in the EU AI Act secondary regulation
    process for Article 6 high-risk classification review
-3. Engage with ATOP's cross-border jurisdiction resolution model in the context of
+3. Engage with Activity Travel Protocol's cross-border jurisdiction resolution model in the context of
    the PTD's 2026 review
 
 ### For the United Kingdom (CMA / CAA)
@@ -562,10 +562,10 @@ PTD — incorporating digital commerce realities and AI accountability from the 
 rather than amending an existing framework.
 
 **Recommended actions:**
-1. Engage with ATOP's AI agent framework in the DSIT AI governance consultation
+1. Engage with Activity Travel Protocol's AI agent framework in the DSIT AI governance consultation
 2. Examine whether the ATOL scheme can be extended to cover AI-assisted booking
-   configurations through ATOP's authorization framework
-3. Consider ATOP's sandbox flag mechanism as a model for the CMA's consumer protection
+   configurations through Activity Travel Protocol's authorization framework
+3. Consider Activity Travel Protocol's sandbox flag mechanism as a model for the CMA's consumer protection
    regulatory sandbox initiative
 
 ### For the United States (FTC / State Attorneys General)
@@ -575,16 +575,17 @@ building on state Seller of Travel regimes — that address cross-border digital
 and AI agents coherently.
 
 **Recommended actions:**
-1. Engage with ATOP as a model for what federal travel consumer protection
+1. Engage with Activity Travel Protocol as a model for what federal travel consumer protection
    infrastructure could look like
-2. Use ATOP's cross-jurisdiction comparison data in the FTC's ongoing digital commerce
+2. Use Activity Travel Protocol's cross-jurisdiction comparison data in the FTC's ongoing digital commerce
    consumer protection work
-3. Consider whether ATOP's Party Registry and credential verification model could
+3. Consider whether Activity Travel Protocol's Party Registry and credential verification model could
    reduce the compliance burden of multi-state Seller of Travel registration
 
 ---
 
 *Document status: Draft v0.1 — March 2026*  
 *This document is a discussion paper and does not constitute legal advice.*  
-*Prepared by: ATOP Protocol — github.com/atop-protocol*  
+*Prepared by: Activity Travel Protocol Protocol — github.com/Activity Travel Protocol-protocol*  
 *License: Apache 2.0*
+

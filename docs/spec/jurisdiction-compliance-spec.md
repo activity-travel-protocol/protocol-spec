@@ -1,9 +1,9 @@
-# ATOP Jurisdiction Compliance Registry Specification
+﻿# Activity Travel Protocol Jurisdiction Compliance Registry Specification
 
 **Version:** 0.2 (Draft)  
 **Status:** Layer 1 — Identity and Trust  
 **Date:** March 2026  
-**Repository:** atop-protocol/atop-spec  
+**Repository:** Activity Travel Protocol-protocol/Activity Travel Protocol-spec  
 **Depends on:** Architecture Specification v0.1, Party Registry Specification v0.2  
 **Related documents:** Jurisdiction Entries v0.1, Global Jurisdiction Comparison v0.1  
 **License:** Apache 2.0  
@@ -30,7 +30,7 @@
 
 ## 1. Purpose of This Document
 
-The Jurisdiction Compliance Registry answers the question every ATOP participant must
+The Jurisdiction Compliance Registry answers the question every Activity Travel Protocol participant must
 answer before executing a transaction:
 
 **For this Party, in this role, selling this product, to this customer, in this
@@ -42,7 +42,7 @@ companion **Jurisdiction Entries v0.1**, versioned separately so regulatory upda
 not trigger schema changes.
 
 The companion **Global Jurisdiction Comparison v0.1** is for regulators, industry
-stakeholders, and policy audiences who need to understand the landscape ATOP operates
+stakeholders, and policy audiences who need to understand the landscape Activity Travel Protocol operates
 within, not the technical implementation.
 
 ---
@@ -51,7 +51,7 @@ within, not the technical implementation.
 
 ### 2.1 Compliance as Transaction Configuration
 
-ATOP evaluates compliance against a **transaction configuration** — the combination of:
+Activity Travel Protocol evaluates compliance against a **transaction configuration** — the combination of:
 
 - The roles all parties hold in the transaction
 - The product type being sold
@@ -71,7 +71,7 @@ ski trip touches the Travel Agency Act, hotel licensing law, road transport regu
 food safety law, municipal slope safety ordinances, and personal data protection law
 simultaneously.
 
-ATOP addresses this through a **two-tier model**:
+Activity Travel Protocol addresses this through a **two-tier model**:
 
 **Tier 1 — Core Associated Domains.** Food safety, ground transport, and maritime
 operations are defined as core domains with full schemas, canonical credential types,
@@ -81,18 +81,18 @@ requirements in activity-based bookings.
 **Tier 2 — Extended Domains.** Any other regulatory domain — ski safety, fire safety,
 guide licensing, environmental protection, healthcare — is declared using a generic
 reference structure. The Party names the domain, identifies the governing authority,
-and specifies the required credential. ATOP provides the declaration framework;
+and specifies the required credential. Activity Travel Protocol provides the declaration framework;
 implementors verify the detail.
 
-### 2.3 What ATOP Does and Does Not Do
+### 2.3 What Activity Travel Protocol Does and Does Not Do
 
-ATOP MUST:
+Activity Travel Protocol MUST:
 - Make every applicable requirement visible to all parties before CONFIRMATION
 - Record in the Trust Chain whether requirements were met at booking time
 - Flag non-compliant configurations visibly in the Trust Chain
 - Activate the Regulatory Sandbox mechanism for gray zones
 
-ATOP MUST NOT claim:
+Activity Travel Protocol MUST NOT claim:
 - That a compliant-flagged transaction is legally compliant under all applicable law
 - That its entries substitute for jurisdiction-specific legal advice
 
@@ -104,7 +104,7 @@ Implementations SHOULD warn parties when a transaction is flagged `non_compliant
 RFC 2119 key words apply: MUST, MUST NOT, REQUIRED, SHOULD, MAY.
 
 Schema language: JSON Schema 2020-12. Normative schemas at
-`atop-protocol/atop-spec/schemas/compliance/`. Inline schemas in this document are
+`Activity Travel Protocol-protocol/Activity Travel Protocol-spec/schemas/compliance/`. Inline schemas in this document are
 illustrative; repository schemas are authoritative.
 
 ---
@@ -120,7 +120,7 @@ JurisdictionEntry
 ├── entry_version                   Versioned independently from this spec
 ├── entry_status                    full | partial | framework | authoritative
 ├── last_updated
-├── co_maintained_by                ATOP party_id of co-maintaining regulatory body
+├── co_maintained_by                Activity Travel Protocol party_id of co-maintaining regulatory body
 ├── primary_regulatory_body
 ├── licensing_requirements[]        Section 4
 ├── consumer_protection[]           Section 5
@@ -145,7 +145,7 @@ JurisdictionEntry
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.atop-protocol.org/compliance/jurisdiction-entry/v0.2",
+  "$id": "https://schemas.Activity Travel Protocol-protocol.org/compliance/jurisdiction-entry/v0.2",
   "type": "object",
   "required": ["jurisdiction_code", "jurisdiction_name", "entry_version",
                "entry_status", "last_updated", "primary_regulatory_body"],
@@ -360,7 +360,7 @@ and are defined in the Jurisdiction Entries.
 
 Answers: *what must the customer be told, when, and in what form?*
 
-Disclosures map to ATOP workflow states. Pre-contractual information is delivered at
+Disclosures map to Activity Travel Protocol workflow states. Pre-contractual information is delivered at
 or before PROPOSAL. The confirmation document is generated at CONFIRMATION.
 Pre-departure information is delivered in the READY state.
 
@@ -427,7 +427,7 @@ disclosure that an AI agent participated in the booking).
 ### 8.1 Why This Section Exists
 
 Travel law governs who can sell travel. But activity-based travel touches many
-regulatory domains that travel law does not address. Every activity type in ATOP
+regulatory domains that travel law does not address. Every activity type in Activity Travel Protocol
 potentially brings with it a set of non-travel regulatory requirements:
 
 | Activity | Associated Domains |
@@ -440,7 +440,7 @@ potentially brings with it a set of non-travel regulatory requirements:
 | Hotel event catering | Food safety, fire safety, occupancy limits |
 | Beach resort | Coast guard jurisdiction, environmental protection zones |
 
-ATOP cannot be a comprehensive database of every regulation in every domain. It can
+Activity Travel Protocol cannot be a comprehensive database of every regulation in every domain. It can
 provide a declaration framework — a structured way for parties to declare which
 domains apply to their activity type and what credentials they hold. The two-tier model
 below defines how.
@@ -448,15 +448,15 @@ below defines how.
 ### 8.2 The Two-Tier Model
 
 **Tier 1 — Core Domains** are fully specified within this document. Core domains are
-those that appear most frequently across ATOP activity types, are well-defined in all
-primary ATOP jurisdictions, and have canonical credential types that can be normalized
+those that appear most frequently across Activity Travel Protocol activity types, are well-defined in all
+primary Activity Travel Protocol jurisdictions, and have canonical credential types that can be normalized
 across jurisdictions. Three core domains are defined in v0.2: food safety, ground
 transport, and maritime.
 
 **Tier 2 — Extended Domains** use a generic reference structure. Any regulatory domain
 not in Tier 1 is declared by identifying the domain type, the governing authority,
 the activity types it applies to, and the required credentials. Content is provided
-by the Party or the jurisdiction entry author; ATOP validates the structure.
+by the Party or the jurisdiction entry author; Activity Travel Protocol validates the structure.
 
 ### 8.3 Shared Schema for All Domain Entries
 
@@ -521,7 +521,7 @@ by the Party or the jurisdiction entry author; ATOP validates the structure.
 conference_catering, food_tour, hotel_breakfast, welcome_dinner
 
 Food safety regulation governs any party preparing, handling, or serving food.
-In ATOP context: restaurants that are stops on a tour itinerary, hotel catering for
+In Activity Travel Protocol context: restaurants that are stops on a tour itinerary, hotel catering for
 conferences, cooking class operators, food tour guides, and any Activity Supplier
 providing meals as part of their service.
 
@@ -549,7 +549,7 @@ providing meals as part of their service.
 guided_driving_tour, transfer_service
 
 Ground transport regulation governs commercial passenger vehicles and their operators.
-In ATOP context: taxis and private hire vehicles for guest transfers, tour buses,
+In Activity Travel Protocol context: taxis and private hire vehicles for guest transfers, tour buses,
 resort shuttle services, and any Transport Supplier carrying customers.
 
 **Canonical credential types for ground transport:**
@@ -562,10 +562,10 @@ resort shuttle services, and any Transport Supplier carrying customers.
 | `VEHICLE_INSURANCE` | Commercial passenger vehicle insurance | L2 |
 | `DRIVER_HOUR_LOG` | Compliance record for driver working hours | L2 |
 
-**Critical ATOP operational note — driver hours:** Driver hour limits are a hard
+**Critical Activity Travel Protocol operational note — driver hours:** Driver hour limits are a hard
 constraint on itinerary feasibility, not merely a compliance checkbox. When a
 TRANSPORT_SUPPLIER declares driver availability windows in their Capability Declaration,
-the ATOP Feasibility Check MUST validate that the proposed itinerary does not require
+the Activity Travel Protocol Feasibility Check MUST validate that the proposed itinerary does not require
 a driver to exceed legal working hours. An itinerary that appears feasible from a
 routing perspective may be non-compliant from a driver hours perspective.
 
@@ -585,7 +585,7 @@ fishing_charter, yacht_charter, water_taxi, coastal_tour, whale_watching,
 paddleboard_tour, sailing_lesson
 
 Maritime regulation governs commercial passenger vessels and their operators.
-In ATOP context: boat tours, diving and snorkeling operators, fishing charters,
+In Activity Travel Protocol context: boat tours, diving and snorkeling operators, fishing charters,
 coastal tours, and any water-based activity operated from a vessel.
 
 **Canonical credential types for maritime:**
@@ -825,7 +825,7 @@ at INQUIRY to evaluate whether the proposed transaction configuration is complia
 ```json
 {
   "selling_party_id": "string",
-  "selling_roles": ["array of ATOP role IDs"],
+  "selling_roles": ["array of Activity Travel Protocol role IDs"],
   "product_type": "string",
   "components": ["array of component types"],
   "activity_types": ["array — triggers associated domain checks"],
@@ -860,7 +860,7 @@ at INQUIRY to evaluate whether the proposed transaction configuration is complia
 
 ```json
 Request: {
-  "selling_party_id": "atop:party:jp:myauberge-001",
+  "selling_party_id": "Activity Travel Protocol:party:jp:myauberge-001",
   "selling_roles": ["ACCOMMODATION_SUPPLIER"],
   "product_type": "package_two_components",
   "components": ["accommodation", "activity"],
@@ -899,7 +899,7 @@ Response: {
 
 Advisory sources are registered in the Compliance Registry and referenced by the
 Disruption Event mechanism. When an advisory changes severity for a registered region,
-ATOP can trigger a Disruption Event Declaration automatically or surface it for
+Activity Travel Protocol can trigger a Disruption Event Declaration automatically or surface it for
 manual review.
 
 ```json
@@ -975,15 +975,16 @@ with prior users notified.
 45-day community comment period. Legal review recommended. Approved in next MINOR
 release of Jurisdiction Entries.
 
-**Co-maintenance with regulatory bodies:** ATOP actively seeks co-maintenance with
+**Co-maintenance with regulatory bodies:** Activity Travel Protocol actively seeks co-maintenance with
 national tourism authorities. Co-maintained entries are marked `authoritative`. The JTA
 is the target co-maintainer for the JP entry. A JTA-endorsed JP entry transforms
-ATOP's compliance declarations from best-interpretation of published law to
+Activity Travel Protocol's compliance declarations from best-interpretation of published law to
 authoritative regulatory statements — a qualitatively different level of reliability.
 
 ---
 
 *Document status: Draft v0.2 — March 2026*  
 *Companion documents: Jurisdiction Entries v0.1, Global Jurisdiction Comparison v0.1*  
-*Maintainer: ATOP Protocol — github.com/atop-protocol*  
+*Maintainer: Activity Travel Protocol Protocol — github.com/Activity Travel Protocol-protocol*  
 *License: Apache 2.0*
+
