@@ -1,5 +1,4 @@
 ﻿import { defineConfig } from 'vitepress'
-
 export default defineConfig({
   title: 'Activity Travel Protocol',
   description: 'Open specification for activity travel booking interoperability',
@@ -32,7 +31,8 @@ export default defineConfig({
         { text: 'Index', link: '/working-drafts/index' },
         { text: 'Pre-Layer 3 Review', link: '/working-drafts/pre-layer3-review' },
         { text: 'Security Architecture', link: '/working-drafts/security-architecture' },
-        { text: 'Context Package', link: '/working-drafts/context-package' }
+        { text: 'Context Package', link: '/working-drafts/context-package' },
+        { text: 'Context Package — Design Rationale', link: '/working-drafts/context-package-design' }
       ]}],
       '/positions/': [{ text: 'Standards Positions', items: [
         { text: 'Standards & Interoperability Map', link: '/positions/standards-landscape' }
