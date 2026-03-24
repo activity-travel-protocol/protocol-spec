@@ -7,6 +7,7 @@ export default defineConfig({
     siteTitle: 'Activity Travel Protocol',
     nav: [
       { text: 'Specification', link: '/spec/architecture' },
+      { text: 'Layer 2', link: '/layer2/' },
       { text: 'Layer 3', link: '/layer3/' },
       { text: 'Working Drafts', link: '/working-drafts/index' },
       { text: 'Standards Positions', link: '/positions/standards-landscape' },
@@ -27,6 +28,22 @@ export default defineConfig({
         { text: 'Jurisdiction Discussion', link: '/spec/jurisdiction-discussion-paper' },
         { text: 'References', link: '/spec/references' },
         { text: 'Charter', link: '/spec/CHARTER' }
+      ]}],
+      '/layer2/': [{ text: 'Layer 2 — Discovery and Capability', items: [
+        { text: 'S0 — Index and Introduction', link: '/layer2/layer2-s0' },
+        { text: 'S1 — Purpose and Scope', link: '/layer2/layer2-s1' },
+        { text: 'S2 — Normative References', link: '/layer2/layer2-s2' },
+        { text: 'S3 — Capability Declaration', link: '/layer2/layer2-s3' },
+        { text: 'S4 — Party Discovery', link: '/layer2/layer2-s4' },
+        { text: 'S5 — Pre-Arrangement Protocol', link: '/layer2/layer2-s5' },
+        { text: 'S6 — Pre-Arrangement Declaration', link: '/layer2/layer2-s6' },
+        { text: 'S7 — Feasibility Check Operation', link: '/layer2/layer2-s7' },
+        { text: 'S8 — Capability Catalogue', link: '/layer2/layer2-s8' },
+        { text: 'S9 — Live Availability', link: '/layer2/layer2-s9' },
+        { text: 'S10 — AI Agent Participation', link: '/layer2/layer2-s10' },
+        { text: 'S11 — Multi-Party Discovery', link: '/layer2/layer2-s11' },
+        { text: 'S12 — Design Rules Compliance', link: '/layer2/layer2-s12' },
+        { text: 'Appendix A — Standards Bridge', link: '/layer2/layer2-appendix-a' }
       ]}],
       '/layer3/': [{ text: 'Layer 3 — Workflow', items: [
         { text: 'Overview', link: '/layer3/' },
