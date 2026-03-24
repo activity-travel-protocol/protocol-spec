@@ -3,7 +3,6 @@ export default defineConfig({
   title: 'Activity Travel Protocol',
   description: 'Open specification for activity travel booking interoperability',
   base: '/',
-  ignoreDeadLinks: true,
   themeConfig: {
     siteTitle: 'Activity Travel Protocol',
     nav: [
@@ -90,4 +89,5 @@ export default defineConfig({
     }
   }
 })
+
 
