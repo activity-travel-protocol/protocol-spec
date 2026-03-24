@@ -1,4 +1,4 @@
-﻿import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Activity Travel Protocol',
   description: 'Open specification for activity travel booking interoperability',
@@ -7,6 +7,7 @@ export default defineConfig({
     siteTitle: 'Activity Travel Protocol',
     nav: [
       { text: 'Specification', link: '/spec/architecture' },
+      { text: 'Layer 3', link: '/layer3/' },
       { text: 'Working Drafts', link: '/working-drafts/index' },
       { text: 'Standards Positions', link: '/positions/standards-landscape' },
       { text: 'Resources', items: [
@@ -26,6 +27,26 @@ export default defineConfig({
         { text: 'Jurisdiction Discussion', link: '/spec/jurisdiction-discussion-paper' },
         { text: 'References', link: '/spec/references' },
         { text: 'Charter', link: '/spec/CHARTER' }
+      ]}],
+      '/layer3/': [{ text: 'Layer 3 — Workflow', items: [
+        { text: 'Overview', link: '/layer3/' },
+        { text: '1 — Purpose and Scope', link: '/layer3/purpose-and-scope' },
+        { text: '2 — Normative References', link: '/layer3/normative-references' },
+        { text: '3 — Booking States', link: '/layer3/booking-states' },
+        { text: '4 — Journey Phases', link: '/layer3/journey-phases' },
+        { text: '5 — BOOKING_SUSPENDED', link: '/layer3/booking-suspended' },
+        { text: '6 — HEM Catalogue', link: '/layer3/hem-invocation-catalogue' },
+        { text: '7 — TRAVELER_UNREACHABLE', link: '/layer3/traveler-unreachable' },
+        { text: '8 — Disruption Handling', link: '/layer3/disruption-handling' },
+        { text: '9 — AI Agent Participation', link: '/layer3/ai-agent-participation' },
+        { text: '10 — Named Protocol Events', link: '/layer3/named-protocol-events' },
+        { text: '11 — Timeout Budget', link: '/layer3/timeout-budget' },
+        { text: '12 — Multi-Party Coordination', link: '/layer3/multi-party-coordination' },
+        { text: '13 — Open Questions', link: '/layer3/open-questions' },
+        { text: '14 — Design Rules Compliance', link: '/layer3/design-rules-compliance' },
+        { text: 'Appendix A — Decision Types', link: '/layer3/appendix-decision-types' },
+        { text: 'Appendix B — State Transitions', link: '/layer3/appendix-state-transitions' },
+        { text: 'Appendix C — BPMN Notation', link: '/layer3/appendix-bpmn-notation' }
       ]}],
       '/working-drafts/': [{ text: 'Working Drafts', items: [
         { text: 'Index', link: '/working-drafts/index' },
