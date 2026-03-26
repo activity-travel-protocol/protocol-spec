@@ -1,4 +1,4 @@
-﻿# Activity Travel Protocol Trust Chain Declaration Specification
+# Activity Travel Protocol Trust Chain Declaration Specification
 
 **Version:** 0.1 (Draft)  
 **Status:** Layer 1 — Identity and Trust  
@@ -315,7 +315,7 @@ Federation Subordinate Statement with additional Activity Travel Protocol transa
     "credential_scope_validation": "sandbox_active",
     "active_sandbox_flags": ["JP-TRAVEL-LAW-SPLIT-SELLER"],
     "required_disclosures": ["JP-DISC-001", "JP-DISC-003"],
-    "duty_of_care_phases": ["PRE_ACTIVITY_COLLECTION", "READY"]
+    "duty_of_care_phases": ["ARRIVAL", "IN_DESTINATION"]
   },
   "metadata": {
     "federation_entity": {
@@ -326,7 +326,10 @@ Federation Subordinate Statement with additional Activity Travel Protocol transa
 ```
 
 The `exp` of the transaction-scoped Subordinate Statement is set to the earlier of:
-- The transaction's expected COMPLETION time plus 24 hours
+- The transaction's expected COMPLETION time plus 24 hours. COMPLETION is reached only
+  after `RETURN_ARRIVAL` is confirmed as complete — per the Layer 3 Workflow Specification
+  (S4). A Subordinate Statement MUST NOT be treated as expired while the traveler is still
+  in `RETURN_ARRIVAL` phase.
 - 30 days from issuance (maximum)
 
 ---
@@ -699,7 +702,7 @@ references plus the Activity Travel Protocol-specific transaction content.
         "notes": "Split-seller configuration active. JP-DISC-003 disclosure required."
       },
       "registry_snapshot_ref": "registry:myauberge-001:snapshot:2026-03-04T09:30:00Z",
-      "duty_of_care_phases": ["PRE_ACTIVITY_COLLECTION", "READY"]
+      "duty_of_care_phases": ["ARRIVAL", "IN_DESTINATION"]
     },
     {
       "party_id": "Activity Travel Protocol:party:jp:ski-resort-nagano-001",
@@ -725,7 +728,7 @@ references plus the Activity Travel Protocol-specific transaction content.
         "sandbox_flags_active": []
       },
       "registry_snapshot_ref": "registry:ski-resort-nagano-001:snapshot:2026-03-04T09:30:00Z",
-      "duty_of_care_phases": ["FULFILLMENT", "COMPLETION"]
+      "duty_of_care_phases": ["ACTIVITY_FULFILLMENT", "RETURN_ARRIVAL"]
     }
   ],
 
@@ -745,22 +748,22 @@ references plus the Activity Travel Protocol-specific transaction content.
     "coverage_validated": true,
     "phases": [
       {
-        "phase": "PRE_ACTIVITY_COLLECTION",
+        "phase": "ARRIVAL",
+        "primary_party": "Activity Travel Protocol:party:jp:myauberge-001"
+      },
+      {
+        "phase": "IN_DESTINATION",
         "primary_party": "Activity Travel Protocol:party:jp:myauberge-001",
         "handover_to": "Activity Travel Protocol:party:jp:ski-resort-nagano-001",
         "handover_trigger": "Customer departs accommodation for ski resort"
       },
       {
-        "phase": "READY",
-        "primary_party": "Activity Travel Protocol:party:jp:myauberge-001"
-      },
-      {
-        "phase": "FULFILLMENT",
+        "phase": "ACTIVITY_FULFILLMENT",
         "primary_party": "Activity Travel Protocol:party:jp:ski-resort-nagano-001",
         "handover_from": "Activity Travel Protocol:party:jp:myauberge-001"
       },
       {
-        "phase": "COMPLETION",
+        "phase": "RETURN_ARRIVAL",
         "primary_party": "Activity Travel Protocol:party:jp:ski-resort-nagano-001"
       }
     ],
@@ -845,24 +848,29 @@ before CONFIRMATION, which party has accepted primary responsibility for each ph
 
 ### 8.2 Journey Phases
 
+The eight canonical journey phases are defined in the Layer 3 Workflow Specification
+(Journey Phase Specification, S4). Duty of Care coverage MUST be declared for all
+eight phases. Disruption Events may be declared across any phase and do not constitute
+a separate phase — they overlay the current phase and escalate to the declaring party
+and, where required, the party holding Duty of Care for that phase.
+
 | Phase | Description | Typical Holder |
 |---|---|---|
-| `PRE_DEPARTURE` | Before customer leaves origin | Tour Operator or Travel Agent |
-| `TRANSIT_OUTBOUND` | Travel to destination | Transport Supplier or Tour Operator |
-| `ARRIVAL` | Customer arrives, checks in | Accommodation Supplier |
-| `PRE_ACTIVITY_COLLECTION` | Information gathering before activities | Accommodation Supplier |
-| `READY` | At destination, activities not yet commenced | Accommodation Supplier |
-| `FULFILLMENT` | Active participation in booked activities | Activity Supplier |
-| `TRANSIT_RETURN` | Travel from destination to origin | Transport Supplier or Tour Operator |
-| `COMPLETION` | Transaction concluded | Primary organizing party |
-| `INCIDENT` | Any phase — disruption or emergency declared | Declaring party, escalating to Tour Operator |
+| `PRE_DEPARTURE` | Before customer departs origin. Pre-travel information, visa, health checks. | Tour Operator or Travel Agent |
+| `OUTBOUND_TRANSIT` | Customer travelling to destination. In transit, not yet at destination. | Transport Supplier or Tour Operator |
+| `ARRIVAL` | Customer arrives at destination and checks in. | Accommodation Supplier |
+| `IN_DESTINATION` | Customer at destination. Pre-activity information gathering, orientation, ready state before activities commence. | Accommodation Supplier |
+| `ACTIVITY_FULFILLMENT` | Active participation in booked activities. May cycle back to `IN_DESTINATION` between activities. | Activity Supplier |
+| `RETURN_TRANSIT` | Customer travelling from destination back to origin. | Transport Supplier or Tour Operator |
+| `RETURN_ARRIVAL` | Customer arrives at origin. Final welfare check. Protocol scope ends when `RETURN_ARRIVAL` is confirmed. | Primary organising party or Tour Operator |
+| `COMPLETION` | Transaction record sealed. Archival triggered. Reached only after `RETURN_ARRIVAL` is confirmed. | Protocol Operator |
 
 ### 8.3 Coverage Validation Rules
 
 1. Every journey phase MUST have exactly one `primary_party`
 2. No phase may have zero primary parties — an unresolved gap MUST block CONFIGURATION
 3. Handover triggers MUST be defined wherever custody changes between parties
-4. The `INCIDENT` phase MUST have an escalation path to a party with human Actors
+4. Every phase MUST have a defined escalation path to a party with human Actors for disruption response
 
 ### 8.4 Duty of Care and AI Agents
 
@@ -888,13 +896,12 @@ require FAPI 2.0 client authentication but not a binding signature.
 | → PROPOSAL | No | Offering party | human, system, ai_agent (Level 2+) |
 | → NEGOTIATION | No | Any party | human, system, ai_agent (Level 2+) |
 | → CONFIRMATION | **Yes — all parties** | All parties | **human only** |
-| → PRE_ACTIVITY_COLLECTION | No | Protocol Operator | system |
-| → READY | No | Accommodation Supplier | human or system |
-| → FULFILLMENT | No | Activity Supplier | human or system |
+| → IN_JOURNEY (entering any phase) | No | Protocol Operator | system |
+| → BOOKING_SUSPENDED | No | Any party or Protocol Operator | human or system |
 | → AMENDMENT (price/terms) | **Yes** | Amending party | **human only** |
 | → CANCELLATION (with penalty) | **Yes** | Cancelling party | **human only** |
 | → COMPLETION | No | Protocol Operator | system |
-| → INCIDENT | No | Declaring party | human or system |
+| Disruption Event Declaration | No | Declaring party | human or system |
 
 ### 9.2 Binding Signature Format
 

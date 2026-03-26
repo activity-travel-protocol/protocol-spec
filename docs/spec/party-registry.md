@@ -1,4 +1,4 @@
-﻿# Activity Travel Protocol Party Registry Specification
+# Activity Travel Protocol Party Registry Specification
 
 **Version:** 0.2 (Draft)  
 **Status:** Layer 1 — Identity and Trust  
@@ -459,7 +459,7 @@ new credential have the affected role flagged `credential_pending` until acquire
     {
       "permission_id": "PUBLISH_CAPABILITY_DECLARATION",
       "description": "Publish a Capability Declaration including configuration schemas.",
-      "workflow_states": ["DISCOVERY"]
+      "workflow_states": ["INQUIRY"]
     },
     {
       "permission_id": "RESPOND_TO_INQUIRY",
@@ -479,14 +479,14 @@ new credential have the affected role flagged `credential_pending` until acquire
     {
       "permission_id": "REQUEST_PRE_ACTIVITY_INFO",
       "description": "Issue Pre-Activity Information Requests for gear, waivers,
-        dietary restrictions.",
-      "workflow_states": ["PRE_ACTIVITY_COLLECTION"]
+        dietary restrictions during IN_JOURNEY phases.",
+      "workflow_states": ["IN_JOURNEY"]
     },
     {
-      "permission_id": "TRIGGER_INCIDENT",
-      "description": "Trigger INCIDENT state for activities under operational
-        responsibility.",
-      "workflow_states": ["FULFILLMENT"]
+      "permission_id": "DECLARE_DISRUPTION_EVENT",
+      "description": "Declare a Disruption Event for activities under operational
+        responsibility, triggering DISRUPTION_REVIEW.",
+      "workflow_states": ["IN_JOURNEY"]
     }
   ],
   "regulatory_notes": "Outdoor activity operators in Japan may be subject to the
@@ -528,7 +528,7 @@ Provides bookable activities, experiences, or tours.
 conditional), ACTIVITY_SAFETY_CERT (L2, conditional for outdoor/adventure),
 LIABILITY_INSURANCE (L2, required).  
 *Permissions:* Full activity booking lifecycle. Issue Pre-Activity Collection requests.
-Trigger INCIDENT state.  
+Declare Disruption Events, triggering `DISRUPTION_REVIEW`.  
 *Regulatory notes:* Ski resorts subject to municipal slope safety regulations in Japan.
 
 ---
@@ -537,8 +537,8 @@ Trigger INCIDENT state.
 Provides ground transportation — taxi, van, bus, shuttle.  
 *Credentials required:* TRANSPORT_OPERATOR_LICENSE (L2, required),
 VEHICLE_INSURANCE (L2, required), DRIVER_LICENSE (L2, required for individuals).  
-*Permissions:* Accept transport bookings. Send pickup confirmations. Trigger transport
-INCIDENT state.  
+*Permissions:* Accept transport bookings. Send pickup confirmations. Declare transport
+Disruption Events, triggering `DISRUPTION_REVIEW`.  
 *Regulatory notes:* Capability declarations MUST declare driver availability windows.
 Feasibility checks MUST validate against declared driver hour limits.
 
@@ -685,8 +685,7 @@ Authorized to issue Activity Travel Protocol Conformance Certificates.
 **`LICENSING_AUTHORITY`** · regulatory · v1.0  
 Government body authorized to issue travel industry licenses.  
 *Special permissions:* May update credential verification status for licenses it has
-issued. Notified when parties under its jurisdiction enter INCIDENT or
-DISRUPTION-REVIEW state.
+issued. Notified when parties under its jurisdiction enter `DISRUPTION_REVIEW` state.
 
 **`CONSUMER_PROTECTION_BODY`** · regulatory · v1.0  
 Government or authorized organization responsible for consumer protection in travel.
@@ -699,9 +698,9 @@ Event Declarations within their operational scope.
 **`EMERGENCY_COORDINATOR`** · regulatory · v1.0  
 Emergency response coordination — local emergency services, mountain rescue, coast
 guard.  
-*Permissions:* Recipient of INCIDENT state notifications. Does not participate in
-booking workflows. Contact details and notification preferences maintained in the
-Registry for regions served.
+*Permissions:* Recipient of `DISRUPTION_REVIEW` state notifications for Category A and B
+events. Does not participate in booking workflows. Contact details and notification
+preferences maintained in the Registry for regions served.
 
 ---
 
@@ -835,7 +834,7 @@ provides non-repudiation.
     "mfa_required": true
   },
   "authorization_scope": {
-    "workflow_states": ["CONFIRMATION", "AMENDMENT", "CANCELLATION", "INCIDENT"],
+    "workflow_states": ["CONFIRMATION", "AMENDMENT", "CANCELLATION", "DISRUPTION_REVIEW"],
     "can_sign_binding": true,
     "can_issue_agent_authorization": true,
     "can_modify_party_record": true,
@@ -871,7 +870,8 @@ counterparties at the time of each interaction.
 | `issued_by_actor` | string | The human Actor who issued it |
 | `issued_at` / `expires_at` | datetime | Validity window |
 | `agent_identity` | object | Name, version, platform, endpoint |
-| `ai_participation_level` | integer 0–3 | Maximum level at which this agent may operate |
+| `ai_participation_level` | integer 0–3 | Default level at which this agent may operate across all workflow states |
+| `state_level_overrides` | object (optional) | Map of workflow state name → integer 0–3. Overrides the default `ai_participation_level` for specific states. The Security Kernel applies the override for the current state if present, falls back to `ai_participation_level` if not, and enforces the CONFIRMATION hard cap (Level ≤ 1) regardless of declared values. |
 | `authority_scope` | object | Permitted states, values, negotiation bounds |
 | `human_confirmation_requirements` | object | Which actions require human confirmation |
 | `counterparty_verification` | object | Public key URL and signature algorithm |
@@ -904,7 +904,13 @@ counterparties at the time of each interaction.
         "agent_endpoint": { "type": "string", "format": "uri" }
       }
     },
-    "ai_participation_level": { "type": "integer", "minimum": 0, "maximum": 3 },
+    "ai_participation_level": { "type": "integer", "minimum": 0, "maximum": 3,
+      "description": "Default participation level across all workflow states. Used when no state-specific override is present." },
+    "state_level_overrides": {
+      "type": "object",
+      "description": "Optional map of workflow state name to participation level integer (0–3). Overrides ai_participation_level for the specified state. The Security Kernel enforces the CONFIRMATION hard cap (Level ≤ 1) regardless of declared values.",
+      "additionalProperties": { "type": "integer", "minimum": 0, "maximum": 3 }
+    },
     "authority_scope": {
       "type": "object",
       "properties": {
@@ -946,6 +952,8 @@ counterparties at the time of each interaction.
 | 2 | AI-negotiated | Send messages, make proposals, counter-propose within bounds | CONFIRMATION or binding transition |
 | 3 | AI-autonomous | Complete full workflow steps | Human reviews result before archival |
 
+**Level resolution.** The Security Kernel resolves the effective participation level for each state transition as follows: (1) if `state_level_overrides` contains an entry for the current workflow state, that value is used; (2) otherwise `ai_participation_level` is used as the default. (3) Regardless of the resolved value, the CONFIRMATION state hard cap applies: the effective level is capped at 1 at CONFIRMATION. The Security Kernel enforces this cap unconditionally — it cannot be overridden by a `state_level_overrides` entry for `CONFIRMATION`.
+
 ### 7.3 Permanent Prohibitions
 
 Regardless of authorization level, an AI Agent is permanently prohibited from:
@@ -955,7 +963,7 @@ Regardless of authorization level, an AI Agent is permanently prohibited from:
 - Issuing a CANCELLATION that triggers a financial penalty
 - Modifying the Party Record
 - Issuing or revoking Agent Authorizations
-- Responding to INCIDENT state without notifying a human Actor within 15 minutes
+- Responding to `DISRUPTION_REVIEW` state without notifying a human Actor within 15 minutes
 
 The Activity Travel Protocol API MUST reject any message in these categories signed by an AI Agent
 identifier. The rejection MUST be logged and the relevant human Actor notified.
@@ -1084,7 +1092,7 @@ documents themselves.
 - **90 days before expiry:** Renewal reminder to Party administrative Actors
 - **30 days before expiry:** Dependent role flagged `credential_expiring`
 - **At expiry:** Dependent role suspended until credential is renewed
-- **Exception:** Bookings already in FULFILLMENT are not affected
+- **Exception:** Bookings already in `IN_JOURNEY` state are not affected
 
 ---
 
@@ -1126,9 +1134,9 @@ implementation handles.
     "max_version": "0.2",
     "supported_roles_in_transaction": ["ACCOMMODATION_SUPPLIER", "PROTOCOL_OPERATOR"],
     "supported_workflow_states": [
-      "DISCOVERY", "INQUIRY", "CONFIGURATION", "PROPOSAL", "NEGOTIATION",
-      "CONFIRMATION", "PRE_ACTIVITY_COLLECTION", "READY", "FULFILLMENT",
-      "COMPLETION", "CANCELLATION", "INCIDENT"
+      "INQUIRY", "CONFIGURATION", "PROPOSAL", "NEGOTIATION",
+      "CONFIRMATION", "IN_JOURNEY", "BOOKING_SUSPENDED", "DISRUPTION_REVIEW",
+      "TRAVELER_UNREACHABLE", "AMENDMENT", "COMPLETION", "CANCELLATION"
     ]
   }
 }
@@ -1207,7 +1215,7 @@ Sections 3 through 10.
         "mfa_required": true
       },
       "authorization_scope": {
-        "workflow_states": ["CONFIRMATION","AMENDMENT","CANCELLATION","INCIDENT"],
+        "workflow_states": ["CONFIRMATION","AMENDMENT","CANCELLATION","DISRUPTION_REVIEW"],
         "can_sign_binding": true,
         "can_issue_agent_authorization": true,
         "can_modify_party_record": true,
@@ -1270,9 +1278,9 @@ Sections 3 through 10.
     "max_version": "0.2",
     "supported_roles_in_transaction": ["ACCOMMODATION_SUPPLIER","PROTOCOL_OPERATOR"],
     "supported_workflow_states": [
-      "DISCOVERY","INQUIRY","CONFIGURATION","PROPOSAL","NEGOTIATION",
-      "CONFIRMATION","PRE_ACTIVITY_COLLECTION","READY","FULFILLMENT",
-      "COMPLETION","CANCELLATION","INCIDENT"
+      "INQUIRY","CONFIGURATION","PROPOSAL","NEGOTIATION",
+      "CONFIRMATION","IN_JOURNEY","BOOKING_SUSPENDED","DISRUPTION_REVIEW",
+      "TRAVELER_UNREACHABLE","AMENDMENT","COMPLETION","CANCELLATION"
     ]
   },
 
@@ -1351,13 +1359,13 @@ On receiving an INQUIRY, the Protocol Operator constructs a Trust Chain:
     {
       "party_id": "Activity Travel Protocol:party:jp:myauberge-001",
       "role_in_transaction": "ACCOMMODATION_SUPPLIER",
-      "duty_of_care_phases": ["PRE_ACTIVITY_COLLECTION", "READY"],
+      "duty_of_care_phases": ["ARRIVAL", "IN_DESTINATION"],
       "snapshot_ref": "registry:myauberge-001:snapshot:2026-03-04T09:30:00Z"
     },
     {
       "party_id": "Activity Travel Protocol:party:jp:ski-resort-nagano-001",
       "role_in_transaction": "ACTIVITY_SUPPLIER",
-      "duty_of_care_phases": ["FULFILLMENT", "COMPLETION"],
+      "duty_of_care_phases": ["ACTIVITY_FULFILLMENT", "RETURN_ARRIVAL"],
       "snapshot_ref": "registry:ski-resort-nagano-001:snapshot:2026-03-04T09:30:00Z"
     }
   ],

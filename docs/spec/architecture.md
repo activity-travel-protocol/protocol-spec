@@ -1,4 +1,4 @@
-﻿# Architecture Specification
+# Architecture Specification
 
 **Activity Travel Protocol**
 Version 0.2 — March 2026
@@ -258,6 +258,8 @@ Every state transition, policy evaluation, and AI agent invocation is traced via
 The protocol covers the complete customer journey from inquiry to safe return home. Eight journey phases: PRE_DEPARTURE, OUTBOUND_TRANSIT, ARRIVAL, IN_DESTINATION, ACTIVITY_FULFILLMENT, RETURN_TRANSIT, RETURN_ARRIVAL, COMPLETION.
 
 Disruption Events are a Layer 1 architectural requirement. AI agents cannot hold Duty of Care — it passes to the Party that issued the agent authorisation.
+
+When a Disruption Event is declared during an IN_JOURNEY phase, the Booking Object enters the `DISRUPTION_REVIEW` state. This is a protocol-level construct — a dedicated state in the Booking Object lifecycle that suspends normal phase progression and activates the disruption resolution pathway. `DISRUPTION_REVIEW` exits to `AMENDMENT`, `CANCELLATION`, or back into the active IN_JOURNEY phase, depending on the resolution outcome. The protocol defines a three-category incident taxonomy — Category C1 (supplier-operational), Category C2 (environmental or force majeure), and Category A/B (life-safety and Duty of Care transfer events) — which determines declaration authority, escalation path, and the Security Kernel enforcement rules that apply. Category A and B declarations are permanently reserved for human Actors. Category C1 declarations may be pre-authorised for autonomous system or AI agent declaration via PP-005 in the Party Policy Declarations Specification.
 
 ---
 

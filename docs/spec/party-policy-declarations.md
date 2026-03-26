@@ -1,4 +1,4 @@
-﻿# Activity Travel Protocol Party Policy Declarations Specification
+# Activity Travel Protocol Party Policy Declarations Specification
 
 **Version:** 0.1 (Draft)  
 **Status:** Layer 1 — Identity and Trust  
@@ -920,6 +920,49 @@ version in effect at transaction time.
 *Applies to:* All Parties  
 *When applicable:* All transactions  
 *Requires human acknowledgment:* No — covered by Party registration
+
+---
+
+### PP-005 — Autonomous C1 Incident Declaration Pre-Authorisation
+
+A Party wishing to permit autonomous Category C1 incident declaration (supplier-operational disruptions
+not requiring immediate Duty of Care transfer) by a system or AI agent Actor MUST explicitly
+pre-authorise this in their Party Record. Without pre-authorisation, Category C1 incident declarations
+MUST be made only by a human Actor.
+
+This policy creates the Party Registry hook that the Security Kernel uses to verify the pre-condition
+before accepting an autonomous C1 declaration. Category A and Category B incident declarations are
+permanently reserved for human Actors and cannot be pre-authorised.
+
+*Applies to:* Any Party deploying system or AI agent Actors with operational responsibility during
+IN_JOURNEY phases  
+*When applicable:* Transactions where the Party holds an active Agent Authorization with
+`permitted_workflow_states` including any IN_JOURNEY phase  
+*Requires human acknowledgment:* No — covered by the issuing human Actor's Agent Authorization signature  
+*Policy basis:* `protocol`  
+*Configurable fields in Party Record:*
+
+```json
+{
+  "pp005_autonomous_c1_declaration": {
+    "authorized": true,
+    "reversal_window_minutes": 30,
+    "authorized_by_actor": "actor:myauberge-001:tomsato",
+    "authorized_at": "2026-03-01T00:00:00Z"
+  }
+}
+```
+
+| Field | Type | Description |
+|---|---|---|
+| `authorized` | boolean | `true` to permit autonomous C1 declaration by system or AI agent Actors. Default: `false`. |
+| `reversal_window_minutes` | integer | Minutes after autonomous C1 declaration during which a human Actor may override. Minimum: 15. Default: 30. |
+| `authorized_by_actor` | string | The human Actor who granted this pre-authorisation. MUST have `can_sign_binding: true`. |
+| `authorized_at` | datetime | When the pre-authorisation was granted. |
+
+The Security Kernel verifies `pp005_autonomous_c1_declaration.authorized = true` in the declaring
+Party's Registry record before accepting any autonomous C1 declaration. If the field is absent or
+`false`, the declaration is rejected and the relevant human Actor is notified immediately.
 
 ---
 

@@ -1,10 +1,10 @@
-﻿# Activity Travel Protocol Protocol Charter
+﻿# Activity Travel Protocol Charter
 ## Activity Travel Protocol
 
 **Version:** 0.1 (Draft)  
 **Status:** Founding Document  
 **Date:** February 2026  
-**Maintainer:** MyAuberge (Activity Travel Protocol-protocol organization on GitHub)  
+**Maintainer:** MyAuberge K.K. (activity-travel-protocol on GitHub)  
 **License:** Apache 2.0  
 
 ---
@@ -168,12 +168,12 @@ MyAuberge (booking.myauberge.jp) serves as the Activity Travel Protocol referenc
 
 ## 10. Contact and Participation
 
-**GitHub:** https://github.com/Activity Travel Protocol-protocol  
-**Specification:** https://github.com/Activity Travel Protocol-protocol/Activity Travel Protocol-spec  
-**Documentation:** https://github.com/Activity Travel Protocol-protocol/Activity Travel Protocol-docs  
-**Maintainer contact:** via GitHub Issues on Activity Travel Protocol-protocol/Activity Travel Protocol-spec  
+**GitHub:** https://github.com/activity-travel-protocol  
+**Specification:** https://github.com/activity-travel-protocol/protocol-spec  
+**Documentation:** https://github.com/activity-travel-protocol/protocol-docs  
+**Maintainer contact:** via GitHub Issues on activity-travel-protocol/protocol-spec  
 
-To propose changes, open an Issue on the `Activity Travel Protocol-spec` repository.  
+To propose changes, open an Issue on the `protocol-spec` repository.  
 To join the founding consortium, open an Issue titled "Consortium Membership — [Your Organization Name]".
 
 ---
