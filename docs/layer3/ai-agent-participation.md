@@ -39,6 +39,8 @@ The atp-ai package's AI provider call interface accepts a ContextPackage object 
 
 > **T-2-C:** Layer 4 SDK: atp-ai invocation interface accepts ContextPackage, not raw field values. Passing raw strings is a TypeScript compile-time type error.
 
+> **DR-v5 RULE 3 — OPA policy boundary (normative):** AI agents receive evaluated policy results in their Context Package — never raw ODRL policy declarations for the agent to interpret. OPA evaluation occurs before Context Package assembly: the Security Kernel compiles Party ODRL declarations to Rego at registration time and evaluates the compiled policy set at the ASSEMBLY POINT. The evaluated policy outcomes (permitted actions, constraints, overrides) are included in the assembled Context Package as structured fields. No raw ODRL is passed to any agent at any participation level. This boundary is non-bypassable.
+
 ## 9.2 Context Package contents by phase
 
 The Context Package schema is defined in full in the Context Package Specification Step 6 (SAR-1 through SAR-21). This section specifies which fields are active and relevant at each phase of the workflow. Fields not listed for a given phase are present in the schema but will be null or empty at that phase.
@@ -58,6 +60,8 @@ The Context Package schema is defined in full in the Context Package Specificati
 | RETURN_ARRIVAL | Wind-down summary, open TU chains, open W2 events, claim references, TRAVELER_PII retention obligations | COMPLETION_ACKNOWLEDGEMENT | DT-1, DT-6 |
 
 > **TRAVELER_PII in Context Package:** TRAVELER_PII fields are assembled only at the access level required by the current decision type. An agent operating at participation Level 1 must not receive T2/T3 document fields not required for the DT. The Kernel enforces this at ASSEMBLY POINT — the agent never sees fields it is not permitted to see.
+
+> **DR-v5 RULE 1 — CONFIRMATION state hard cap (normative):** Level 3 AI autonomy is prohibited at PENDING_CONFIRMATION state. The Security Kernel enforces `human_escalation_requested = true` on any Decision Object received while the Booking Object is in PENDING_CONFIRMATION, regardless of the agent's declared participation level or authority scope. An agent operating at Level 3 in another state does not retain that authority at PENDING_CONFIRMATION. This is non-bypassable Security Kernel enforcement — it cannot be overridden by Party Policy Declaration or AgentAuthorityDeclaration. Decision: DR-v6-D5.
 
 ## 9.3 Decision Object and authority scope validation
 

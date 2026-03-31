@@ -53,19 +53,19 @@ Components: Party Registry, Verifiable Credentials, Jurisdiction Compliance Regi
 
 Standards: OpenID Federation 1.0, W3C VC Data Model 2.0, FAPI 2.0 Security Profile, did:web (minimum), TLS 1.3, AES-256-GCM.
 
-### Layer 2 — Discovery and Capability (NOT YET STARTED)
+### Layer 2 — Discovery and Capability (COMPLETE)
 
 Describes what suppliers offer before any booking begins.
 
 Components: Capability Declarations, Activity Configuration Schema, Resource Reference Registry, Pre-Arrangement Declarations, Feasibility Check operation.
 
-### Layer 3 — Workflow (NOT YET STARTED)
+### Layer 3 — Workflow (COMPLETE)
 
 The state machine governing the booking lifecycle from INQUIRY through COMPLETION.
 
 Components: State definitions, transition rules, message formats, timeout rules, Duty of Care handoffs, Disruption Event handling, AI agent participation rules.
 
-### Layer 4 — Schema and SDK (PLACEHOLDER)
+### Layer 4 — Schema and SDK (UNBLOCKED)
 
 The complete API surface and developer toolkit.
 
@@ -186,7 +186,7 @@ Contents of a Context Package:
 - Authority scope granted to this agent invocation
 - Decision history for this booking
 
-The Context Package schema is specified in the AI Agent Interface Specification (forthcoming, Layer 3).
+The Context Package schema is fully specified across SAR-1 through SAR-21 and published at [Context Package Specification](/working-drafts/context-package).
 
 ### 7.2 Decision Object
 

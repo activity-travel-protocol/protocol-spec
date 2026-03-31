@@ -4,7 +4,7 @@
 Working Note — March 2026
 
 > **Document Status:** Working Note
-> This document records pre-specification consistency analysis completed before Layer 3 (Workflow Specification) authoring begins. The content will be absorbed into the Layer 3 specification and its appendices upon ratification. It is published here for transparency and cross-reference.
+> This document records pre-specification consistency analysis completed before Layer 3 authoring. Layer 3 is now complete and published. The tensions documented here (T-1 through T-5) were resolved during Layer 3 authoring. This document is retained for transparency and cross-reference.
 
 ---
 

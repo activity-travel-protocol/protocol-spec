@@ -19,7 +19,7 @@ The following external standards and specifications are normatively referenced b
 
 | Ref | Standard / specification | Position | Used in this specification |
 |---|---|---|---|
-| **[OIDF]** | OpenID Federation 1.0. OpenID Foundation. Defines the federation model for establishing trust between parties at scale without bilateral pre-registration. | ADOPT | Party Registry identity establishment. Trust Chain construction. AgentAuthorityDeclaration issuance. Referenced in S1.3, S9.9. |
+| **[OIDF]** | OpenID Federation 1.0. OpenID Foundation. Defines the federation model for establishing trust between parties at scale without bilateral pre-registration. | ADOPT | Party Registry identity establishment. Trust Chain construction. AgentAuthorityDeclaration issuance. Referenced in S1.3, S9.1.2. |
 | **[FAPI2]** | FAPI 2.0 Security Profile. OpenID Foundation. Defines the security profile for high-value API interactions, including ES256 signing requirements. | ADOPT | Context Package signing (ES256, FAPI 2.0 profile). Decision Object signature validation. Referenced in S9.1.2, S9.3. |
 | **[VC2]** | W3C Verifiable Credentials Data Model 2.0. W3C Recommendation. Defines the credential format for verifiable identity and authority claims. | ADOPT | Coordination Delegation credential format (CD-1). AgentAuthorityDeclaration. Trust Chain declarations. Referenced in S12.4.1. |
 | **[TLS13]** | TLS 1.3. IETF RFC 8446. Defines the transport security protocol required for all protocol communications. | ADOPT | All inter-party protocol communications. Minimum transport security requirement. Referenced in Architecture Specification v0.2. |

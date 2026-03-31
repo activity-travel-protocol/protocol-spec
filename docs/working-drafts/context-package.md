@@ -8,8 +8,8 @@ This document is a Working Draft. It is the canonical Layer 1 Context Package sc
 |---|---|
 | Document ref | ATP_ContextPackage_Step6_v1 |
 | Schema version | v6 (SAR-1 through SAR-21 applied) |
-| Status | Security Constraints applied — ready for Layer 2 specification |
-| Contributor | Tom Sato (MyAuberge Co., Ltd.) |
+| Status | Complete — Layer 2 and Layer 3 specifications published. Canonical Layer 1 Context Package reference. |
+| Contributor | Tom Sato (MyAuberge K.K.) |
 | Date | March 2026 |
 
 ## What This Document Is
@@ -478,5 +478,5 @@ DOR-1 through DOR-8 unchanged from v3. Step 6 adds three new rules and updates D
 ::: info Step 6 Complete
 SAR-10 through SAR-21 applied. All open items from v3 closed except deferred items in Section 12.
 
-Next specification work: Layer 3 — Workflow Specification (BPMN 2.0 + XState v5). Prerequisite for Layer 4 schemas.
+Next specification work: Layer 4 — Schema and SDK. Prerequisite: SDK Architecture Blueprint (Track 3 Session 2).
 :::

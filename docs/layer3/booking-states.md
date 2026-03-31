@@ -130,6 +130,8 @@ Entered exclusively from PENDING_CONFIRMATION via the All components confirmed t
 
 AI agent participation is permitted in CONFIRMED at Level 1 (INFORMATION_PROVISION) and Level 2 (CONFIGURATION_SUGGESTION). DT-1 and DT-2 apply. Agents may propose amendments to the confirmed booking. All amendment proposals require human confirmation from the Booking Party before taking effect. Autonomous amendment is not permitted in CONFIRMED. Amendment proposals that require supplier re-confirmation trigger an AMENDMENT state transition (Section 3.4).
 
+> **No protocol timeout for CONFIRMED:** No timeout is defined for the CONFIRMED state. This is intentional — the booking may remain in CONFIRMED indefinitely pending Booking Party action to commence the journey. The Booking Party holds contractual commitment; the Kernel Scheduler does not enforce a departure deadline. Cancellation policy terms apply if the Booking Party elects to cancel.
+
 ### 3.3.4 Transitions out of CONFIRMED
 
 | Transition | Target state | Conditions required | Kernel action |
@@ -137,6 +139,7 @@ AI agent participation is permitted in CONFIRMED at Level 1 (INFORMATION_PROVISI
 | Journey begins | IN_JOURNEY | Booking Party or authorised agent records JOURNEY_STARTED. Phase set to PRE_DEPARTURE. | Kernel records JOURNEY_STARTED event. Phase field set to PRE_DEPARTURE. All Activity Components confirmed as PENDING. Pre-departure checklist assembled. |
 | Amendment requested | AMENDMENT | Booking Party or authorised agent (DT-2, human-confirmed) submits amendment affecting one or more confirmed components. | Kernel records AMENDMENT_REQUESTED event. Booking Object enters AMENDMENT retaining CONFIRMED context. Suppliers of affected components notified. |
 | Cancellation | BOOKING_CANCELLED | Booking Party initiates cancellation. OPA evaluates applicable cancellation policy before transition executes. | Kernel records BOOKING_CANCELLED event with cancellation_reason: BOOKING_PARTY_CANCELLATION. Cancellation policy terms applied. Supplier cancellation notifications dispatched. |
+| Disruption declared | DISRUPTION_REVIEW | Booking Party or authorised agent (DT-4) disruption declaration. source_signal_reference must resolve to an event log entry (DOR-5). C1 reversal window (PT15M) opened on confirmed declaration. | Kernel records DISRUPTION_DECLARED event. Phase context preserved as PRE_DEPARTURE. Reversible downstream actions held during C1 window. |
 | BOOKING_SUSPENDED entry | BOOKING_SUSPENDED (modifier) | One of the three BOOKING_SUSPENDED entry conditions met (C-BS-1, C-BS-2, or C-BS-3). Human confirmation required before Kernel applies modifier. | Kernel records BOOKING_SUSPENDED_ENTERED event. Phase preserved (pre-departure context). HEM invoked where applicable. All audit fields recorded per S5.6. |
 
 ---
@@ -288,6 +291,8 @@ BOOKING_CANCELLED_SUSPENDED is entered when a Booking Object in BOOKING_SUSPENDE
 - The booking_cancelled_during_suspension flag is set in the event log.
 - Next-of-kin contact obligations continue per jurisdiction authority instructions (C-BS-1 cases).
 - Supplier cancellation notifications are dispatched with SUSPENDED_CANCELLATION reason code.
+
+> **cancellation_reason for BOOKING_CANCELLED_SUSPENDED:** The SUSPENDED_CANCELLATION reason code is specific to BOOKING_CANCELLED_SUSPENDED and is not part of the BOOKING_CANCELLED reason enum defined in Section 3.10. BOOKING_CANCELLED and BOOKING_CANCELLED_SUSPENDED are distinct terminal states with distinct reason spaces. Implementations must not conflate them.
 
 No transitions out of BOOKING_CANCELLED_SUSPENDED exist.
 

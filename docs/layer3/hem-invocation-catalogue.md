@@ -185,8 +185,8 @@ Each entry below is a normative specification of one HEM invocation point. Entri
 | **escalation_reason** | `SSF_REVOCATION_DURING_C1` |
 | **protocol_deadline** | No separate deadline — C1 clock is frozen on SSF event arrival. HEM-12 must be resolved before C1 clock resumes. |
 | **human_confirmation_token** | Required. Human must confirm whether to proceed with or reverse the DT-4 declaration. |
-| **Secondary path** | C1 clock remains frozen until HEM-12 resolved. If handler unreachable: DT-4 declaration placed on indefinite hold. Booking Party notified. |
-| **Notes** | The C1 clock freeze means the PT15M reversal window does not expire during SSF processing. The declaring agent's credential status is rechecked before any downstream action is permitted, regardless of the human's decision to proceed. |
+| **Secondary path** | C1 clock remains frozen until HEM-12 resolved. If handler unreachable: C1_MAX_FREEZE_DURATION applies (PT1H). On expiry, the Kernel automatically reverses the DT-4 declaration, records INCIDENT_REVERSED with reason: SSF_HANDLER_TIMEOUT, and the booking resumes normal state machine operation. Booking Party notified of auto-reversal. |
+| **Notes** | The C1 clock freeze means the PT15M reversal window does not expire during SSF processing. The declaring agent's credential status is rechecked before any downstream action is permitted, regardless of the human's decision to proceed. C1_MAX_FREEZE_DURATION (PT1H) is not configurable — it is a protocol floor ensuring that a handler failure cannot permanently suspend the booking in a non-BOOKING_SUSPENDED hold state. The auto-reversal outcome is conservative: the disruption is treated as undeclared rather than confirmed, favouring booking continuity over autonomous disruption response. |
 
 #### HEM-13 — TU-1 / TU-4 unresolved — standard phases
 
