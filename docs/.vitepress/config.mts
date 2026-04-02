@@ -14,6 +14,7 @@ export default defineConfig({
       { text: 'Resources', items: [
         { text: 'References', link: '/spec/references' },
         { text: 'Charter', link: '/spec/CHARTER' },
+        { text: 'Governance', link: 'https://activitytravel.org/governance' },
         { text: 'GitHub', link: 'https://github.com/activity-travel-protocol/protocol-spec' }
       ]}
     ],
@@ -81,7 +82,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Activity Travel Protocol — Open Specification',
-      copyright: 'Released under Creative Commons Attribution 4.0'
+      copyright: 'Governed by the Activity Travel Protocol Foundation · Released under Apache 2.0'
     },
     editLink: {
       pattern: 'https://github.com/activity-travel-protocol/protocol-spec/edit/main/docs/:path',
