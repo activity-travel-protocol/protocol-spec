@@ -319,7 +319,7 @@ Federation Subordinate Statement with additional Activity Travel Protocol transa
   },
   "metadata": {
     "federation_entity": {
-      "organization_name": "MyAuberge Co., Ltd."
+      "organization_name": "MyAuberge K.K."
     }
   }
 }

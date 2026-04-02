@@ -70,7 +70,7 @@ A claim has three components:
 
 | Component | Question | Example |
 |---|---|---|
-| **Subject** | Who or what is being described? | MyAuberge Co., Ltd. |
+| **Subject** | Who or what is being described? | MyAuberge K.K. |
 | **Claim** | What is being asserted? | Holds a valid hotel operating license |
 | **Claimant** | Who is making the assertion? | Nagano Prefecture Tourism Department |
 
@@ -175,7 +175,7 @@ field names, types, required fields, and constraints. This is the normative defi
 **Part 2 — Field definitions.** A table defining every field: its purpose, whether
 required or optional, who provides it, and whether publicly readable or authenticated.
 
-**Part 3 — Example.** A complete, realistic JSON example using MyAuberge Co., Ltd.
+**Part 3 — Example.** A complete, realistic JSON example using MyAuberge K.K.
 as the reference party throughout this document.
 
 When extending the specification with new entity types, the same three-part pattern
@@ -1150,7 +1150,7 @@ version exists, the transaction cannot proceed.
 
 ## 11. The Complete Party Record
 
-A complete Party Record for MyAuberge Co., Ltd., assembling all components defined in
+A complete Party Record for MyAuberge K.K., assembling all components defined in
 Sections 3 through 10.
 
 ```json
@@ -1162,7 +1162,7 @@ Sections 3 through 10.
   "last_updated": "2026-03-04T09:00:00Z",
 
   "identity": {
-    "legal_name": "MyAuberge Co., Ltd.",
+    "legal_name": "MyAuberge K.K.",
     "trading_name": "MyAuberge",
     "legal_name_local": "マイオーベルジュ株式会社",
     "jurisdiction": "JP",

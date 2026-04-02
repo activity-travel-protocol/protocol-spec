@@ -8,7 +8,7 @@ This document is a Working Draft. Decisions recorded here are closed for the pur
 |---|---|
 | Document ref | ATP_SecurityArchitecture_v1 |
 | Status | Security Architecture session complete — ready for Step 6 |
-| Contributor | Tom Sato (MyAuberge Co., Ltd.) |
+| Contributor | Tom Sato (MyAuberge K.K.) |
 | Depends on | ATP_ContextPackage_Step3_4_v3 · ATP_ContextPackage_Step5_v1 · ATP_TravelerIdentity_SessionBrief_v2 |
 | Produces | ATP_ContextPackage_Step6_v1 |
 | Date | March 2026 |
