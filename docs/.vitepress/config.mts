@@ -82,7 +82,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Activity Travel Protocol — Open Specification',
-      copyright: 'Governed by the Activity Travel Protocol Foundation · Released under Apache 2.0'
+      copyright: 'Governed by the <a href="https://activitytravel.org/governance.html">Activity Travel Protocol Foundation</a> · Released under Apache 2.0'
     },
     editLink: {
       pattern: 'https://github.com/activity-travel-protocol/protocol-spec/edit/main/docs/:path',
