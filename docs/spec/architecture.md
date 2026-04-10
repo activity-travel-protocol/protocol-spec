@@ -1,7 +1,7 @@
 # Architecture Specification
 
 **Activity Travel Protocol**
-Version 0.2 — March 2026
+Version 1.0 — April 2026
 
 ---
 
@@ -65,11 +65,11 @@ The state machine governing the booking lifecycle from INQUIRY through COMPLETIO
 
 Components: State definitions, transition rules, message formats, timeout rules, Duty of Care handoffs, Disruption Event handling, AI agent participation rules.
 
-### Layer 4 — Schema and SDK (UNBLOCKED)
+### Layer 4 — Schema and SDK (IN DEVELOPMENT)
 
-The complete API surface and developer toolkit.
+The complete API surface and developer toolkit. Activity Configuration Schema Design System complete. OpenAPI 3.1 REST surface, TypeScript SDK (twelve `@atp/` scoped packages), and Python analytics sidecar in active development.
 
-Components: OpenAPI 3.1 (REST), GraphQL schema, AsyncAPI 3.0 events, JSON Schema objects, Zod schemas, AI agent interface schemas, MCP server, compatibility bridges (NDC, OpenTravel 1.0), conformance test suite.
+Components: OpenAPI 3.1 (REST), TypeScript SDK, AI agent interface schemas, MCP server (`@atp/mcp-server`), OCTO Bridge (`@atp/bridge-octo`), Prompt Library (`@atp/llms-tooling`), conformance test suite (`@atp/interop-tests`).
 
 ---
 
@@ -222,28 +222,30 @@ The Activity Travel Protocol exposes four API surfaces. All four are first-class
 
 The MCP server is a protocol-level deliverable, not an optional integration. One well-designed MCP server makes every MCP-compatible AI assistant a capable travel booking agent without additional integration work.
 
-The MCP server ships with the v1.0 SDK as the `atp-mcp` package.
+The MCP server ships with the v1.0 SDK as the `@atp/mcp-server` package. It exposes eight tools over Streamable HTTP (Tier 2/3) or stdio (Tier 1), with OAuth 2.1 mandate authentication and NeMo Guardrails integration at Tier 2/3.
 
 ---
 
 ## 9. SDK Package Structure
 
-The SDK is delivered as a set of independently installable packages:
+The SDK is delivered as twelve independently installable packages under the `@atp/` namespace:
 
-| Package | Contents | Environments |
-|---------|----------|--------------|
-| `atp-core` | Booking Object model, XState state machine, Zod validation, event log types. Zero network I/O. | All |
-| `atp-client` | REST, GraphQL, AsyncAPI clients. Auth token management. | All |
-| `atp-server` | Protocol runtime host. All 12 OS functions. | Node.js only |
-| `atp-policy` | ODRL authoring, ODRL-to-OPA compiler, policy validation. | All |
-| `atp-agent` | AI agent interface — Context Package, Decision Object validation, escalation. | All |
-| `atp-mcp` | MCP server exposing protocol operations as LLM tools. | Node.js |
-| `atp-graphql` | GraphQL schema and resolvers for Capability Discovery. | All |
-| `atp-testing` | Conformance test suite runner. Issues Conformance Certificate. | Node.js |
-| `atp-zod` | Zod schemas generated from JSON Schema 2020-12 source. | All |
-| `atp-supabase` | Supabase adapter — booking storage, auth, edge functions, Realtime. | All |
+| Package | Contents | Status |
+|---------|----------|--------|
+| `@atp/core` | All TypeScript types and branded primitives. Zero SDK dependencies. | v1.0 |
+| `@atp/adapters-tier1` | Tier 1 adapter implementations: SqliteBookingStore, InMemoryStateCache, AnthropicAgentRuntime, LocalFilesystemStorage. | v1.0 |
+| `@atp/adapters-tier2` | Tier 2 adapter implementations: SupabasePostgresStore, ValKeyStateCache, OpenAIAgentRuntime, MinIOStorage. | v1.0 |
+| `@atp/adapters-tier3` | Tier 3 adapter implementations: CockroachDBStore, RedisClusterStateCache, NIMAgentRuntime, S3CompatibleStorage, AIGridRoutingHint. | v1.0 |
+| `@atp/rest-api` | OpenAPI 3.1 REST surface client. Auto-generated from activitytravel.pro/openapi.json. | v1.0 |
+| `@atp/mcp-server` | ATP MCP Server — eight tools, OAuth 2.1 + mandate auth, NeMo Guardrails, Windley Loop implementation. | v1.0 |
+| `@atp/security` | Fletcher Embassy pattern. Cedar trust boundary translation. Cedarling WASM runtime. | v1.0 |
+| `@atp/bridge-octo` | OCTO v2 → ATP bridge. Normative field mapping. Foundation-scaffolded, community-maintained. | v1.0 |
+| `@atp/llms-tooling` | Prompt Library. Windley context template, four persona templates, 15-placeholder composition model. | v1.0 |
+| `@atp/interop-tests` | Automated interop test suite. ATP-compatible certification gate. | v1.0 |
+| `@atp/ai-agent` | ATPAgentProvider implementations: AnthropicAgentProvider (Tier 1), NIMAgentProvider (Tier 2/3). | v1.0 |
+| `@atp/dev-tools` | Booking Object inspector, CLI scaffolding tools, local Docker Compose dev environment runner. | v1.0 |
 
-All packages except `atp-server` must run in Deno/V8 isolate environments. Web Crypto API is used instead of Node.js crypto. No native Node.js dependencies in core packages.
+TypeScript-first. Python analytics sidecar (IAnalyticsEngine, IGraphEngine) for cuDF, cuGraph, pandas, and DuckDB. Python client library (REST API wrapper) ships at v1.1. Java client library is a v1.1 community deliverable via the OpenAPI 3.1 spec.
 
 ---
 
@@ -269,4 +271,4 @@ This architecture specification governs all Layer 1 through Layer 4 documents. W
 
 ---
 
-*Activity Travel Protocol — Architecture Specification v0.2 — March 2026*
+*Activity Travel Protocol — Architecture Specification v1.0 — April 2026*
