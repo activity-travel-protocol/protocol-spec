@@ -4,8 +4,6 @@
 
 **Templates:** [Windley Context](windley-context) · [Guest Agent](guest-agent) · [Operator Agent](operator-agent) · [Supplier Agent](supplier-agent) · [Discovery Agent](discovery-agent)
 
-**ACTIVITY TRAVEL PROTOCOL**
-
 **Prompt Library v1.0**
 
 *@atp/llms-tooling — System Prompt Templates for ATP Agent Personas*
@@ -13,11 +11,9 @@
   **Tooling          atp/1.0+tooling/1.0.0
   version**          
 
-                     ATP_MCPServer_v1_Addendum.docx
-
 ## Decisions closed in this document
 >
-> PL-D1 — Template format: literal text with {{placeholder}} syntax
+> PL-D1 — Template format: literal text with &#123;&#123;placeholder&#125;&#125; syntax
 > (not schema description).
 >
 > PL-D2 — Five template files in @atp/llms-tooling: windley-context,
@@ -30,7 +26,7 @@
 >
 > \+ Windley context block (injected at session initialisation).
 >
-> PL-D4 — Placeholder syntax: {{UPPER_SNAKE_CASE}} for runtime values;
+> PL-D4 — Placeholder syntax: &#123;&#123;UPPER_SNAKE_CASE&#125;&#125; for runtime values;
 > all placeholders
 >
 > documented in Section 2.3.
@@ -78,6 +74,7 @@ The Prompt Library has three functions within the protocol:
 
 The @atp/llms-tooling package ships five template files:
 
+  -----------------------------------------------------------------------
   **File**                    **Purpose**
   windley-context.md          Windley Loop pre-session context block.
                               Injected at session init.
@@ -93,9 +90,10 @@ The @atp/llms-tooling package ships five template files:
 
   discovery-agent.md          Discovery Agent persona template. Activity
                               search, capability matching.
+  -----------------------------------------------------------------------
 
 Each template is a Markdown file. The placeholder syntax is
-{{UPPER_SNAKE_CASE}} throughout (PL-D4). A complete placeholder
+&#123;&#123;UPPER_SNAKE_CASE&#125;&#125; throughout (PL-D4). A complete placeholder
 reference is in Section 2.3.
 
 ### 1.3 Versioning
@@ -114,10 +112,6 @@ protocol spec). The version string appears in every template header.
 
 ### 1.4 Relationship to Other Specifications
 
-  ATP_MCPServer_v1.docx            Normative source for all eight MCP tools,
-                                   authority scopes, mandate model, NeMo
-                                   Guardrails rails, OAuth 2.1 integration.
-
   ATP_MCPServer_v1_Addendum.docx   Normative source for Windley Loop (MCP-D13),
                                    re-query triggers (MCP-D14), escalation
                                    precision (MCP-D15).
@@ -125,6 +119,7 @@ protocol spec). The version string appears in every template header.
   ATP_llms_v2.md                   llms.txt + llms-full.txt content. References
                                    @atp/llms-tooling by name and documents the
                                    Windley Loop for AI agent consumers.
+  -------------------------------------------------------------------------------
 
 ## 2. Composition Model
 
@@ -133,6 +128,7 @@ protocol spec). The version string appears in every template header.
 Every ATP agent system prompt is composed of three blocks assembled in
 sequence by the runtime operator:
 
+  -----------------------------------------------------------------------
   **Block**             **Source / Timing**
   Block 1 — Persona   Loaded at agent startup from the persona template
   block                 file (e.g. guest-agent.md). Static for the
@@ -146,6 +142,7 @@ sequence by the runtime operator:
   Block 3 —           Injected by the runtime at each inference call:
   Conversation context  current message, conversation history, Context
                         Package fields relevant to the query.
+  -----------------------------------------------------------------------
 
 Block 1 is stable. Block 2 is dynamic — it changes when the Booking
 Object state transitions. Block 3 is ephemeral — it changes at every
@@ -173,62 +170,64 @@ document.
 
 ### 2.3 Placeholder Reference
 
-All placeholders use {{UPPER_SNAKE_CASE}} syntax. The table below lists
+All placeholders use &#123;&#123;UPPER_SNAKE_CASE&#125;&#125; syntax. The table below lists
 every placeholder used across the five templates, its source, and when
 it is resolved.
 
+  -------------------------------------------------------------------------------------------
   **Placeholder**                 **Resolved by**          **Notes**
-  {{BOOKING_OBJECT_ID}}           Runtime — from mandate UUID v7 of the bound Booking
+  &#123;&#123;BOOKING_OBJECT_ID&#125;&#125;           Runtime — from mandate UUID v7 of the bound Booking
                                                            Object. Present in Windley context
                                                            block.
 
-  {{BOOKING_OBJECT_STATE}}        Runtime —              Current XState state machine state
+  &#123;&#123;BOOKING_OBJECT_STATE&#125;&#125;        Runtime —              Current XState state machine state
                                   atp_get_booking_status   (e.g. PRE_JOURNEY, JOURNEY).
 
-  {{PERMITTED_ACTIONS}}           Cedar partial evaluation Newline-separated list of
+  &#123;&#123;PERMITTED_ACTIONS&#125;&#125;           Cedar partial evaluation Newline-separated list of
                                                            permitted ATPAction values from
                                                            residual policy set.
 
-  {{PERMITTED_TOOL_NAMES}}        Cedar partial evaluation Newline-separated list of MCP tool
+  &#123;&#123;PERMITTED_TOOL_NAMES&#125;&#125;        Cedar partial evaluation Newline-separated list of MCP tool
                                                            names derived from permitted
                                                            actions.
 
-  {{PERMITTED_HEM_IDS}}           Cedar partial evaluation Comma-separated hem_id values if
+  &#123;&#123;PERMITTED_HEM_IDS&#125;&#125;           Cedar partial evaluation Comma-separated hem_id values if
                                                            HEM_INVOKE is in scope. Empty
                                                            string if not.
 
-  {{STATE_TRANSITION_TRIGGERS}}   Cedar partial evaluation List of state transitions that
+  &#123;&#123;STATE_TRANSITION_TRIGGERS&#125;&#125;   Cedar partial evaluation List of state transitions that
                                                            will trigger a Windley Loop
                                                            re-query.
 
-  {{MANDATE_TTL_SECONDS}}         Runtime — from mandate Remaining TTL of the current ATP
+  &#123;&#123;MANDATE_TTL_SECONDS&#125;&#125;         Runtime — from mandate Remaining TTL of the current ATP
                                   JWT                      Mandate JWT. Used for session
                                                            awareness.
 
-  {{DEPLOYMENT_TIER}}             Runtime — operator     TIER_1, TIER_2, or TIER_3.
+  &#123;&#123;DEPLOYMENT_TIER&#125;&#125;             Runtime — operator     TIER_1, TIER_2, or TIER_3.
                                   config                   Determines NeMo Guardrails
                                                            availability.
 
-  {{OPERATOR_NAME}}               Runtime — operator     Human-readable name of the
+  &#123;&#123;OPERATOR_NAME&#125;&#125;               Runtime — operator     Human-readable name of the
                                   config                   operating entity (e.g. MyAuberge
                                                            K.K.).
 
-  {{GUEST_PREFERRED_LANGUAGE}}    Context Package          ISO 639-1 language code. Used by
+  &#123;&#123;GUEST_PREFERRED_LANGUAGE&#125;&#125;    Context Package          ISO 639-1 language code. Used by
                                                            Guest Agent for notification
                                                            language.
 
-  {{NOTIFICATION_CHANNELS}}       Context Package          Comma-separated list of available
+  &#123;&#123;NOTIFICATION_CHANNELS&#125;&#125;       Context Package          Comma-separated list of available
                                                            channels: WHATSAPP, SMS, EMAIL.
 
-  {{ACTIVITY_CATEGORY}}           Context Package          ATP Activity Category Registry
+  &#123;&#123;ACTIVITY_CATEGORY&#125;&#125;           Context Package          ATP Activity Category Registry
                                                            value (e.g. SKI_ALPINE,
                                                            FARM_EXPERIENCE).
 
-  {{SUPPLIER_NAME}}               Context Package          Name of the supplier in context.
+  &#123;&#123;SUPPLIER_NAME&#125;&#125;               Context Package          Name of the supplier in context.
                                                            Used by Supplier Agent.
 
-  {{SEARCH_REGION}}               Runtime — operator     Geographic region for activity
+  &#123;&#123;SEARCH_REGION&#125;&#125;               Runtime — operator     Geographic region for activity
                                   config                   search. Used by Discovery Agent.
 
-  {{OCTO_BRIDGE_ENABLED}}         Runtime — operator     true or false. Indicates whether
+  &#123;&#123;OCTO_BRIDGE_ENABLED&#125;&#125;         Runtime — operator     true or false. Indicates whether
                                   config                   OCTO Bridge adapter is active.
+  -------------------------------------------------------------------------------------------

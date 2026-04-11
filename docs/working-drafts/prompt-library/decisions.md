@@ -31,6 +31,7 @@ ATP Activity Category Registry starter catalogue. Where mapping
 confidence is APPROXIMATE or INDIRECT, Discovery Agent results MUST flag
 this to the consumer.
 
+  -------------------------------------------------------------------------
   **OCTO v2 product   **ATP Activity        **Confidence**
   type**              Category**            
   TOUR                CULTURAL_TOUR         DIRECT
@@ -82,6 +83,7 @@ this to the consumer.
   WORKSHOP            CULINARY_EXPERIENCE   APPROXIMATE — expand ATP
                                             registry for craft/workshop
                                             category
+  -------------------------------------------------------------------------
 
 ### 8.2 Session 6 Deferred Items
 
@@ -185,7 +187,7 @@ the agent's context. Block 1 (persona) does not change.
 
 ### 9.3 Tier Awareness
 
-Templates reference {{DEPLOYMENT_TIER}} to enable tier-aware agent
+Templates reference &#123;&#123;DEPLOYMENT_TIER&#125;&#125; to enable tier-aware agent
 behaviour. At Tier 1 (no NeMo Guardrails sidecar), the Windley Loop is
 the sole pre-execution scope guard. The Guest Agent template's Rail 2
 note ('NeMo Rail 2 applies at Tier 2/3') is resolved by the runtime
@@ -194,13 +196,8 @@ that the agent must apply tone discipline without Rail 2 assistance.
 
 ## 10. Version History
 
-  1.0 — April   Initial release. Track 3 Session 5B. Five templates:
-  2026            windley-context, guest-agent, operator-agent,
-                  supplier-agent, discovery-agent. OQ-AS-3 partial
-                  resolution (OCTO product type mapping table). Decisions
-                  PL-D1 through PL-D6 closed.
+  -----------------------------------------------------------------------
 
 *Activity Travel Protocol — Prompt Library v1.0 — April 2026*
 
-*Activity Travel Protocol Foundation (in formation / 設立準備中) ---
 Apache 2.0*

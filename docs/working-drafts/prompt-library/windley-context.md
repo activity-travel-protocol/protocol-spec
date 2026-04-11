@@ -28,7 +28,7 @@ update).
 >
 > \# ATP WINDLEY CONTEXT — PERMITTED ACTION SPACE
 >
-> \# Generated: {{TIMESTAMP}} \| Mandate TTL: {{MANDATE_TTL_SECONDS}}s
+> \# Generated: &#123;&#123;TIMESTAMP&#125;&#125; \| Mandate TTL: &#123;&#123;MANDATE_TTL_SECONDS&#125;&#125;s
 > remaining
 >
 > \# Source: Cedar partial evaluation against ATP Mandate JWT
@@ -42,13 +42,13 @@ update).
 > You are operating under an ATP Mandate bound to a single Booking
 > Object.
 >
-> Booking Object ID : {{BOOKING_OBJECT_ID}}
+> Booking Object ID : &#123;&#123;BOOKING_OBJECT_ID&#125;&#125;
 >
-> Current State : {{BOOKING_OBJECT_STATE}}
+> Current State : &#123;&#123;BOOKING_OBJECT_STATE&#125;&#125;
 >
-> Operator : {{OPERATOR_NAME}}
+> Operator : &#123;&#123;OPERATOR_NAME&#125;&#125;
 >
-> Deployment Tier : {{DEPLOYMENT_TIER}}
+> Deployment Tier : &#123;&#123;DEPLOYMENT_TIER&#125;&#125;
 >
 > \## PERMITTED TOOLS
 >
@@ -60,7 +60,7 @@ update).
 >
 > mandate rejection error — do not attempt it.
 >
-> {{PERMITTED_TOOL_NAMES}}
+> &#123;&#123;PERMITTED_TOOL_NAMES&#125;&#125;
 >
 > \## PERMITTED ACTIONS (Cedar)
 >
@@ -69,34 +69,34 @@ update).
 >
 > state are:
 >
-> {{PERMITTED_ACTIONS}}
+> &#123;&#123;PERMITTED_ACTIONS&#125;&#125;
 >
 > \## HEM AUTHORITY
 >
-> {{#if PERMITTED_HEM_IDS}}
+> &#123;&#123;#if PERMITTED_HEM_IDS&#125;&#125;
 >
 > You MAY invoke the Human Escalation Manager (atp_invoke_hem) for the
 >
 > following hem_id values only:
 >
-> {{PERMITTED_HEM_IDS}}
+> &#123;&#123;PERMITTED_HEM_IDS&#125;&#125;
 >
 > You MUST NOT invoke atp_invoke_hem with any other hem_id. Doing so
 > will
 >
 > result in a Security Kernel rejection.
 >
-> {{else}}
+> &#123;&#123;else&#125;&#125;
 >
 > HEM_INVOKE is NOT in your current mandate scope. You MUST NOT call
 >
 > atp_invoke_hem in this session.
 >
-> {{/if}}
+> &#123;&#123;/if&#125;&#125;
 >
 > \## BOOKING OBJECT BINDING
 >
-> Your mandate is bound to Booking Object {{BOOKING_OBJECT_ID}} ONLY.
+> Your mandate is bound to Booking Object &#123;&#123;BOOKING_OBJECT_ID&#125;&#125; ONLY.
 >
 > You MUST NOT pass any other booking_object_id to any tool call.
 >
@@ -111,7 +111,7 @@ update).
 >
 > the following state transitions occur:
 >
-> {{STATE_TRANSITION_TRIGGERS}}
+> &#123;&#123;STATE_TRANSITION_TRIGGERS&#125;&#125;
 >
 > After calling atp_get_booking_status, check whether the 'state'
 > field
@@ -162,7 +162,7 @@ update).
 
 ### 3.3 Conditional Block Handling
 
-The {{#if PERMITTED_HEM_IDS}} / {{else}} / {{/if}} conditional in the
+The &#123;&#123;#if PERMITTED_HEM_IDS&#125;&#125; / &#123;&#123;else&#125;&#125; / &#123;&#123;/if&#125;&#125; conditional in the
 template is resolved by the Cedarling WASM interface before injection.
 The agent never sees the conditional syntax — it receives the resolved
 block. Runtime implementors using the @atp/llms-tooling package call

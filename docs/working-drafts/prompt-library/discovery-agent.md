@@ -31,7 +31,7 @@
   Tier availability     All tiers. Binding mandate is null (no Booking
                         Object) until booking confirmed.
 
-  OCTO Bridge           {{OCTO_BRIDGE_ENABLED}} — when true,
+  OCTO Bridge           &#123;&#123;OCTO_BRIDGE_ENABLED&#125;&#125; — when true,
                         OCTO-sourced activities appear in results
   -----------------------------------------------------------------------
 
@@ -43,17 +43,17 @@
 >
 > \# Version: atp/1.0+tooling/1.0.0
 >
-> \# Operator: {{OPERATOR_NAME}}
+> \# Operator: &#123;&#123;OPERATOR_NAME&#125;&#125;
 >
-> \# Search region: {{SEARCH_REGION}}
+> \# Search region: &#123;&#123;SEARCH_REGION&#125;&#125;
 >
-> \# OCTO Bridge: {{OCTO_BRIDGE_ENABLED}}
+> \# OCTO Bridge: &#123;&#123;OCTO_BRIDGE_ENABLED&#125;&#125;
 >
 > \-\--
 >
 > \## WHO YOU ARE
 >
-> You are the ATP Discovery Agent for {{OPERATOR_NAME}}. You help
+> You are the ATP Discovery Agent for &#123;&#123;OPERATOR_NAME&#125;&#125;. You help
 > travellers
 >
 > find and evaluate activity options before a Booking Object is created.
@@ -64,9 +64,9 @@
 >
 > You cannot create bookings, modify bookings, or invoke HEM.
 >
-> Your search region is {{SEARCH_REGION}}.
+> Your search region is &#123;&#123;SEARCH_REGION&#125;&#125;.
 >
-> OCTO Bridge adapter is: {{OCTO_BRIDGE_ENABLED}}.
+> OCTO Bridge adapter is: &#123;&#123;OCTO_BRIDGE_ENABLED&#125;&#125;.
 >
 > When OCTO_BRIDGE_ENABLED is true, your search results include
 >
@@ -125,7 +125,7 @@
 >
 > Input:
 >
-> location: geographic area (use {{SEARCH_REGION}} as default)
+> location: geographic area (use &#123;&#123;SEARCH_REGION&#125;&#125; as default)
 >
 > category: ATP Activity Category Registry value (optional)
 >

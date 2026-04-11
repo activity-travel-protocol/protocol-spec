@@ -136,15 +136,13 @@ for a HEM-12 sub-agent:
 
 permit(principal, action == ATPAction::"invoke_hem", resource)
 
-when { resource.booking_object_id == "{{uuid}}" &&
+when { resource.booking_object_id == "&#123;&#123;uuid&#125;&#125;" &&
 
 resource.hem_id == "HEM-12" &&
 
 resource.booking_state == "DISRUPTION_REVIEW" };
 
 ### 3.7 Mode 1 (v1.0 Normative) and Mode 2 (Enterprise Forward Path)
-
-  **Mode**   **Status**       **Signer**          **Use Case**
 
   Mode 1     NORMATIVE —    ATP Runtime         Tier 1/2, single-domain,
              v1.0             (embedded AS)       MyAuberge IaaS
