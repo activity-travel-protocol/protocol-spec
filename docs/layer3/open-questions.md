@@ -1,7 +1,7 @@
-# Open Questions Resolution
+﻿# Open Questions Resolution
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 13 | March 2026
+Working Draft | Section 13 | April 2026
 
 | Field | Value |
 |---|---|
@@ -194,4 +194,4 @@ The CAAM [BRIDGE] position in the Standards Landscape is maintained. Layer 3 mak
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 13 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 13 — April 2026*

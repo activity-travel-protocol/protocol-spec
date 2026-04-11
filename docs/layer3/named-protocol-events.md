@@ -1,7 +1,7 @@
-# Named Protocol Events
+﻿# Named Protocol Events
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 10 | March 2026
+Working Draft | Section 10 | April 2026
 
 ---
 
@@ -196,4 +196,4 @@ Recorded by a Fulfilling Party when requesting a Coordination Delegation from th
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 10 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 10 — April 2026*

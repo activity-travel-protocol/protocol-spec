@@ -1,7 +1,7 @@
-# Disruption Event Handling
+﻿# Disruption Event Handling
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 8 | March 2026
+Working Draft | Section 8 | April 2026
 
 ---
 
@@ -172,4 +172,4 @@ The Activity Travel Protocol surfaces 735d obligations as part of the DISRUPTION
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 8 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 8 — April 2026*

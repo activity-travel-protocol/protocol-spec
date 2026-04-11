@@ -1,7 +1,7 @@
-# Appendix B: State Transition Table
+﻿# Appendix B: State Transition Table
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Appendix B | March 2026
+Working Draft | Appendix B | April 2026
 
 ---
 
@@ -112,4 +112,4 @@ All Activity Component status transitions are Security Kernel operations recorde
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Appendix B — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Appendix B — April 2026*

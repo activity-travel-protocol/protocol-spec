@@ -1,7 +1,7 @@
-# Timeout Budget Model
+﻿# Timeout Budget Model
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 11 | March 2026
+Working Draft | Section 11 | April 2026
 
 ---
 
@@ -11,7 +11,7 @@ All timeout durations use ISO 8601 duration format: PT = period of time; M = min
 
 ## 11.1 Kernel Scheduler enforcement rules
 
-The Kernel Scheduler (OS function 3, Architecture Specification v0.2 Section 5) enforces all timeout values defined in this section. The following rules govern how it does so:
+The Kernel Scheduler (OS function 3, Architecture Specification v1.0 Section 5) enforces all timeout values defined in this section. The following rules govern how it does so:
 
 - **Timeout events are state transitions.** They go through the Policy Engine (OPA evaluation) and produce event log entries. A timeout is not a silent expiry — it is a protocol event.
 - **The Kernel Scheduler uses the tighter of two values** wherever both a protocol maximum and a Party-declared value exist. A Party may configure a tighter deadline than the protocol default; they may never configure a looser one.
@@ -114,4 +114,4 @@ The following rules govern how Parties may configure timeout values in their Par
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 11 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 11 — April 2026*

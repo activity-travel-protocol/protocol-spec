@@ -1,7 +1,7 @@
-# Human Escalation Manager Invocation Catalogue
+﻿# Human Escalation Manager Invocation Catalogue
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 6 | March 2026
+Working Draft | Section 6 | April 2026
 
 ---
 
@@ -315,4 +315,4 @@ Each entry below is a normative specification of one HEM invocation point. Entri
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 6 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 6 — April 2026*

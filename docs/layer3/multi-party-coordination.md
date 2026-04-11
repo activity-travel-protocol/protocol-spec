@@ -1,7 +1,7 @@
-# Multi-Party Coordination
+﻿# Multi-Party Coordination
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 12 | March 2026
+Working Draft | Section 12 | April 2026
 
 | Field | Value |
 |---|---|
@@ -224,4 +224,4 @@ When a DT-4 disruption declaration is confirmed (C1 window elapsed), the Kernel 
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 12 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 12 — April 2026*

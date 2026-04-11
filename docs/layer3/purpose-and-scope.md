@@ -1,7 +1,7 @@
-# Purpose and Scope
+﻿# Purpose and Scope
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 1 | March 2026
+Working Draft | Section 1 | April 2026
 
 | Field | Value |
 |---|---|
@@ -35,7 +35,7 @@ Layer 3 is built on, and must be read alongside, the following documents:
 
 | Document | Role in Layer 3 |
 |---|---|
-| Architecture Specification v0.2 | Defines the 12 OS functions, the Security Kernel execution order, the Booking Object runtime model, and the 8 journey phases that Layer 3 specifies in full. |
+| Architecture Specification v1.0 | Defines the 12 OS functions, the Security Kernel execution order, the Booking Object runtime model, and the 8 journey phases that Layer 3 specifies in full. |
 | Context Package Specification Step 6 | Defines the Context Package and Decision Object schemas that all AI agent participation points in Layer 3 use. SAR-1 through SAR-21 are the authoritative schema definitions. |
 | Security Architecture v1 | Defines the TRAVELER_UNREACHABLE escalation chains (TU-1 through TU-6), BOOKING_SUSPENDED entry and exit conditions, SUPPLIER_FAILURE_AT_DELIVERY incident taxonomy, and TravelerWellnessStatus model. Layer 3 references these definitions without restating them. |
 | Pre-Layer 3 Consistency Review | Resolves tensions T-1 through T-5 and produces 16 design rules (T-1-A through T-5-D) that this specification is required to follow. Open questions OQ-L3-1 through OQ-L3-3 and OQ-SL-1 are resolved within this specification. |
@@ -119,7 +119,7 @@ The Security Kernel runs non-bypassably on every state transition before any bus
 - **Trust Chain validation** — full Trust Chain from requesting Party to protocol root verified.
 - **AI agent scope validation** — if the request originates from an AI agent, authority scope validated against the operation requested. Out-of-scope requests trigger the Human Escalation Manager, not an error.
 
-The Security Kernel is specified in Architecture Specification v0.2 Section 6 and Security Architecture v1. This specification does not restate its internal mechanics — it describes what happens after the Kernel has cleared a transition.
+The Security Kernel is specified in Architecture Specification v1.0 Section 6 and Security Architecture v1. This specification does not restate its internal mechanics — it describes what happens after the Kernel has cleared a transition.
 
 ## 1.7 Open questions resolved by this specification
 
@@ -134,4 +134,4 @@ The Pre-Layer 3 Consistency Review identified four open questions carried into L
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 1 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 1 — April 2026*

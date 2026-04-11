@@ -1,7 +1,7 @@
-# TRAVELER_UNREACHABLE Chains in Workflow Context
+﻿# TRAVELER_UNREACHABLE Chains in Workflow Context
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 7 | March 2026
+Working Draft | Section 7 | April 2026
 
 ---
 
@@ -215,4 +215,4 @@ Resolution requires law enforcement confirmation that the traveler has been foun
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 7 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 7 — April 2026*

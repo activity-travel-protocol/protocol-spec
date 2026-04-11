@@ -1,7 +1,7 @@
-# Normative References and Definitions
+﻿# Normative References and Definitions
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 2 | March 2026
+Working Draft | Section 2 | April 2026
 
 ---
 
@@ -22,7 +22,7 @@ The following external standards and specifications are normatively referenced b
 | **[OIDF]** | OpenID Federation 1.0. OpenID Foundation. Defines the federation model for establishing trust between parties at scale without bilateral pre-registration. | ADOPT | Party Registry identity establishment. Trust Chain construction. AgentAuthorityDeclaration issuance. Referenced in S1.3, S9.1.2. |
 | **[FAPI2]** | FAPI 2.0 Security Profile. OpenID Foundation. Defines the security profile for high-value API interactions, including ES256 signing requirements. | ADOPT | Context Package signing (ES256, FAPI 2.0 profile). Decision Object signature validation. Referenced in S9.1.2, S9.3. |
 | **[VC2]** | W3C Verifiable Credentials Data Model 2.0. W3C Recommendation. Defines the credential format for verifiable identity and authority claims. | ADOPT | Coordination Delegation credential format (CD-1). AgentAuthorityDeclaration. Trust Chain declarations. Referenced in S12.4.1. |
-| **[TLS13]** | TLS 1.3. IETF RFC 8446. Defines the transport security protocol required for all protocol communications. | ADOPT | All inter-party protocol communications. Minimum transport security requirement. Referenced in Architecture Specification v0.2. |
+| **[TLS13]** | TLS 1.3. IETF RFC 8446. Defines the transport security protocol required for all protocol communications. | ADOPT | All inter-party protocol communications. Minimum transport security requirement. Referenced in Architecture Specification v1.0. |
 | **[AES256]** | AES-256-GCM. NIST FIPS 197 / SP 800-38D. Defines the symmetric encryption standard for TRAVELER_PII at rest. | ADOPT | TRAVELER_PII encryption at rest from PENDING_CONFIRMATION onwards. Referenced in S3.2.5. |
 | **[ES256]** | ECDSA using P-256 and SHA-256. IETF RFC 7518 Section 3.4. The algorithm used for Context Package and Decision Object signing. | ADOPT | Context Package signing. Decision Object signature. Coordination Delegation proof. Referenced in S9.1.2, S12.4.1. |
 
@@ -42,7 +42,7 @@ The following external standards and specifications are normatively referenced b
 |---|---|---|---|
 | **[BPMN2]** | Business Process Model and Notation 2.0. Object Management Group (OMG). Defines the diagram notation used for all workflow diagrams in this specification. | ADOPT | All state machine diagrams (BPD-01 through BPD-10). BPMN notation rules defined in Appendix C. Referenced in S1.5. |
 | **[XSTATE5]** | XState v5. TypeScript state machine and statechart library. The runtime execution format for the Layer 3 state machine. Runs in browser, edge (Deno/V8 isolate), and Node.js. | ADOPT | Booking Object state machine runtime. BOOKING_SUSPENDED parallel state model. XState v5 mapping in Appendix C.6. Referenced in S1.5. |
-| **[ASYNCAPI3]** | AsyncAPI 3.0. AsyncAPI Initiative. Defines the asynchronous messaging format for IPC channel event delivery between parties. | ADOPT | Inter-Party Communication (IPC) channel (OS function 5). Supplier confirmation notification. HEM handler dispatch. Referenced in Architecture Specification v0.2. |
+| **[ASYNCAPI3]** | AsyncAPI 3.0. AsyncAPI Initiative. Defines the asynchronous messaging format for IPC channel event delivery between parties. | ADOPT | Inter-Party Communication (IPC) channel (OS function 5). Supplier confirmation notification. HEM handler dispatch. Referenced in Architecture Specification v1.0. |
 | **[ISO8601]** | ISO 8601:2019. International Organisation for Standardisation. Defines date, time, and duration notation. Duration format PT[n]M/H/D used for all timeout values in this specification. | ADOPT | All timeout values throughout S3–S11. Audit trail timestamps. Event log entries. Referenced in S11 throughout. |
 | **[UUIDV7]** | UUID Version 7. IETF RFC 9562. Time-ordered UUID format used for booking_id assignment on Booking Object creation. | ADOPT | booking_id field on all Booking Objects. Referenced in S3.1.5. |
 
@@ -59,8 +59,8 @@ The following external standards and specifications are normatively referenced b
 
 | Ref | Standard / specification | Position | Used in this specification |
 |---|---|---|---|
-| **[OTEL]** | OpenTelemetry. CNCF Graduated Project. Defines the observability framework for distributed tracing, metrics, and logging. | ADOPT | Protocol runtime observability. Event log telemetry. Referenced in Architecture Specification v0.2 Section 5. |
-| **[MCP]** | Model Context Protocol. Anthropic. Defines the server protocol for AI model tool integration. atp-mcp ships as a first-class Layer 1 deliverable. | ADOPT | AI agent invocation interface. atp-mcp package (first-class protocol deliverable). MCP server as primary AI agent integration point. Referenced in S9, Architecture Specification v0.2. |
+| **[OTEL]** | OpenTelemetry. CNCF Graduated Project. Defines the observability framework for distributed tracing, metrics, and logging. | ADOPT | Protocol runtime observability. Event log telemetry. Referenced in Architecture Specification v1.0 Section 5. |
+| **[MCP]** | Model Context Protocol. Anthropic. Defines the server protocol for AI model tool integration. atp-mcp ships as a first-class Layer 1 deliverable. | ADOPT | AI agent invocation interface. atp-mcp package (first-class protocol deliverable). MCP server as primary AI agent integration point. Referenced in S9, Architecture Specification v1.0. |
 
 ## 2.2 Internal Normative References
 
@@ -68,7 +68,7 @@ The following Activity Travel Protocol documents are normatively referenced by t
 
 | Document | Full title | Role in this specification |
 |---|---|---|
-| **Architecture Spec v0.2** | Activity Travel Protocol Architecture Specification v0.2 | Defines the 12 OS functions (Kernel-mode and User-mode), the Security Kernel execution order, the Booking Object runtime model (UUID v7, XState v5, append-only event log), the three-tier scaling model, the cloud-agnostic principle, and the eight journey phases. Layer 3 implements the state machine; this document defines the runtime it runs on. |
+| **Architecture Spec v0.2** | Activity Travel Protocol Architecture Specification v1.0 | Defines the 12 OS functions (Kernel-mode and User-mode), the Security Kernel execution order, the Booking Object runtime model (UUID v7, XState v5, append-only event log), the three-tier scaling model, the cloud-agnostic principle, and the eight journey phases. Layer 3 implements the state machine; this document defines the runtime it runs on. |
 | **Context Package Step 6** | Activity Travel Protocol Context Package Specification Step 6 (SAR-1 through SAR-21) | Defines the Context Package schema (SAR-1 through SAR-18), the Decision Object schema, the AgentAuthorityDeclaration, the named protocol event schemas (SAR-19 SUPPLIER_FAILURE_AT_DELIVERY, SAR-20 TRAVELER_FOUND, SAR-21 RECOVERED), and the DT enum extensibility model. The authoritative source for all AI agent participation schemas used in Layer 3. |
 | **Security Architecture v1** | Activity Travel Protocol Security Architecture v1 | Defines the TRAVELER_UNREACHABLE escalation chains (TU-1 through TU-6), BOOKING_SUSPENDED entry and exit conditions (C-BS-1/2/3), the SUPPLIER_FAILURE_AT_DELIVERY incident taxonomy (SF-1/2/3), TravelerWellnessStatus model (W0–W4), the C1 autonomous incident reversal window, SSF integration, and the Human Escalation Manager model (T-5-A through T-5-D). Layer 3 references these definitions; this document is the authoritative source. |
 | **Pre-Layer 3 Review** | Activity Travel Protocol Pre-Layer 3 Consistency Review v1 | Resolves five latent architectural tensions (T-1 through T-5) and produces 17 design rules (T-1-A through T-5-D) that this specification is required to follow. Establishes the DT enum extensibility model, the Kernel/user sanitisation boundary, the identity_tier forward-compatibility approach, the BOOKING_SUSPENDED parallel state model, and the HEM mandatory presence rule. The authority_scope NEGOTIATION for DT-3 is defined in this document. |
@@ -125,7 +125,7 @@ The following terms are used normatively in this specification. Where a term is 
 
 **protocol_deadline** — The maximum time allowed for a human actor to respond to a Human Escalation Manager dispatch before secondary escalation. Each HEM invocation entry in Section 6 specifies a protocol_deadline. Values are Party-configurable to tighter bounds only.
 
-**Security Kernel** — The non-bypassable runtime enforcement layer that executes on every state transition. Performs authentication, authorisation, OPA policy evaluation, Trust Chain validation, and AI agent scope validation before any business logic executes. Specified in Architecture Specification v0.2 Section 6 and Security Architecture v1.
+**Security Kernel** — The non-bypassable runtime enforcement layer that executes on every state transition. Performs authentication, authorisation, OPA policy evaluation, Trust Chain validation, and AI agent scope validation before any business logic executes. Specified in Architecture Specification v1.0 Section 6 and Security Architecture v1.
 
 **SourceSignalRecord** — The structured record of the external signal that triggered a disruption declaration (SAR-18 in Context Package Specification Step 6). Mandatory for DT-4 declarations — a DT-4 Decision Object without a valid source_signal_reference resolving to an event log entry is rejected by the Security Kernel.
 
@@ -141,4 +141,4 @@ The following terms are used normatively in this specification. Where a term is 
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 2 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 2 — April 2026*

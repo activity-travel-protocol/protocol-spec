@@ -1,7 +1,7 @@
-# Appendix A: Decision Type Registry
+﻿# Appendix A: Decision Type Registry
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Appendix A | March 2026
+Working Draft | Appendix A | April 2026
 
 ---
 
@@ -80,4 +80,4 @@ The registry does not define a testing or certification process for new Decision
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Appendix A — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Appendix A — April 2026*

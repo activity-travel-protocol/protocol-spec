@@ -1,7 +1,7 @@
-# BOOKING_SUSPENDED Cross-Cutting Behaviour
+﻿# BOOKING_SUSPENDED Cross-Cutting Behaviour
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 5 | March 2026
+Working Draft | Section 5 | April 2026
 
 ---
 
@@ -111,4 +111,4 @@ SSF stream monitoring continues throughout BOOKING_SUSPENDED. If a CAEP Session 
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 5 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 5 — April 2026*

@@ -1,7 +1,7 @@
-# Design Rules Compliance Trace
+﻿# Design Rules Compliance Trace
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 14 | March 2026
+Working Draft | Section 14 | April 2026
 
 | Field | Value |
 |---|---|
@@ -161,4 +161,4 @@ Both LAYER 4 PENDING rules are SDK design constraints, not specification ambigui
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 14 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 14 — April 2026*

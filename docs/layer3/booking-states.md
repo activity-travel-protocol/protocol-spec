@@ -1,13 +1,13 @@
-# Booking States
+﻿# Booking States
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 3 | March 2026
+Working Draft | Section 3 | April 2026
 
 ---
 
 This section defines every state in the Booking Object state machine. For each state, it specifies: the conditions under which the state is entered, the transitions out of the state, the timeout rules that apply, and the duty-of-care obligations active while the Booking Object is in that state.
 
-The Security Kernel executes non-bypassably on every transition. This is universally true and is not restated per-state. See Section 1.6 and Architecture Specification v0.2 Section 6.
+The Security Kernel executes non-bypassably on every transition. This is universally true and is not restated per-state. See Section 1.6 and Architecture Specification v1.0 Section 6.
 
 ## 3.0 Complete state inventory
 
@@ -298,4 +298,4 @@ No transitions out of BOOKING_CANCELLED_SUSPENDED exist.
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 3 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 3 — April 2026*

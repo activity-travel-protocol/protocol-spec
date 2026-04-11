@@ -1,7 +1,7 @@
-# Journey Phase Specification
+﻿# Journey Phase Specification
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 4 | March 2026
+Working Draft | Section 4 | April 2026
 
 ---
 
@@ -300,4 +300,4 @@ Duty of care level: LOW. HEM invocation recommended; administrative resolution a
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 4 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 4 — April 2026*

@@ -1,11 +1,11 @@
----
+﻿---
 title: Layer 3 — Workflow Specification
 description: The Activity Travel Protocol Layer 3 Workflow Specification defines the complete runtime behaviour of a booking from first inquiry through journey completion, including booking states, journey phases, disruption handling, AI agent participation, and multi-party coordination.
 ---
 
 # Layer 3 — Workflow Specification
 
-**Status:** Working Draft — March 2026  
+**Status:** Working Draft — April 2026  
 **Layer:** 3 of 4  
 **Depends on:** Layer 1 (Identity and Trust)
 
@@ -159,5 +159,5 @@ Layer 3 depends on Layer 1. Implementers must be familiar with the [Architecture
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — March 2026*\
-*Apache 2.0 — MyAuberge K.K.*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — April 2026*\
+*Apache 2.0 — Activity Travel Protocol Foundation (in formation / 設立準備中)*

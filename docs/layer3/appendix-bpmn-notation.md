@@ -1,7 +1,7 @@
-# Appendix C: BPMN Notation Guide
+﻿# Appendix C: BPMN Notation Guide
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Appendix C | March 2026
+Working Draft | Appendix C | April 2026
 
 ---
 
@@ -263,4 +263,4 @@ The `INQUIRY_TIMEOUT_DURATION` constant is resolved at machine instantiation fro
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Appendix C — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Appendix C — April 2026*

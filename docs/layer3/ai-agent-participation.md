@@ -1,7 +1,7 @@
-# AI Agent Participation Model
+﻿# AI Agent Participation Model
 
 **Activity Travel Protocol — Layer 3 Workflow Specification**\
-Working Draft | Section 9 | March 2026
+Working Draft | Section 9 | April 2026
 
 ---
 
@@ -150,4 +150,4 @@ The following actions are outside agent authority regardless of declared scope. 
 
 ---
 
-*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 9 — March 2026*
+*Activity Travel Protocol — Layer 3 Workflow Specification — Working Draft — Section 9 — April 2026*
