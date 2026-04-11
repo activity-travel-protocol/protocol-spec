@@ -10,10 +10,7 @@
 
 *ATP_Layer4_Schema_v1.docx · Track 3 Session 6*
 
-  **Produced**    MyAuberge K.K. — Tom Sato
-
   **Governed**    Activity Travel Protocol Foundation (in formation /
-                  設立準備中)
 
 +-----------------------------------------------------------------------+
 | **Purpose**                                                           |
@@ -95,6 +92,7 @@ Three principles govern the type design:
 The following branded primitive types constitute the identity layer of
 @atp/core. All are string brands unless otherwise noted.
 
+  ------------------------------------------------------------------------
   **Type**              **Base**        **Description**
   **BookingObjectId**   UUID v7 string  Unique identifier for a Booking
                                         Object instance. UUID v7 ensures
@@ -151,6 +149,7 @@ The following branded primitive types constitute the identity layer of
 
   **LanguageTag**       string          BCP 47 language tag. E.g. ja-JP,
                                         en-US.
+  ------------------------------------------------------------------------
 
 ### 2.3 Booking Object Type
 

@@ -4,7 +4,7 @@
 
 *OQ-MCP-3 (HEM-MANDATE-01) · OQ-AS-3 (OCTO v2 mapping) · OQ-MCP-2 (Fletcher Embassy status)*
 
-[← REST API](rest-api) · [Registry Publication →](registry-publication)
+[← REST API](rest-api) · [Decisions →](decisions)
 
 ## 4. OQ-MCP-3 Resolution — HEM-MANDATE-01
 
