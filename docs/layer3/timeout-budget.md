@@ -40,7 +40,7 @@ All timeouts are listed in priority order within each category. P1 timeouts are 
 | HEM-08 | ARRIVAL + BOOKING_SUSPENDED | PT15M | Yes — tighter only | No floor stated | N/A |
 | HEM-09 | TU-1 unresolved — ACTIVITY_FULFILLMENT | PT30M | Yes — tighter only | No floor stated | Yes |
 | HEM-10 | TU-3b TRAVELER_DEPARTED_IRREGULARLY | PT30M | Yes — tighter only | No floor stated | Yes |
-| HEM-11 | OPA assembly failure — blocking DT | PT10M | Yes — tighter only | PT10M (protocol maximum) | Yes |
+| HEM-11 | Policy assembly failure — blocking DT | PT10M | Yes — tighter only | PT10M (protocol maximum) | Yes |
 | HEM-12 | SSF revocation during C1 window | No separate deadline — C1 clock frozen | N/A | N/A | Yes — by definition |
 | HEM-13 | TU-1 / TU-4 unreachable — standard phases | PT30M | Yes — tighter only | No floor stated | Yes |
 | HEM-14 | CONFIRMATION_TIMEOUT | PT24H | Yes — tighter only | No floor stated | Yes |
@@ -107,7 +107,7 @@ The following rules govern how Parties may configure timeout values in their Par
 |---|---|
 | **Tighter-only** | A Party may configure a timeout value tighter (shorter) than the protocol default. They may never configure a value looser (longer). Cedar rejects any Party Policy Declaration that attempts to set a timeout value exceeding the protocol maximum. |
 | **Kernel uses tighter** | Where both a protocol default and a Party-declared value exist, the Kernel Scheduler uses the tighter of the two. The Party cannot override this behaviour. |
-| **No floor except HEM-01 and HEM-11** | Only HEM-01 (PT5M floor — ACTIVITY_FULFILLMENT + BOOKING_SUSPENDED) and HEM-11 (PT10M — OPA assembly failure, also the protocol maximum) have stated floors. All other timeouts may be configured to any value tighter than the protocol default, including very short values. Operators choosing very short timeouts accept the operational consequences. |
+| **No floor except HEM-01 and HEM-11** | Only HEM-01 (PT5M floor — ACTIVITY_FULFILLMENT + BOOKING_SUSPENDED) and HEM-11 (PT10M — Policy assembly failure, also the protocol maximum) have stated floors. All other timeouts may be configured to any value tighter than the protocol default, including very short values. Operators choosing very short timeouts accept the operational consequences. |
 | **Fixed timeouts** | Two timeouts are not configurable by any Party: the C1 autonomous reversal window (PT15M — fixed) and the secondary HEM dispatch window (PT5M — fixed). These are protocol constants. |
 | **Supplier evidence window** | The PT24H supplier evidence window for SUPPLIER_FAILURE_AT_DELIVERY is fixed. No Party may extend or shorten it. This maintains the burden-of-proof inversion model's integrity. |
 | **Frozen during BOOKING_SUSPENDED** | All Party-configured timeout values, like protocol defaults, are frozen when BOOKING_SUSPENDED is active. They resume from their paused position on BOOKING_SUSPENDED exit. |

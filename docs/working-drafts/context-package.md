@@ -384,7 +384,7 @@ Used when a Decision Object's `reasoning` field fails the per-action minimum len
 |---|---|---|
 | `CONFIDENCE_UNDERRUN` | Confidence value below per-action minimum threshold | Step 5 / SAR-2. Retained for confidence-value failures only. |
 | `REASONING_INSUFFICIENT` | `reasoning` field shorter than per-action minimum (DOR-7-SAR2) | **SAR-12 NEW.** |
-| `ASSEMBLY_FAILURE` | OPA timeout or failure on blocking DT | FR-5.3. `protocol_deadline`: PT10M. |
+| `ASSEMBLY_FAILURE` | Cedar evaluation timeout or failure on blocking DT | FR-5.3. `protocol_deadline`: PT10M. |
 | `CREDENTIAL_COMPROMISED_GATE` | Active RISC Credential Compromised event on `agent_id` | SSF-Q2. Full execution gate. |
 | `SSF_REVOCATION_DURING_C1_WINDOW` | C1 trigger SSF event during PT15M reversal window | SSF-Q4. |
 | `DECISION_REPLAY_DETECTED` | Exact Decision Object hash match on different `invocation_id` for same `booking_id` | DT-Q4. Hard protocol rule. |
