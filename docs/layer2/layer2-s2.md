@@ -29,8 +29,9 @@ The following external standards and specifications are normatively referenced b
 | **[VC2]** | W3C Verifiable Credentials Data Model 2.0. W3C Recommendation. Defines the credential format for verifiable identity and authority claims. | ADOPT | Delegation Topology Declaration credential format. Pre-Arrangement Declaration credential binding. Referenced in S3.4, S6. |
 | **[TLS13]** | TLS 1.3. IETF RFC 8446. Defines the transport security protocol required for all protocol communications. | ADOPT | All inter-party Layer 2 communications. Capability Catalogue query transport. Referenced in Architecture Specification v0.2. |
 | ***Policy and Authorisation*** | | | |
-| **[ODRL]** | Open Digital Rights Language (ODRL) Information Model 2.2. W3C Recommendation. Defines the policy declaration format compiled to OPA Rego for evaluation. | ADOPT | Pre-Arrangement Declaration policy expression. Capability Declaration operational constraints. Referenced in S6. |
-| **[OPA]** | Open Policy Agent. CNCF Graduated Project. The policy evaluation engine to which ODRL declarations are compiled as Rego. | ADOPT | Pre-Arrangement Declaration evaluation at Layer 3 Security Kernel. Capability Declaration constraint validation at registration. Referenced in S6, S3. |
+| **[ODRL]** | Open Digital Rights Language (ODRL) Information Model 2.2. W3C Recommendation. External interoperability expression layer for IDSA Dataspace Protocol compatibility. ATP Capability Declarations may be published as DCAT 3 Datasets with ODRL `hasPolicy` attributes. ODRL is not the ATP runtime enforcement language — see [Cedar]. | ADOPT (external interoperability) | Capability Declaration DCAT 3 / IDSA Dataspace Protocol expression. OQ-DSP-1. Referenced in S6. |
+| **[Cedar]** | Cedar Policy Language. Amazon Web Services / cedar-policy.io. Formally decidable policy language — evaluation always terminates. The ATP runtime enforcement language. All `permit` and `forbid` rules in ATP policy sets are authored in Cedar. | ADOPT | All Security Kernel policy enforcement. Pre-Arrangement Declaration evaluation at Layer 3 Security Kernel. Capability Declaration constraint validation at registration. Referenced in S6, S3. |
+| **[Cedarling WASM]** | Cedarling WASM runtime. The Cedar evaluation engine running in-process within the ATPRuntime Node.js process via WebAssembly. No sidecar, no network hop. Per-transition evaluation cost: 0.1–1ms. Shipped via the `@atp/security` package. | ADOPT | Runtime Cedar policy evaluation at every Security Kernel transition. |
 | ***Agent Communication Protocols*** | | | |
 | **[MCP]** | Model Context Protocol. Anthropic. Defines the server protocol for AI model tool integration. atp-mcp ships as a first-class protocol deliverable. | ADOPT | Capability Catalogue MCP tool interface. Static Capability Declaration queries. Graceful degradation fallback path. MCP/A2A boundary at Booking Object creation. Referenced in S8, S10, S1.4. |
 | **[A2A]** | Agent2Agent Protocol. Google Cloud / Linux Foundation. v0.3. Defines the agent-to-agent communication protocol for inter-party discovery and negotiation. | ADOPT | Inter-party agent communication during discovery and feasibility phase. A2A task schemas for Capability Declaration queries and Feasibility Check interactions. Referenced in S8, S10. |
@@ -56,7 +57,7 @@ The following Activity Travel Protocol documents are normatively referenced by t
 |----------|-----------|---------------------------|
 | **Architecture Spec v0.2** | Activity Travel Protocol Architecture Specification v0.2 | Defines the five Layer 2 components, OS Function 4 (Driver Model) for the Resource Reference Registry, the three-tier scaling model, the cloud-agnostic principle, and the Security Kernel execution order. Layer 2 implements the discovery and configuration layer; this document defines the runtime it feeds. |
 | **Party Registry Spec v0.2** | Activity Travel Protocol Party Registry Specification v0.2 | Defines the Party registration model. Capability Declarations and Pre-Arrangement Declarations are registered as Party artifacts in the Party Registry. Layer 2 extends the Party Registry with Capability Declaration and Pre-Arrangement Declaration registration operations — it does not redefine Party identity or trust chain registration. |
-| **Party Policy Declarations Spec v0.2** | Activity Travel Protocol Party Policy Declarations Specification v0.2 | Defines the PartyPolicyDeclaration structure. Pre-Arrangement Declarations are a category of Party Policy Declaration. Their schema is defined in this specification (Section 6); their enforcement runs through the Layer 3 Security Kernel OPA evaluation at the Party Operational policy tier. |
+| **Party Policy Declarations Spec v0.2** | Activity Travel Protocol Party Policy Declarations Specification v0.2 | Defines the PartyPolicyDeclaration structure. Pre-Arrangement Declarations are a category of Party Policy Declaration. Their schema is defined in this specification (Section 6); their enforcement runs through the Layer 3 Security Kernel Cedar evaluation at the Party Operational policy tier. |
 | **Jurisdiction Compliance Spec v0.2** | Activity Travel Protocol Jurisdiction Compliance Specification v0.2 | Defines jurisdiction compliance obligations constraining party operations. Pre-Arrangement Declaration schema must incorporate jurisdiction constraint fields (L2-T-4-C). Capability Declarations must declare the jurisdictions in which they are valid. Jurisdiction coverage is a material change trigger for DECLARATION_SUPERSEDED. |
 | **Trust Chain Spec v0.1** | Activity Travel Protocol Trust Chain Declaration Specification v0.1 | Defines the Trust Unit model used in Delegation Topology feasibility confirmation. Delegation Topology Declaration credential format builds on the W3C VC 2.0 trust model defined here. Multi-party delegation chain construction in the Feasibility Check operation (Section 7) uses Trust Chain constructs defined here. |
 | **Layer 3 Workflow Specification** | Activity Travel Protocol Layer 3 Workflow Specification (complete, March 2026) | Layer 3 INQUIRY state logic requires FEASIBILITY_CLEARED per Activity Component before INQUIRY may exit (Layer 3 S1 Section 1.7, OQ-L3-1; enforced in Layer 3 S3). The Feasibility Window defined in this specification (Section 7) is referenced as an external parameter by Layer 3 S11. Pre-Arrangement Declarations take effect through the Layer 3 Security Kernel at the Party Operational policy tier. |
@@ -196,7 +197,7 @@ The Booking Object creation event. All agent interactions before Booking Object 
 
 **Pre-Arrangement Declaration**
 
-A Layer 2 artifact establishing pre-negotiated terms between parties before a booking begins. Pre-Arrangement Declarations are registered in the Party Registry as Party Policy Declarations at Layer 1 Party registration time. They take effect during Layer 3 booking execution through the Security Kernel's OPA evaluation at the Party Operational policy tier. Pre-Arrangement Declarations are not Security Kernel bypasses — every state transition that relies on a Pre-Arrangement Declaration still goes through the full Security Kernel execution order (L2-T-4-B). Pre-Arrangement Declarations must be registered before the booking begins; a declaration first asserted during an active booking is invalid (L2-T-4-D). Defined in Section 6.
+A Layer 2 artifact establishing pre-negotiated terms between parties before a booking begins. Pre-Arrangement Declarations are registered in the Party Registry as Party Policy Declarations at Layer 1 Party registration time. They take effect during Layer 3 booking execution through the Security Kernel's Cedar evaluation at the Party Operational policy tier. Pre-Arrangement Declarations are not Security Kernel bypasses — every state transition that relies on a Pre-Arrangement Declaration still goes through the full Security Kernel execution order (L2-T-4-B). Pre-Arrangement Declarations must be registered before the booking begins; a declaration first asserted during an active booking is invalid (L2-T-4-D). Defined in Section 6.
 
 *Cross-reference: S6, S1.5.*
 
@@ -216,7 +217,7 @@ The Layer 2 data provider driver registry. Suppliers and parties register extern
 
 **Security Kernel**
 
-The non-bypassable enforcement layer of the Activity Travel Protocol runtime. In Layer 2, the Security Kernel enforces: Party identity verification at Capability Declaration registration; FEASIBILITY_CLEARED event validation against registered declaration versions; Pre-Arrangement Declaration registration rules (L2-T-4-D). The Security Kernel's full execution order (authenticate, authorise, OPA policy evaluation, Trust Chain validation, AI agent scope validation) applies to all Layer 3 operations that touch Layer 2 artifacts.
+The non-bypassable enforcement layer of the Activity Travel Protocol runtime. In Layer 2, the Security Kernel enforces: Party identity verification at Capability Declaration registration; FEASIBILITY_CLEARED event validation against registered declaration versions; Pre-Arrangement Declaration registration rules (L2-T-4-D). The Security Kernel's full execution order (authenticate, authorise, Cedar policy evaluation, Trust Chain validation, AI agent scope validation) applies to all Layer 3 operations that touch Layer 2 artifacts.
 
 *Authoritative definition: Architecture Specification v0.2 Section 6. Layer 2 usage: S3.1, S6, S7.3.*
 
@@ -255,9 +256,10 @@ The following abbreviations are used throughout this specification:
 | **L2-T-n-X** | Layer 2 design rule (n = tension number, X = sub-rule letter) |
 | **MCP** | Model Context Protocol |
 | **NDC** | New Distribution Capability (IATA) |
-| **ODRL** | Open Digital Rights Language |
+| **ODRL** | Open Digital Rights Language (external interoperability layer — see OQ-DSP-1) |
 | **OIDF** | OpenID Foundation |
-| **OPA** | Open Policy Agent |
+| **Cedar** | Cedar Policy Language (ATP runtime enforcement engine) |
+| **Cedarling** | Cedarling WASM — in-process Cedar evaluation runtime |
 | **OQ-L3-n** | Open Question, Layer 3 (n = question number, resolved in this specification) |
 | **OTA** | OpenTravel Alliance |
 | **PD-L2-n** | Prior Design Decision, Layer 2 (n = decision number) |

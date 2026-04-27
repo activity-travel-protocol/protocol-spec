@@ -47,7 +47,7 @@ CAAM defines the Post-Discovery Authorization Handshake — the runtime authoriz
 - *CAAM Sidecar* and the Activity Travel Protocol's *Security Kernel* occupy the same architectural location — between the agent and execution — enforcing policies the agent cannot override.
 - *Scope Attenuation* mirrors the Activity Travel Protocol's participation level model (Level 1 → Level 2 → Level 3).
 
-**What CAAM does not cover:** booking state machines, multi-party workflows, ODRL policy declarations, duty of care, disruption handling, jurisdiction compliance, or Capability Declarations. These are the Activity Travel Protocol's value-add above CAAM's infrastructure layer.
+**What CAAM does not cover:** booking state machines, multi-party workflows, Cedar policy enforcement, duty of care, disruption handling, jurisdiction compliance, or Capability Declarations. These are the Activity Travel Protocol's value-add above CAAM's infrastructure layer.
 
 **Actions required:**
 - Define formal mapping between the Activity Travel Protocol Trust Chain (OpenID Federation Subordinate Statements) and CAAM delegation tokens (`act`-claim JWT chains).
@@ -163,8 +163,8 @@ Already implemented via `iata_irops_category_code` in `SourceSignalRecord` (SAR-
 | **FAPI 2.0 Security Profile** | API-level security. Compatible with draft-klrc-aiagent-auth-00 patterns. |
 | **W3C VC Data Model 2.0** | Party credentials. ES256 signing confirmed (SAR-10 through SAR-21). |
 | **DID Methods** (did:web, did:ion, did:key) | did:web required minimum. Compatible with ARDP's domain-anchored identity model. |
-| **ODRL** | Canonical policy declaration. Confirmed differentiator vs. IETF OAuth-scope approach — human-readable, regulatory-legible. |
-| **OPA / Open Policy Agent** | Runtime policy evaluation. ODRL compiled to Rego at registration. |
+| **Cedar** | Runtime policy enforcement engine. Formally decidable. Evaluated in-process via Cedarling WASM at every Security Kernel transition. Replaces OPA/Rego as the ATP enforcement language. |
+| **ODRL** | External interoperability expression layer for IDSA Dataspace Protocol / DCAT 3 compatibility. Not the ATP runtime enforcement language. ATP Capability Declarations may be published as DCAT 3 Datasets with ODRL `hasPolicy` attributes. OQ-DSP-1. |
 | **BPMN 2.0 / XState v5** | Workflow specification and runtime. Activity Travel Protocol's Context Package and state machine are ahead of IETF framework drafts. |
 | **AsyncAPI 3.0** | Event streaming. Monitor MCP Tasks SEP for alignment opportunity. |
 | **OpenTelemetry** | Audit trail spans. Confirmed by Security Architecture v1. |
@@ -191,8 +191,9 @@ Already implemented via `iata_irops_category_code` in `SourceSignalRecord` (SAR-
 | FAPI 2.0 | Security | ADOPT | Closed. |
 | W3C VC Data Model 2.0 | Security | ADOPT | Closed. |
 | DID Methods | Security | ADOPT | Closed. |
-| ODRL | Security | ADOPT | Confirmed differentiator. |
-| OPA / Rego | Security | ADOPT | Closed. |
+| Cedar | Security | ADOPT | Replaces OPA/Rego as ATP runtime enforcement engine. Formally decidable. |
+| Cedarling WASM | Security | ADOPT | In-process Cedar evaluation runtime. No sidecar. |
+| ODRL | Security | ADOPT (external interoperability) | Repositioned as IDSA Dataspace Protocol / DCAT 3 expression layer. OQ-DSP-1. |
 | BPMN 2.0 / XState v5 | Workflow | ADOPT | Closed. |
 | AsyncAPI 3.0 | Integration | ADOPT | Monitor MCP Tasks SEP. |
 | OpenTelemetry | Observability | ADOPT | Closed. |
@@ -219,7 +220,7 @@ Already implemented via `iata_irops_category_code` in `SourceSignalRecord` (SAR-
 - **OQ-SL-2:** Where does the Activity Travel Protocol's equivalent of the CAAM Post-Discovery Authorization Handshake occur in the booking lifecycle? At Party registration? At INQUIRY receipt? At Context Package assembly?
 - **OQ-SL-3 — CLOSED:** A2A is now ADOPT (PD-L2-2). Layer 2 S10 will define A2A task schemas for Capability Declaration queries and Feasibility Check interactions as Layer 2 protocol artifacts (design rule L2-T-2-B). A separate serialisation question does not arise — the Activity Travel Protocol Capability Declaration is the canonical form; A2A Agent Card mapping is a bridge artifact defined in Layer 2 App. A.
 - **OQ-SL-4:** Should the Activity Travel Protocol seek observer participation in the OAI-Travel workgroup now, or wait until v1.0 spec is complete?
-- **OQ-SL-5:** Is there a case for the Activity Travel Protocol to produce OAuth scope representations of ODRL policies as a Bridge artefact, or does this over-engineer v1.0?
+- **OQ-SL-5:** With ODRL repositioned as the external interoperability expression layer (OQ-DSP-1), is there a case for the Activity Travel Protocol to produce ODRL representations of Cedar policy sets as a Bridge artefact for IDSA Dataspace Protocol consumers, or does this over-engineer v1.0?
 
 ---
 
