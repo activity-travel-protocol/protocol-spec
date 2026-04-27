@@ -98,9 +98,9 @@ The runtime subscribes to SSF events at Party registration time. Invalidation sc
 | RISC: Account Purged | All `agent_id`s under the `party_id` |
 | RISC: Account Enabled | All `agent_id`s under the `party_id` — proactive re-fetch for each |
 
-### 2.5 OPA Assembly Failure (FR-5.3)
+### 2.5 Policy Assembly Failure (FR-5.3)
 
-When OPA times out or fails for a blocking DT (DT-3, DT-4 `DISRUPTION_REVIEW`, DT-6), assembly fails. The Human Escalation Manager is invoked with `escalation_reason: ASSEMBLY_FAILURE`.
+When Cedar evaluation times out or fails for a blocking DT (DT-3, DT-4 `DISRUPTION_REVIEW`, DT-6), assembly fails. The Human Escalation Manager is invoked with `escalation_reason: ASSEMBLY_FAILURE`.
 
 - `protocol_deadline`: PT10M. This is a protocol maximum — Parties may declare a tighter value in their Party Policy Declaration. The runtime uses the tighter of the two values.
 
@@ -176,7 +176,7 @@ Frequency, confidence drift, and escalation pattern thresholds cannot be respons
 
 | Value | Source | Description |
 |---|---|---|
-| `ASSEMBLY_FAILURE` | FR-5.3 | OPA timeout or failure on blocking DT (DT-3, DT-4 `DISRUPTION_REVIEW`, DT-6). `protocol_deadline`: PT10M maximum. |
+| `ASSEMBLY_FAILURE` | FR-5.3 | Cedar evaluation timeout or failure on blocking DT (DT-3, DT-4 `DISRUPTION_REVIEW`, DT-6). `protocol_deadline`: PT10M maximum. |
 | `CONFIDENCE_UNDERRUN` | Step 5 / SAR-2 | Decision Object reasoning below per-action minimum. Interim until `REASONING_INSUFFICIENT` defined in Step 6. |
 | `CREDENTIAL_COMPROMISED_GATE` | NEW — SSF-Q2 | Decision Object received from `agent_id` with active RISC Credential Compromised event. Full execution gate. |
 | `SSF_REVOCATION_DURING_C1_WINDOW` | NEW — SSF-Q4 | C1 trigger SSF event received during PT15M autonomous incident declaration reversal window. |

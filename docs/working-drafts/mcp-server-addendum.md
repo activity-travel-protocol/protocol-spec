@@ -66,7 +66,7 @@ Section 3.4 (The Narrowing Property) in ATP_MCPServer_v1.docx.
 
 ATP_MCPServer_v1.docx specifies scope enforcement at the gate: mandate
 evaluation (Layer 2) rejects tool calls outside the Cedar policy; the
-Security Kernel (Layer 1) rejects state transitions that violate ODRL
+Security Kernel (Layer 1) rejects state transitions that violate Cedar policy
 policy; NeMo Guardrails Rail 3 intercepts out-of-scope tool calls at
 inference time before the MCP call is formed.
 
@@ -277,7 +277,7 @@ Windley Loop, is:
                                                      Rejection: 403.
 
   Layer 1          Security Kernel     On state      Non-bypassable. Rejection:
-                   (OPA/ODRL)          transition    403.
+                   (Cedar)          transition    403.
 
   Execution        Tool executes       —           ---
 

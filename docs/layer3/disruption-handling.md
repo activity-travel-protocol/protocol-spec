@@ -60,7 +60,7 @@ An agent holding DISRUPTION_RESPONSE scope may propose alternative arrangements 
 
 ### 8.2.5 DT-4 confidence floor
 
-A minimum confidence value applies to DT-4 declarations. The per-action minimum is defined in the Decision Object schema (DOR-7, Context Package Specification Step 6). A DT-4 Decision Object with confidence below the floor is rejected by the Kernel and REASONING_INSUFFICIENT or CONFIDENCE_UNDERRUN is returned as the escalation_reason, triggering HEM-11 (ASSEMBLY_FAILURE) if OPA evaluation also fails.
+A minimum confidence value applies to DT-4 declarations. The per-action minimum is defined in the Decision Object schema (DOR-7, Context Package Specification Step 6). A DT-4 Decision Object with confidence below the floor is rejected by the Kernel and REASONING_INSUFFICIENT or CONFIDENCE_UNDERRUN is returned as the escalation_reason, triggering HEM-11 (ASSEMBLY_FAILURE) if Cedar evaluation also fails.
 
 ---
 
@@ -133,9 +133,9 @@ Force majeure may only be declared by a Booking Party authorised representative.
 | Whole booking | The force majeure event makes the entire booking impossible. All Activity Components are affected. | BOOKING_SUSPENDED (C-BS-3) | Path A (cancellation) or Path B (suspension lifted when force majeure event resolves) per Section 5.5. |
 | Partial | One or more Activity Components are affected but the booking may continue in modified form. | DISRUPTION_REVIEW | Disruption resolution path per Section 3.5. Affected components may be cancelled or substituted with human confirmation. |
 
-### 8.4.4 Force majeure and OPA policy evaluation
+### 8.4.4 Force majeure and Cedar policy evaluation
 
-ODRL-encoded cancellation policies are evaluated by OPA before any financial consequences are applied. Force majeure declarations are submitted to the OPA policy engine with force_majeure: true in the evaluation context. Jurisdiction-specific force majeure rules (e.g. Japan's consumer protection provisions for natural disasters) are evaluated at the jurisdiction tier. Party Operational policies declaring force majeure terms are evaluated at the party tier.
+Cedar-encoded cancellation policies are evaluated by Cedarling WASM before any financial consequences are applied. Force majeure declarations are submitted to the Cedar policy engine with `force_majeure: true` in the evaluation context. Jurisdiction-specific force majeure rules (e.g. Japan's consumer protection provisions for natural disasters) are evaluated at the jurisdiction tier. Party Operational policies declaring force majeure terms are evaluated at the party tier.
 
 The protocol does not determine whether force majeure is legally valid — it evaluates the declared policies. Legal determination is the responsibility of the parties and their jurisdiction.
 

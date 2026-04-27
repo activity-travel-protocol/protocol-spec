@@ -37,7 +37,7 @@ before routing. Rejection: 403 Forbidden.
 
 **Layer 1 — Security Kernel (human ceiling)**
 
-The non-bypassable OPA/ODRL policy engine executing on every Booking
+The non-bypassable Cedar policy engine executing on every Booking
 Object state transition. Cannot be overridden by any mandate. Rejection:
 403 Forbidden.
 

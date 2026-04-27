@@ -166,16 +166,16 @@ Each entry below is a normative specification of one HEM invocation point. Entri
 
 ### 6.3.3 Priority P3 — Operational
 
-#### HEM-11 — OPA assembly failure — blocking DT
+#### HEM-11 — Policy assembly failure — blocking DT
 
 | Field | Value |
 |---|---|
-| **Trigger state** | OPA policy evaluation fails during ASSEMBLY POINT. Decision Object confidence below floor (CONFIDENCE_UNDERRUN) or reasoning below minimum length (REASONING_INSUFFICIENT). |
+| **Trigger state** | Cedar policy evaluation fails during ASSEMBLY POINT. Decision Object confidence below floor (CONFIDENCE_UNDERRUN) or reasoning below minimum length (REASONING_INSUFFICIENT). |
 | **escalation_reason** | `ASSEMBLY_FAILURE` \| `CONFIDENCE_UNDERRUN` \| `REASONING_INSUFFICIENT` |
 | **protocol_deadline** | PT10M (also the protocol maximum for this invocation — not configurable looser). Operator may configure tighter. |
 | **human_confirmation_token** | Required if blocking a DT-2, DT-3, or DT-4 action. |
 | **Secondary path** | Booking operation blocked until resolved. If PT10M elapsed: operation cancelled, human decision required to retry. |
-| **Notes** | The PT10M value is both the default and the protocol maximum for HEM-11. No Party may configure a looser deadline for OPA assembly failures. |
+| **Notes** | The PT10M value is both the default and the protocol maximum for HEM-11. No Party may configure a looser deadline for policy assembly failures. |
 
 #### HEM-12 — SSF revocation during C1 window
 

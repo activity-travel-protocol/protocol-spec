@@ -116,7 +116,7 @@ traveller-facing agent.
   enforcement                                          
 
   Booking Object   Security Kernel       State machine Every state transition
-  access control   (OPA/ODRL)                          
+  access control   (Cedar)                          
 
 ### 6.2 OAuth 2.1 — Grant Type and Flow
 

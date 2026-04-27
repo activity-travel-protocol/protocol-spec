@@ -26,7 +26,7 @@ An ASSEMBLY POINT is a mandatory Kernel operation that precedes every AI agent i
 At an ASSEMBLY POINT, the Security Kernel:
 
 - **Authenticates** the requesting Party and validates their authority to invoke an agent for this operation.
-- **Assembles the Context Package** — collecting current Booking Object state, applicable policy set (ODRL), feasibility constraints, decision history, and TravelerContext — from authoritative sources.
+- **Assembles the Context Package** — collecting current Booking Object state, applicable Cedar residual policy set (produced by Windley Loop pre-evaluation), feasibility constraints, decision history, and TravelerContext — from authoritative sources.
 - **Applies the CUSTOMER_INPUT sanitisation pipeline** to all fields carrying x-data-classification: CUSTOMER_INPUT (strip HTML, normalise Unicode, enforce maxLength, detect prompt injection patterns). Sanitisation is non-bypassable.
 - **Applies TRAVELER_PII access rules** — assembles only the TravelerContext fields permitted by the Party's registered identity_tier_permissions at the declared identity_tier. No T2/T3 fields are included for an agent operating at a scope that does not require them.
 - **Applies location_disclosure_blocked** — if TU-6 is active, any assembly that would expose traveler location, accommodation, or itinerary fields is blocked regardless of authority scope.
@@ -39,7 +39,7 @@ The atp-ai package's AI provider call interface accepts a ContextPackage object 
 
 > **T-2-C:** Layer 4 SDK: atp-ai invocation interface accepts ContextPackage, not raw field values. Passing raw strings is a TypeScript compile-time type error.
 
-> **DR-v5 RULE 3 — OPA policy boundary (normative):** AI agents receive evaluated policy results in their Context Package — never raw ODRL policy declarations for the agent to interpret. OPA evaluation occurs before Context Package assembly: the Security Kernel compiles Party ODRL declarations to Rego at registration time and evaluates the compiled policy set at the ASSEMBLY POINT. The evaluated policy outcomes (permitted actions, constraints, overrides) are included in the assembled Context Package as structured fields. No raw ODRL is passed to any agent at any participation level. This boundary is non-bypassable.
+> **DR-v5 RULE 3 — Cedar policy boundary (normative):** AI agents receive evaluated policy results in their Context Package — never raw Cedar policy sets for the agent to interpret. Cedar evaluation occurs before Context Package assembly: the Security Kernel evaluates the Cedar policy set for the current Booking Object state and agent mandate via Cedarling WASM at the ASSEMBLY POINT. The evaluated policy outcomes (permitted actions, constraints, overrides) are included in the assembled Context Package as structured fields. No raw Cedar policy text is passed to any agent at any participation level. This boundary is non-bypassable.
 
 ## 9.2 Context Package contents by phase
 
@@ -47,9 +47,9 @@ The Context Package schema is defined in full in the Context Package Specificati
 
 | Phase | Key Context Package fields active | Authority scope ceiling | Primary DTs permitted |
 |---|---|---|---|
-| INQUIRY | Booking Object (incomplete), Capability Declaration references, applicable ODRL policy set, TravelerContext (T1 minimum), feasibility constraints | CONFIGURATION_SUGGESTION | DT-1, DT-2 |
-| PENDING_CONFIRMATION | Booking Object (submitted), supplier ConfirmationRequest status, applicable ODRL policy set, TravelerContext | INFORMATION_PROVISION only | DT-1 |
-| CONFIRMED (pre-journey) | Full Booking Object, all confirmed Activity Components, applicable ODRL policy set, TravelerContext, PrecedentRecord (prior bookings) | CONFIGURATION_SUGGESTION | DT-1, DT-2 |
+| INQUIRY | Booking Object (incomplete), Capability Declaration references, applicable Cedar residual policy set, TravelerContext (T1 minimum), feasibility constraints | CONFIGURATION_SUGGESTION | DT-1, DT-2 |
+| PENDING_CONFIRMATION | Booking Object (submitted), supplier ConfirmationRequest status, applicable Cedar residual policy set, TravelerContext | INFORMATION_PROVISION only | DT-1 |
+| CONFIRMED (pre-journey) | Full Booking Object, all confirmed Activity Components, applicable Cedar residual policy set, TravelerContext, PrecedentRecord (prior bookings) | CONFIGURATION_SUGGESTION | DT-1, DT-2 |
 | PRE_DEPARTURE | Full Booking Object, pre-departure checklist, travel advisories, wellness declarations (W1/W4), jurisdiction contacts | CONFIGURATION_SUGGESTION | DT-1, DT-2 |
 | OUTBOUND_TRANSIT | Active transit leg details, Carrier Party context, IROPS feed reference, TravelerContext, alt_contact_ref | DISRUPTION_RESPONSE (if declared) | DT-1, DT-4 |
 | ARRIVAL | Host Party context, TRAVELER_RECEIVED status, check-in component, accessibility requirements (W4) | CONFIGURATION_SUGGESTION | DT-1, DT-2, DT-4 |
@@ -106,7 +106,7 @@ An agent's authority scope is declared in its AgentAuthorityDeclaration (Context
 | DISRUPTION_RESPONSE | DT-1, DT-2, and DT-4 actions: autonomous incident declaration, alternative arrangement proposals | Operations agent during active travel phases | DT-4 declaration: no (within C1 window). DT-2 proposals: yes. |
 | CORPORATE_ACCOUNT | DT-1 and DT-2 actions on behalf of TravelerGroup where decision_authority = CORPORATE_ACCOUNT | Corporate travel manager agent | Yes for booking changes. Group decisions surfaced to corporate account holder. |
 | BUSINESS_GROUP_LEAD | DT-1 and DT-2 actions for all members of a TravelerGroup with CORPORATE_ACCOUNT decision_authority | Senior corporate account agent with group-wide authority | Yes for booking changes affecting multiple travelers. |
-| NEGOTIATION | DT-1 and DT-3 actions: multi-party negotiation initiation | Multi-party negotiation agent in bookings with two or more Fulfilling Parties | Yes — gate on all affected Party confirmations and OPA evaluation before execution. |
+| NEGOTIATION | DT-1 and DT-3 actions: multi-party negotiation initiation | Multi-party negotiation agent in bookings with two or more Fulfilling Parties | Yes — gate on all affected Party confirmations and Cedar evaluation before execution. |
 | AGENT_COORDINATE | DT-1, DT-2, plus coordination actions (DUTY_OF_CARE_TRANSFER_INITIATED, DUTY_OF_CARE_ACCEPTED, COORDINATION_DELEGATION_REQUESTED, PENDING_SYNCHRONISATION release trigger) | AI agent acting for a Fulfilling Party in multi-party booking coordination | DoC transfer actions require confirmation. Coordination delegation requests do not. |
 | AGENT_ESCALATE | DT-1, plus HEM_INVOCATION_REQUESTED during DoC gap period | Emergency escalation authority during a Duty of Care gap period | No — emergency escalation is agent-autonomous within this scope. |
 
@@ -119,9 +119,9 @@ While BOOKING_SUSPENDED is active, all agent invocations are rejected by the Sec
 - No Decision Object is accepted.
 - Any in-flight Decision Object received after the BOOKING_SUSPENDED_ENTERED event timestamp is rejected.
 
-On exit from BOOKING_SUSPENDED via Path B or Path C (Section 5.5), the Kernel re-assembles the Context Package (T-4-C) and re-evaluates OPA policy before any agent action resumes. Agents do not resume automatically — the first post-suspension invocation goes through a fresh ASSEMBLY POINT.
+On exit from BOOKING_SUSPENDED via Path B or Path C (Section 5.5), the Kernel re-assembles the Context Package (T-4-C) and re-evaluates Cedar policy before any agent action resumes. Agents do not resume automatically — the first post-suspension invocation goes through a fresh ASSEMBLY POINT.
 
-> **Design rule T-4-C:** Exit from BOOKING_SUSPENDED requires Kernel re-assembly of the Context Package and OPA re-evaluation before any autonomous agent action resumes.
+> **Design rule T-4-C:** Exit from BOOKING_SUSPENDED requires Kernel re-assembly of the Context Package and Cedar re-evaluation before any autonomous agent action resumes.
 
 ## 9.6 Stale Context Package handling
 
