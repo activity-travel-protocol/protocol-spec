@@ -15,7 +15,7 @@ All Layer 3 BPMN diagrams use exactly four swimlanes. The swimlane boundaries ar
 
 | Swimlane | Label | Permitted node types | Prohibited node types |
 |---|---|---|---|
-| **KERNEL** | `KERNEL` | ASSEMBLY POINT nodes, Security Kernel operations (authentication, authorisation, OPA evaluation, Trust Chain validation, AI agent scope validation), duty-of-care transfer records, HEM dispatch gates, event log write operations, Kernel Scheduler timeout triggers, named protocol event recordings. | AI agent invocation nodes, Booking Party decision nodes, Supplier action nodes. |
+| **KERNEL** | `KERNEL` | ASSEMBLY POINT nodes, Security Kernel operations (authentication, authorisation, Cedar evaluation, Trust Chain validation, AI agent scope validation), duty-of-care transfer records, HEM dispatch gates, event log write operations, Kernel Scheduler timeout triggers, named protocol event recordings. | AI agent invocation nodes, Booking Party decision nodes, Supplier action nodes. |
 | **BOOKING PARTY** | `BOOKING PARTY` | Booking Party decisions and actions: confirmation requests, amendment proposals, cancellation requests, duty-of-care actions within Booking Party authority scope, human confirmation nodes. | Kernel operations, Supplier actions, AI agent invocations. |
 | **SUPPLIER** | `SUPPLIER` | Supplier operations: confirmation events, fulfillment acknowledgements, disruption declarations within supplier authority scope, TRAVELER_RECEIVED recordings, ACTIVITY_STARTED and ACTIVITY_COMPLETED events. In multi-supplier diagrams, this swimlane may be subdivided by supplier role (HOST PARTY, CARRIER PARTY, FULFILLING PARTY) using a nested swimlane structure. | Kernel operations, Booking Party decisions, AI agent invocations. |
 | **AI AGENT** | `AI AGENT` | AI agent participation nodes: invocation following ASSEMBLY POINT, Decision Object submission, human_escalation_requested flag dispatch. In multi-agent diagrams, subdivide by agent role (BOOKING AGENT, OPERATIONS AGENT, etc.). | Kernel operations, Booking Party decisions, Supplier actions. Agents operate only in this swimlane, never in KERNEL. |
@@ -159,7 +159,7 @@ BOOKING_SUSPENDED EXIT
 path: [Path A | Path B | Path C]
 authority required: [description]
 CP re-assembly: [required for Path B and C]
-OPA re-evaluation: [required for Path B and C]
+Cedar re-evaluation: [required for Path B and C]
 ```
 
 ## C.6 XState v5 mapping
@@ -230,7 +230,7 @@ bookingMachine: {
             PATH_B_CONFIRMED: 'NOT_SUSPENDED',
             PATH_C_CONFIRMED: 'NOT_SUSPENDED'
           },
-          exit: ['reassembleContextPackage', 'reEvaluateOPA']
+          exit: ['reassembleContextPackage', 'reEvaluateCedar']
         }
       }
     }

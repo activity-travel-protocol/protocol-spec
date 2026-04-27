@@ -100,7 +100,7 @@ BPMN diagrams use four swimlanes throughout this specification:
 
 | Swimlane | Contents |
 |---|---|
-| KERNEL | Non-bypassable Security Kernel operations: authenticate, authorise, OPA policy evaluation, Trust Chain validation, AI agent scope validation, ASSEMBLY POINT nodes, HEM dispatch gates, duty-of-care transfer notifications. |
+| KERNEL | Non-bypassable Security Kernel operations: authenticate, authorise, Cedar policy evaluation, Trust Chain validation, AI agent scope validation, ASSEMBLY POINT nodes, HEM dispatch gates, duty-of-care transfer notifications. |
 | BOOKING PARTY | Booking Party operations: confirmation requests, amendment proposals, cancellation requests, duty-of-care actions within booking Party authority scope. |
 | SUPPLIER | Supplier operations: confirmation, fulfillment acknowledgement, disruption declarations within supplier authority scope. |
 | AI AGENT | AI agent participation: invocation following ASSEMBLY POINT, Decision Object submission, escalation requests. Agents operate only in this swimlane, never in KERNEL. |
@@ -115,7 +115,7 @@ The Security Kernel runs non-bypassably on every state transition before any bus
 
 - **Authenticate** — Party identity verified against the Party Registry; credential currency validated.
 - **Authorise** — Party role verified as permitted for the requested operation in the current state.
-- **Policy evaluation** — applicable ODRL policy set evaluated through OPA across all four policy tiers: Protocol, Jurisdiction, Party Operational, Party Preference.
+- **Policy evaluation** — applicable ODRL policy set evaluated via Cedar across all four policy tiers: Protocol, Jurisdiction, Party Operational, Party Preference.
 - **Trust Chain validation** — full Trust Chain from requesting Party to protocol root verified.
 - **AI agent scope validation** — if the request originates from an AI agent, authority scope validated against the operation requested. Out-of-scope requests trigger the Human Escalation Manager, not an error.
 

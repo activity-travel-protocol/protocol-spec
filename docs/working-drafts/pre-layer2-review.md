@@ -1,4 +1,4 @@
-# Pre-Layer 2 Consistency Review
+﻿# Pre-Layer 2 Consistency Review
 
 **Activity Travel Protocol**
 Version 1.0 — March 2026
@@ -154,13 +154,13 @@ The tension is whether a Pre-Arrangement Declaration, established in Layer 2, ca
 
 **Resolution**
 
-Pre-Arrangement Declarations do not override Layer 3 Security Kernel authority gates. They are inputs to OPA policy evaluation, not bypasses of it. The Security Kernel evaluates all four policy tiers in order (Protocol, Jurisdiction, Party Operational, Party Preference) for every state transition. A Pre-Arrangement Declaration is a Party Operational policy artifact registered at Layer 1 Party registration time.
+Pre-Arrangement Declarations do not override Layer 3 Security Kernel authority gates. They are inputs to Cedar policy evaluation, not bypasses of it. The Security Kernel evaluates all four policy tiers in order (Protocol, Jurisdiction, Party Operational, Party Preference) for every state transition. A Pre-Arrangement Declaration is a Party Operational policy artifact registered at Layer 1 Party registration time.
 
-Concretely: a Pre-Arrangement Declaration may grant a Booking Party pre-authorisation to trigger certain state transitions without requiring real-time supplier confirmation. But this pre-authorisation is expressed as a Party Policy Declaration — it goes through the Security Kernel's OPA evaluation, it is recorded in the event log, and it is subject to Jurisdiction and Protocol-tier policy override. It is not a bypass; it is a standing authorisation that the Security Kernel evaluates normally.
+Concretely: a Pre-Arrangement Declaration may grant a Booking Party pre-authorisation to trigger certain state transitions without requiring real-time supplier confirmation. But this pre-authorisation is expressed as a Party Policy Declaration — it goes through the Security Kernel's Cedar evaluation, it is recorded in the event log, and it is subject to Jurisdiction and Protocol-tier policy override. It is not a bypass; it is a standing authorisation that the Security Kernel evaluates normally.
 
-> **L2-T-4-A:** Pre-Arrangement Declarations are Layer 2 artifacts that are expressed as Party Policy Declarations in the Layer 1 Party Registry. They take effect through the Layer 3 Security Kernel's OPA evaluation at the Party Operational policy tier.
+> **L2-T-4-A:** Pre-Arrangement Declarations are Layer 2 artifacts that are expressed as Party Policy Declarations in the Layer 1 Party Registry. They take effect through the Layer 3 Security Kernel's Cedar evaluation at the Party Operational policy tier.
 >
-> **L2-T-4-B:** Pre-Arrangement Declarations MUST NOT be construed as bypasses of the Security Kernel. Every state transition that relies on a Pre-Arrangement Declaration still goes through the full Security Kernel execution order: authenticate, authorise, OPA evaluation (including Pre-Arrangement), Trust Chain validation, AI agent scope validation.
+> **L2-T-4-B:** Pre-Arrangement Declarations MUST NOT be construed as bypasses of the Security Kernel. Every state transition that relies on a Pre-Arrangement Declaration still goes through the full Security Kernel execution order: authenticate, authorise, Cedar evaluation (including Pre-Arrangement), Trust Chain validation, AI agent scope validation.
 >
 > **L2-T-4-C:** Layer 2 MUST define the schema for Pre-Arrangement Declarations, including the state transitions they may pre-authorise, the conditions under which they expire, and the jurisdiction constraints that limit their applicability.
 >
@@ -207,7 +207,7 @@ All 18 normative design rules produced by this review are listed below for refer
 | **L2-T-3-B** | T-L2-3 | Suppliers publish DECLARATION_SUPERSEDED on material change, referencing superseded and replacement version identifiers. |
 | **L2-T-3-C** | T-L2-3 | Feasibility Check validates declaration currency; FEASIBILITY_FAILED with reason DECLARATION_STALE on expired or superseded declarations. |
 | **L2-T-3-D** | T-L2-3 | Layer 2 defines 'material change' for DECLARATION_SUPERSEDED purposes. |
-| **L2-T-4-A** | T-L2-4 | Pre-Arrangement Declarations are Party Operational policy artifacts; take effect through Security Kernel OPA evaluation. |
+| **L2-T-4-A** | T-L2-4 | Pre-Arrangement Declarations are Party Operational policy artifacts; take effect through Security Kernel Cedar evaluation. |
 | **L2-T-4-B** | T-L2-4 | Pre-Arrangement Declarations are not Security Kernel bypasses; full execution order applies. |
 | **L2-T-4-C** | T-L2-4 | Layer 2 defines Pre-Arrangement Declaration schema including pre-authorised transitions, expiry, and jurisdiction constraints. |
 | **L2-T-4-D** | T-L2-4 | Pre-Arrangement Declarations must be registered before booking begins; runtime assertion is invalid. |

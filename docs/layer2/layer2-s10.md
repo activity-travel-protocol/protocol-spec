@@ -1,4 +1,4 @@
-# S10 AI Agent Participation
+﻿# S10 AI Agent Participation
 
 **Activity Travel Protocol — Layer 2 Capability and Discovery Specification**
 **Section 10: AI Agent Participation**
@@ -154,7 +154,7 @@ The protocol does not mandate that the same agent instance participates in both 
 
 ### 10.6.3 Security Kernel Continuity
 
-Pre-Arrangement Declarations established in Layer 2 (S6) that confer agent authority for specific Layer 3 transitions are evaluated by the Security Kernel as Party Operational policy — they are not Layer 2 artifacts that bypass the Security Kernel. The same OPA evaluation model applies (§6.2). Layer 2 agent authority scopes (L2-AS-1 through L2-AS-4) are not evaluated by the Layer 3 Security Kernel; they govern only the pre-Booking Object phase.
+Pre-Arrangement Declarations established in Layer 2 (S6) that confer agent authority for specific Layer 3 transitions are evaluated by the Security Kernel as Party Operational policy — they are not Layer 2 artifacts that bypass the Security Kernel. The same Cedar evaluation model applies (§6.2). Layer 2 agent authority scopes (L2-AS-1 through L2-AS-4) are not evaluated by the Layer 3 Security Kernel; they govern only the pre-Booking Object phase.
 
 ---
 

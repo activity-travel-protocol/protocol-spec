@@ -1,4 +1,4 @@
-# 4. Activity Configuration Schema
+﻿# 4. Activity Configuration Schema
 
 **Activity Travel Protocol — Layer 2 — Discovery and Capability Specification**
 
@@ -187,7 +187,7 @@ This list is not exhaustive. The general principle is that `configuration_parame
 | L2-T-1-C | Section 4.0.2 establishes that a Feasibility Check may not be initiated until Activity Configuration is complete — enforcing the pipeline sequencing dependency. |
 | Layer 3 T-2-B (noted for implementer awareness) | Section 4.1.2 specifies that `configuration_notes` are classified as `CUSTOMER_INPUT`. When this field is passed through the Layer 3 ASSEMBLY POINT, Layer 3 design rule T-2-B applies — no direct path from raw `configuration_notes` content to an AI agent invocation is permitted. Sanitisation is enforced at the ASSEMBLY POINT, not at Activity Configuration time. |
 | L2-T-3-C | Sections 4.1.1 and 4.3.1 require `capability_declaration_version_id` to be carried through from configuration input to Activity Component output, enabling the Feasibility Check operation to validate declaration currency per L2-T-3-C. |
-| L2-T-4-A | Section 4.2.1 specifies that `NEGOTIATED` pricing requires a `pre_arrangement_declaration_id` reference — Pre-Arrangement Declarations take effect through the Layer 3 Security Kernel OPA evaluation, consistent with L2-T-4-A. |
+| L2-T-4-A | Section 4.2.1 specifies that `NEGOTIATED` pricing requires a `pre_arrangement_declaration_id` reference — Pre-Arrangement Declarations take effect through the Layer 3 Security Kernel Cedar evaluation, consistent with L2-T-4-A. |
 
 ---
 

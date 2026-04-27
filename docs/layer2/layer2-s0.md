@@ -1,4 +1,4 @@
----
+﻿---
 title: Layer 2 — Discovery and Capability Specification
 description: The Activity Travel Protocol Layer 2 Discovery and Capability Specification defines how parties advertise what they offer, how agents discover suppliers, how feasibility is confirmed before a booking begins, and how the Capability Catalogue operates at runtime.
 ---
@@ -145,7 +145,7 @@ Data provider driver registration. Schema validation at registration time. OS Fu
 
 ### [Section 6  — Pre-Arrangement Declarations](./layer2-s6)
 
-Schema for Pre-Arrangement Declarations. State transitions that a Pre-Arrangement Declaration may pre-authorise. Expiry conditions. Jurisdiction constraints on applicability. Registration requirement  — Pre-Arrangement Declarations must be registered in the Party Registry before the booking begins; runtime assertion is invalid and must be rejected by the Security Kernel. Interaction with the Layer 3 Security Kernel OPA evaluation at the Party Operational policy tier. Design rules L2-T-4-A through L2-T-4-D.
+Schema for Pre-Arrangement Declarations. State transitions that a Pre-Arrangement Declaration may pre-authorise. Expiry conditions. Jurisdiction constraints on applicability. Registration requirement  — Pre-Arrangement Declarations must be registered in the Party Registry before the booking begins; runtime assertion is invalid and must be rejected by the Security Kernel. Interaction with the Layer 3 Security Kernel Cedar evaluation at the Party Operational policy tier. Design rules L2-T-4-A through L2-T-4-D.
 
 ### [Section 7  — Feasibility Check Operation](./layer2-s7)
 

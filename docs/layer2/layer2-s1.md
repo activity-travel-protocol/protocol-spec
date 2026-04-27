@@ -1,4 +1,4 @@
-# 1. Purpose and Scope
+﻿# 1. Purpose and Scope
 
 **Activity Travel Protocol — Layer 2 — Discovery and Capability Specification**
 
@@ -59,7 +59,7 @@ Layer 2 is built on, and must be read alongside, the following documents:
 | Party Registry Specification v0.2 | Defines the Party registration model. Capability Declarations and Pre-Arrangement Declarations are registered as Party artifacts in the Party Registry. Layer 2 extends, but does not redefine, the Party Registry. |
 | Party Policy Declarations Spec v0.2 | Defines the PartyPolicyDeclaration structure. Pre-Arrangement Declarations are a category of Party Policy Declaration; their schema and enforcement rules are defined in this specification (Section 6) and enforced by the Layer 3 Security Kernel. |
 | Trust Chain Declaration Spec v0.1 | Defines the Trust Unit model used in Delegation Topology feasibility confirmation. Multi-party Coordination Delegation topology validation in the Feasibility Check operation (Section 7) uses Trust Chain constructs defined here. |
-| Layer 3 Workflow Specification | Layer 3 INQUIRY state logic requires that FEASIBILITY_CLEARED has been issued per Activity Component before INQUIRY may exit — the OQ-L3-1 resolution recorded in Layer 3 S1 Section 1.7 and enforced in Layer 3 S3. The Feasibility Window defined in this specification (Section 7) is referenced as an external parameter by Layer 3 S11. Pre-Arrangement Declarations registered under this specification take effect through the Layer 3 Security Kernel OPA evaluation at the Party Operational policy tier. |
+| Layer 3 Workflow Specification | Layer 3 INQUIRY state logic requires that FEASIBILITY_CLEARED has been issued per Activity Component before INQUIRY may exit — the OQ-L3-1 resolution recorded in Layer 3 S1 Section 1.7 and enforced in Layer 3 S3. The Feasibility Window defined in this specification (Section 7) is referenced as an external parameter by Layer 3 S11. Pre-Arrangement Declarations registered under this specification take effect through the Layer 3 Security Kernel Cedar evaluation at the Party Operational policy tier. |
 | Pre-Layer 2 Consistency Review v1.0 | Resolves tensions T-L2-1 through T-L2-5 and produces 18 design rules (L2-T-1-A through L2-T-5-C) that this specification is required to follow. Prior decisions PD-L2-1 and PD-L2-2 are inputs to this specification. Open questions OQ-L3-1, OQ-L3-3, and OQ-L3-5 are resolved within this specification. |
 | Jurisdiction Compliance Specification v0.2 | Defines jurisdiction compliance obligations that constrain party operations. Pre-Arrangement Declarations defined in this specification must incorporate jurisdiction constraint fields per design rule L2-T-4-C. Jurisdiction policy is evaluated by the Layer 3 Security Kernel at the Jurisdiction policy tier on every state transition that a Pre-Arrangement Declaration touches. |
 | Standards Positions and Interoperability Map v1.1 | Defines the Activity Travel Protocol's ADOPT positions on MCP and A2A, the normative MCP/A2A boundary at Booking Object creation, and the BRIDGE positions on OpenTravel Alliance and IATA NDC that govern Layer 2 Appendix A content. |
@@ -90,7 +90,7 @@ The five components defined in this specification are not independent. They form
 
 **Activity Configuration Schema** defines how a generic declared offering is parameterised into a fully-specified Activity Component. The output of Activity Configuration is a concrete booking item ready for Layer 3 INQUIRY: specific dates, participants, configuration options, and price.
 
-**Pre-Arrangement Declarations** are pre-negotiated terms — standing authorisations, agreed pricing frameworks, or pre-confirmed delegation arrangements — registered in the Party Registry as Party Policy Declarations before any booking begins. They take effect during Layer 3 execution through the Security Kernel's OPA evaluation.
+**Pre-Arrangement Declarations** are pre-negotiated terms — standing authorisations, agreed pricing frameworks, or pre-confirmed delegation arrangements — registered in the Party Registry as Party Policy Declarations before any booking begins. They take effect during Layer 3 execution through the Security Kernel's Cedar evaluation.
 
 **The Feasibility Check operation** is the final Layer 2 step before Booking Object creation. It confirms, per Activity Component, that the configured offering is available and the declared capability is current. Suppliers push FEASIBILITY_CLEARED (or FEASIBILITY_FAILED) as events. When all required components have cleared, the booking agent may create the Booking Object and enter Layer 3.
 

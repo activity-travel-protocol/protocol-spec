@@ -142,7 +142,7 @@ BOOKING_SUSPENDED is confirmed as a cross-cutting state modifier. For phases IN_
 
 - **T-4-A:** BOOKING_SUSPENDED is modelled as a parallel state in the XState machine, not a phase-level state.
 - **T-4-B:** For each of the 8 journey phases, Layer 3 must define: (i) BOOKING_SUSPENDED entry action set, (ii) Duty of Care obligation level, (iii) mandatory or recommended HEM invocation, (iv) exit paths.
-- **T-4-C:** BOOKING_SUSPENDED exit requires Kernel re-assembly of the Context Package and OPA re-evaluation before autonomous agent actions resume.
+- **T-4-C:** BOOKING_SUSPENDED exit requires Kernel re-assembly of the Context Package and Cedar re-evaluation before autonomous agent actions resume.
 - **T-4-D:** Audit trail must record: `suspension_entered_at`, `suspension_reason`, `current_phase`, `duty_of_care_holder`, and resolution timestamp.
 
 ---
@@ -210,7 +210,7 @@ All five tension points are resolved. All pre-conditions for Layer 3 authoring a
 | T-3-C | No state machine logic may depend on Capability Catalogue content. | T-3 |
 | T-4-A | BOOKING_SUSPENDED is a parallel state (XState), not a phase-level state. | T-4 |
 | T-4-B | Per-phase BOOKING_SUSPENDED behaviour specified for all 8 phases. | T-4 |
-| T-4-C | BOOKING_SUSPENDED exit requires Kernel re-assembly and OPA re-evaluation. | T-4 |
+| T-4-C | BOOKING_SUSPENDED exit requires Kernel re-assembly and Cedar re-evaluation. | T-4 |
 | T-4-D | Audit trail records: suspension timestamps, phase, DoC holder, resolution. | T-4 |
 | T-5-A | HEM dispatch nodes in the Kernel swimlane of BPMN diagrams. | T-5 |
 | T-5-B | Per HEM invocation: specify escalation_reason, token requirement, secondary path. | T-5 |

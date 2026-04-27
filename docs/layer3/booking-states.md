@@ -138,7 +138,7 @@ AI agent participation is permitted in CONFIRMED at Level 1 (INFORMATION_PROVISI
 |---|---|---|---|
 | Journey begins | IN_JOURNEY | Booking Party or authorised agent records JOURNEY_STARTED. Phase set to PRE_DEPARTURE. | Kernel records JOURNEY_STARTED event. Phase field set to PRE_DEPARTURE. All Activity Components confirmed as PENDING. Pre-departure checklist assembled. |
 | Amendment requested | AMENDMENT | Booking Party or authorised agent (DT-2, human-confirmed) submits amendment affecting one or more confirmed components. | Kernel records AMENDMENT_REQUESTED event. Booking Object enters AMENDMENT retaining CONFIRMED context. Suppliers of affected components notified. |
-| Cancellation | BOOKING_CANCELLED | Booking Party initiates cancellation. OPA evaluates applicable cancellation policy before transition executes. | Kernel records BOOKING_CANCELLED event with cancellation_reason: BOOKING_PARTY_CANCELLATION. Cancellation policy terms applied. Supplier cancellation notifications dispatched. |
+| Cancellation | BOOKING_CANCELLED | Booking Party initiates cancellation. Cedar evaluates applicable cancellation policy before transition executes. | Kernel records BOOKING_CANCELLED event with cancellation_reason: BOOKING_PARTY_CANCELLATION. Cancellation policy terms applied. Supplier cancellation notifications dispatched. |
 | Disruption declared | DISRUPTION_REVIEW | Booking Party or authorised agent (DT-4) disruption declaration. source_signal_reference must resolve to an event log entry (DOR-5). C1 reversal window (PT15M) opened on confirmed declaration. | Kernel records DISRUPTION_DECLARED event. Phase context preserved as PRE_DEPARTURE. Reversible downstream actions held during C1 window. |
 | BOOKING_SUSPENDED entry | BOOKING_SUSPENDED (modifier) | One of the three BOOKING_SUSPENDED entry conditions met (C-BS-1, C-BS-2, or C-BS-3). Human confirmation required before Kernel applies modifier. | Kernel records BOOKING_SUSPENDED_ENTERED event. Phase preserved (pre-departure context). HEM invoked where applicable. All audit fields recorded per S5.6. |
 
@@ -230,7 +230,7 @@ Entered from CONFIRMED when the Booking Party or authorised agent records JOURNE
 | Amendment requested | AMENDMENT | Booking Party or authorised agent (DT-2, human-confirmed) submits amendment affecting one or more components. | Kernel records AMENDMENT_REQUESTED event. Booking Object enters AMENDMENT retaining IN_JOURNEY phase context. |
 | Party unresponsive | PARTY_UNRESPONSIVE | Timeout fires for a party with an active obligation during the current phase. | Kernel records PARTY_UNRESPONSIVE_ENTERED event. Phase context preserved. HEM invoked per phase-specific rules. |
 | BOOKING_SUSPENDED entry | BOOKING_SUSPENDED (modifier) | One of the three BOOKING_SUSPENDED entry conditions met (C-BS-1, C-BS-2, or C-BS-3). Human confirmation required. | Kernel records BOOKING_SUSPENDED_ENTERED event. Current journey phase preserved. Per-phase entry action set executed (S5.4). All audit fields recorded per S5.6. |
-| Cancellation | BOOKING_CANCELLED | Booking Party initiates cancellation during the journey. OPA evaluates cancellation policy. | Kernel records BOOKING_CANCELLED event with cancellation_reason: BOOKING_PARTY_CANCELLATION. Supplier notifications dispatched. |
+| Cancellation | BOOKING_CANCELLED | Booking Party initiates cancellation during the journey. Cedar evaluates cancellation policy. | Kernel records BOOKING_CANCELLED event with cancellation_reason: BOOKING_PARTY_CANCELLATION. Supplier notifications dispatched. |
 
 ---
 
@@ -278,7 +278,7 @@ Valid cancellation_reason values:
 - `DISRUPTION_UNRESOLVABLE`
 - `PARTY_UNRESPONSIVE_UNRESOLVED`
 
-Cancellation policy terms are applied via OPA evaluation before the transition executes (except INQUIRY_ABANDONED and INQUIRY_TIMEOUT, which carry no contractual obligation). Supplier cancellation notifications are dispatched. TRAVELER_PII retention obligations apply per jurisdiction rules.
+Cancellation policy terms are applied via Cedar evaluation before the transition executes (except INQUIRY_ABANDONED and INQUIRY_TIMEOUT, which carry no contractual obligation). Supplier cancellation notifications are dispatched. TRAVELER_PII retention obligations apply per jurisdiction rules.
 
 ---
 

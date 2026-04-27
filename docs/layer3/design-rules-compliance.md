@@ -41,7 +41,7 @@ Section 14.6 records the rules that are not fully satisfied within Layer 3 alone
 | **T-3-C** | T-3: identity_tier | No state machine conditional logic may depend on Capability Catalogue content. | S3–S12 | **SATISFIED** |
 | **T-4-A** | T-4: BOOKING_SUSPENDED | BOOKING_SUSPENDED is a parallel XState modifier, not a phase-level state. | S3, S5 | **SATISFIED** |
 | **T-4-B** | T-4: BOOKING_SUSPENDED | Per-phase BOOKING_SUSPENDED entry/exit defined for all 8 phases. | S5 | **SATISFIED** |
-| **T-4-C** | T-4: BOOKING_SUSPENDED | Exit requires Kernel re-assembly and OPA re-evaluation before agent actions. | S5 | **SATISFIED** |
+| **T-4-C** | T-4: BOOKING_SUSPENDED | Exit requires Kernel re-assembly and Cedar re-evaluation before agent actions. | S5 | **SATISFIED** |
 | **T-4-D** | T-4: BOOKING_SUSPENDED | Audit trail records suspension_entered_at, reason, phase, DoC holder, resolution. | S5 | **SATISFIED** |
 | **T-5-A** | T-5: HEM | HEM dispatch nodes appear in the Kernel swimlane of BPMN diagrams. | S6, S7 | **SATISFIED** |
 | **T-5-B** | T-5: HEM | Every HEM invocation specifies: escalation_reason, confirmation token, secondary path. | S6, S7, S11, S12 | **SATISFIED** |
@@ -103,7 +103,7 @@ Section 14.6 records the rules that are not fully satisfied within Layer 3 alone
 | Section | Rule(s) | Coverage provided | Status |
 |---|---|---|---|
 | **S3** | T-4-A | S3.8 explicitly classifies BOOKING_SUSPENDED as a parallel state modifier, not a sequential active state. The state inventory table in S3.0 marks BOOKING_SUSPENDED as class "Parallel modifier". T-4-A satisfied. | **SATISFIED** |
-| **S5** | T-4-A, T-4-B, T-4-C, T-4-D | S5 is the primary satisfaction section for all four T-4 rules. T-4-B: the per-phase table in S5.4 covers all eight journey phases with explicit entry action sets and exit paths. T-4-C: S5.5 specifies that Context Package re-assembly and OPA re-evaluation are required on Path B and Path C exit. T-4-D: S5.6 provides the mandatory audit trail field list for BOOKING_SUSPENDED entry and exit events. | **SATISFIED** |
+| **S5** | T-4-A, T-4-B, T-4-C, T-4-D | S5 is the primary satisfaction section for all four T-4 rules. T-4-B: the per-phase table in S5.4 covers all eight journey phases with explicit entry action sets and exit paths. T-4-C: S5.5 specifies that Context Package re-assembly and Cedar re-evaluation are required on Path B and Path C exit. T-4-D: S5.6 provides the mandatory audit trail field list for BOOKING_SUSPENDED entry and exit events. | **SATISFIED** |
 
 ---
 

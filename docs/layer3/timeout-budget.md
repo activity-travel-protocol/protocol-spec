@@ -13,12 +13,12 @@ All timeout durations use ISO 8601 duration format: PT = period of time; M = min
 
 The Kernel Scheduler (OS function 3, Architecture Specification v1.0 Section 5) enforces all timeout values defined in this section. The following rules govern how it does so:
 
-- **Timeout events are state transitions.** They go through the Policy Engine (OPA evaluation) and produce event log entries. A timeout is not a silent expiry — it is a protocol event.
+- **Timeout events are state transitions.** They go through the Policy Engine (Cedar evaluation) and produce event log entries. A timeout is not a silent expiry — it is a protocol event.
 - **The Kernel Scheduler uses the tighter of two values** wherever both a protocol maximum and a Party-declared value exist. A Party may configure a tighter deadline than the protocol default; they may never configure a looser one.
 - **Timeout clocks begin at the event that starts the window** — not at message delivery, not at human reading of a notification. The starting event is the timestamp on the event log entry that opens the window.
 - **Timeout clocks are frozen when BOOKING_SUSPENDED is active.** They do not expire while the booking is suspended. On exit from BOOKING_SUSPENDED via Path B or Path C, frozen clocks resume from where they were paused — they do not restart.
 - **The C1 autonomous incident declaration reversal window (PT15M)** is also frozen when an SSF revocation event arrives during the window. It resumes only after HEM-12 human resolution.
-- **No Party Policy Declaration may extend a timeout beyond its protocol maximum.** OPA rejects any policy that attempts to do so.
+- **No Party Policy Declaration may extend a timeout beyond its protocol maximum.** Cedar rejects any policy that attempts to do so.
 
 > **Timeout duration notation:** All values in this section use ISO 8601 duration notation. PT5M = 5 minutes. PT1H = 1 hour. PT24H = 24 hours. PT4H = 4 hours. Where a timeout has no protocol maximum (e.g. PRE_DEPARTURE phase duration), this is stated explicitly as 'No maximum'.
 
@@ -105,7 +105,7 @@ The following rules govern how Parties may configure timeout values in their Par
 
 | Rule | Statement |
 |---|---|
-| **Tighter-only** | A Party may configure a timeout value tighter (shorter) than the protocol default. They may never configure a value looser (longer). OPA rejects any Party Policy Declaration that attempts to set a timeout value exceeding the protocol maximum. |
+| **Tighter-only** | A Party may configure a timeout value tighter (shorter) than the protocol default. They may never configure a value looser (longer). Cedar rejects any Party Policy Declaration that attempts to set a timeout value exceeding the protocol maximum. |
 | **Kernel uses tighter** | Where both a protocol default and a Party-declared value exist, the Kernel Scheduler uses the tighter of the two. The Party cannot override this behaviour. |
 | **No floor except HEM-01 and HEM-11** | Only HEM-01 (PT5M floor — ACTIVITY_FULFILLMENT + BOOKING_SUSPENDED) and HEM-11 (PT10M — OPA assembly failure, also the protocol maximum) have stated floors. All other timeouts may be configured to any value tighter than the protocol default, including very short values. Operators choosing very short timeouts accept the operational consequences. |
 | **Fixed timeouts** | Two timeouts are not configurable by any Party: the C1 autonomous reversal window (PT15M — fixed) and the secondary HEM dispatch window (PT5M — fixed). These are protocol constants. |
