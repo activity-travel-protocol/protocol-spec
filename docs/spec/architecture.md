@@ -124,7 +124,7 @@ The Activity Travel Protocol runtime is an Operating System for travel transacti
 
 **5. Inter-Party Communication (IPC)** — All inter-party communication routes through the runtime. No direct Party-to-Party channels that bypass the protocol. All messages are JWS-signed and verified.
 
-**6. Security Kernel** — Non-bypassable. Every state transition: authenticate Party, authorise operation, evaluate OPA policy, validate Trust Chain, validate AI agent authority scope. See Section 6.
+**6. Security Kernel** — Non-bypassable. Every state transition: authenticate Party, authorise operation, evaluate Cedar policy, validate Trust Chain, validate AI agent authority scope. See Section 6.
 
 **8. Versioning and Compatibility** — Multiple protocol versions run simultaneously during transition periods. 12-month deprecation notice required for breaking changes. Robustness principle applied for minor version differences.
 
@@ -154,15 +154,17 @@ For every state transition request:
 
 1. **Authenticate** — Verify the requesting Party's identity against the Party Registry. Validate credential currency.
 2. **Authorise** — Verify the Party holds a role that permits the requested operation in the current state.
-3. **Policy evaluation** — Evaluate the applicable ODRL policy set through OPA. All four policy tiers evaluated: Protocol, Jurisdiction, Party Operational, Party Preference.
+3. **Policy evaluation** — Evaluate the applicable Cedar policy set via Cedarling WASM. All four policy tiers evaluated: Protocol, Jurisdiction, Party Operational, Party Preference.
 4. **Trust Chain validation** — Verify the full Trust Chain from the requesting Party to the protocol root. Validate all intermediate Subordinate Statements.
 5. **AI agent scope validation** — If the request originates from an AI agent, validate the agent's authority scope against the operation requested. Out-of-scope requests trigger the Human Escalation Manager, not an error.
 
 ### 6.2 Policy Engine
 
-- **Declaration format**: ODRL (W3C Open Digital Rights Language) — human-readable, what parties write, what regulators read.
-- **Runtime evaluation**: OPA (Open Policy Agent, CNCF-graduated). ODRL policies compiled to OPA/Rego at registration time.
+- **Policy language**: Cedar — a formally decidable policy language. Evaluation always terminates (provable property, not a performance claim). Every `permit` and `forbid` rule in the ATP policy sets is authored in Cedar and version-controlled alongside the protocol specification.
+- **Runtime evaluation**: Cedarling WASM — the Cedar evaluation engine running in-process within the ATPRuntime Node.js process. No sidecar, no network hop. Per-transition evaluation cost: 0.1–1ms. The `@atp/security` package ships the Cedarling WASM runtime.
+- **Policy sets**: Three Cedar policy sets are defined in the reference implementation, one per `regulatory_class`: OPERATOR, OWN_SUPPLY, LICENSED_TA. Each Booking Object's `regulatory_class` field determines which policy set is evaluated against it at every transition.
 - **Policy hierarchy** (highest to lowest): Protocol-Level, Jurisdiction Regulatory, Party Operational, Party Preference.
+- **ODRL and IDSA Dataspace Protocol interoperability**: ODRL (W3C Open Digital Rights Language) remains relevant to ATP as an *external interoperability expression layer*, not as the internal enforcement engine. ATP Capability Declarations may be published as DCAT 3 Datasets with ODRL `hasPolicy` attributes for interoperability with IDSA Dataspace Protocol-compliant connectors. In this model, Cedar is the enforcement language (runtime, in-process, deterministic) and ODRL is the expression language (portable, human-readable, travels with the data asset). A formal ATP ODRL profile mapping Cedar action namespaces to ODRL vocabulary terms is under consideration as OQ-DSP-1.
 
 ### 6.3 Transport and Encryption
 
@@ -181,7 +183,7 @@ The Context Package is the defined schema of everything an AI agent receives at 
 
 Contents of a Context Package:
 - Current Booking Object state
-- Applicable policy set (in ODRL)
+- Applicable Cedar residual policy set (produced by Windley Loop pre-evaluation — the set of actions Cedar permits for this agent in the current Booking Object state)
 - Feasibility constraints
 - Authority scope granted to this agent invocation
 - Decision history for this booking
